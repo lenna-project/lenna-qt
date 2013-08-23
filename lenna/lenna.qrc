@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/logo">
+        <file alias="lenna_logo">lenna_96.png</file>
+    </qresource>
+</RCC>
