@@ -14,10 +14,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    lenna.cpp
+    lenna.cpp \
+    splashscreen.cpp
 
 HEADERS  += mainwindow.h \
-    lenna.h
+    lenna.h \
+    splashscreen.h
 
 FORMS    += mainwindow.ui
 
