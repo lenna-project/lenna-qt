@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "lenna.h"
 #include "splashscreen.h"
+#include "aboutdialog.h"
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -27,4 +28,10 @@ void MainWindow::on_actionQuit_triggered()
 {
     Lenna::destroy();
     this->close();
+}
+
+void MainWindow::on_actionAbout_triggered()
+{
+    AboutDialog dialog;
+    dialog.exec();
 }

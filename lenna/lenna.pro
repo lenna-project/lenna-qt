@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -15,13 +15,16 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     lenna.cpp \
-    splashscreen.cpp
+    splashscreen.cpp \
+    aboutdialog.cpp
 
 HEADERS  += mainwindow.h \
     lenna.h \
-    splashscreen.h
+    splashscreen.h \
+    aboutdialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    aboutdialog.ui
 
 RESOURCES += \
     lenna.qrc
