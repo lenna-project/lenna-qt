@@ -8,4 +8,7 @@
         <file alias="thanksto.html">resources/thanksto.html</file>
         <file alias="license.txt">resources/gpl-3.0.txt</file>
     </qresource>
+    <qresource prefix="/lenna">
+        <file alias="plugins">resources/plugins.png</file>
+    </qresource>
 </RCC>

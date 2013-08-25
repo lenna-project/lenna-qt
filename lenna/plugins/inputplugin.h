@@ -15,35 +15,27 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef LENNA_H
-#define LENNA_H
 
-#include <QObject>
-#include <QtCore/QTranslator>
-#include <QtGui/QIcon>
+#ifndef INPUTPLUGIN_H
+#define INPUTPLUGIN_H
 
-class Lenna : public QObject
-{
+#include "plugin.h"
+#include "../image.h"
+
+#include <QtCore/QtPlugin>
+
+class InputPlugin: public Plugin{
 public:
+    virtual ~InputPlugin() {
+    }
 
-    static void setApplicationName(QString name);
-    static void setApplicationVersion(QString version);
-    static void setOrganizationName(QString organization_name);
-
-    static QString applicationName();
-    static QString applicationVersion();
-    static QString organizationName();
-    static QIcon applicationIcon();
-
-    static QString applicationDirPath();
-
-    static void installTranslator(QTranslator *file);
-
-    static void destroy();
-
-signals:
-
-public slots:
+    virtual void init() = 0;
+    virtual bool hasNext() = 0;
+    virtual Image *next() = 0;
+    virtual int getProgress() = 0;
 };
 
-#endif // LENNA_H
+Q_DECLARE_INTERFACE(InputPlugin,
+        "Lenna.InputPlugin/1.0");
+
+#endif // INPUTPLUGIN_H

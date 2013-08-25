@@ -54,6 +54,10 @@
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionPlugins">
+   <property name="icon">
+    <iconset resource="lenna.qrc">
+     <normaloff>:/lenna/plugins</normaloff>:/lenna/plugins</iconset>
+   </property>
    <property name="text">
     <string>Plugins</string>
    </property>
@@ -61,6 +65,9 @@
   <action name="actionQuit">
    <property name="text">
     <string>Quit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
    </property>
   </action>
   <action name="actionAbout">

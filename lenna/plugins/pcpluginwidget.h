@@ -15,35 +15,33 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef LENNA_H
-#define LENNA_H
 
-#include <QObject>
-#include <QtCore/QTranslator>
-#include <QtGui/QIcon>
+#ifndef PCPLUGINWIDGET_H
+#define PCPLUGINWIDGET_H
 
-class Lenna : public QObject
+#include "plugin.h"
+
+#include <QtWidgets/QWidget>
+
+namespace Ui {
+class PCPluginWidget;
+}
+
+class PCPluginWidget : public QWidget
 {
+    Q_OBJECT
+    
 public:
+    PCPluginWidget(Plugin *plugin);
+    ~PCPluginWidget();
+    Plugin *getPlugin();
+    
+private:
+    Ui::PCPluginWidget *ui;
+    Plugin *plugin;
 
-    static void setApplicationName(QString name);
-    static void setApplicationVersion(QString version);
-    static void setOrganizationName(QString organization_name);
-
-    static QString applicationName();
-    static QString applicationVersion();
-    static QString organizationName();
-    static QIcon applicationIcon();
-
-    static QString applicationDirPath();
-
-    static void installTranslator(QTranslator *file);
-
-    static void destroy();
-
-signals:
-
-public slots:
+private slots:
+    void checkBoxChanged();
 };
 
-#endif // LENNA_H
+#endif // PCPLUGINWIDGET_H

@@ -1,6 +1,6 @@
 /**
-    This file is part of program Lenna
-    Copyright (C) 2013  FalseCAM
+    This file is part of program Reihenaufnahme
+    Copyright (C) 2012  FalseCAM
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -15,32 +15,9 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
 
-#include <QMainWindow>
+#include "image.h"
 
-namespace Ui {
-class MainWindow;
+Image::Image() {
+
 }
-
-class MainWindow : public QMainWindow
-{
-    Q_OBJECT
-    
-public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
-    
-private slots:
-    void on_actionQuit_triggered();
-
-    void on_actionAbout_triggered();
-
-    void on_actionPlugins_triggered();
-
-private:
-    Ui::MainWindow *ui;
-};
-
-#endif // MAINWINDOW_H

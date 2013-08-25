@@ -15,35 +15,25 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef LENNA_H
-#define LENNA_H
 
-#include <QObject>
-#include <QtCore/QTranslator>
-#include <QtGui/QIcon>
+#ifndef IMAGE_H
+#define IMAGE_H
 
-class Lenna : public QObject
+#include <QtCore/QObject>
+#include <QtGui/QImage>
+
+class Image : public QObject
 {
+    Q_OBJECT
 public:
-
-    static void setApplicationName(QString name);
-    static void setApplicationVersion(QString version);
-    static void setOrganizationName(QString organization_name);
-
-    static QString applicationName();
-    static QString applicationVersion();
-    static QString organizationName();
-    static QIcon applicationIcon();
-
-    static QString applicationDirPath();
-
-    static void installTranslator(QTranslator *file);
-
-    static void destroy();
-
+    explicit Image();
+    
 signals:
-
+    
 public slots:
+
+private:
+    
 };
 
-#endif // LENNA_H
+#endif // IMAGE_H

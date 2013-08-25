@@ -15,35 +15,23 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef LENNA_H
-#define LENNA_H
 
-#include <QObject>
-#include <QtCore/QTranslator>
+#ifndef PLUGIN_H
+#define PLUGIN_H
+
+#include <QtCore/QObject>
+#include <QtWidgets/QWidget>
 #include <QtGui/QIcon>
 
-class Lenna : public QObject
-{
+class Plugin: virtual public QObject{
 public:
-
-    static void setApplicationName(QString name);
-    static void setApplicationVersion(QString version);
-    static void setOrganizationName(QString organization_name);
-
-    static QString applicationName();
-    static QString applicationVersion();
-    static QString organizationName();
-    static QIcon applicationIcon();
-
-    static QString applicationDirPath();
-
-    static void installTranslator(QTranslator *file);
-
-    static void destroy();
-
-signals:
-
-public slots:
+    virtual QString getName() = 0;
+    virtual QString getTitle() = 0;
+    virtual QString getVersion() = 0;
+    virtual QString getAuthor() = 0;
+    virtual QString getDescription() = 0;
+    virtual QIcon getIcon() = 0;
+    virtual QWidget* getWidget() = 0;
 };
 
-#endif // LENNA_H
+#endif // PLUGIN_H

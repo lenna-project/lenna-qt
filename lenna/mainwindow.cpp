@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "lenna.h"
 #include "splashscreen.h"
+#include "plugins/pluginsconfigdialog.h"
 #include "aboutdialog.h"
 
 
@@ -33,5 +34,11 @@ void MainWindow::on_actionQuit_triggered()
 void MainWindow::on_actionAbout_triggered()
 {
     AboutDialog dialog;
+    dialog.exec();
+}
+
+void MainWindow::on_actionPlugins_triggered()
+{
+    PluginsConfigDialog dialog;
     dialog.exec();
 }
