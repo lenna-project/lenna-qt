@@ -21,6 +21,7 @@
 
 #include <QtCore/QObject>
 #include <QtGui/QImage>
+#include <opencv2/core/core.hpp>
 
 class Image : public QObject
 {
@@ -33,7 +34,7 @@ signals:
 public slots:
 
 private:
-    
+    IplImage *image;
 };
 
 #endif // IMAGE_H

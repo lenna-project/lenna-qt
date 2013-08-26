@@ -41,6 +41,10 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
+    void loadInputPluginWidgets();
+    void loadEditPluginWidgets();
+    void loadOutputPluginWidgets();
 };
 
 #endif // MAINWINDOW_H

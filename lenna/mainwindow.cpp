@@ -3,6 +3,7 @@
 #include "lenna.h"
 #include "splashscreen.h"
 #include "plugins/pluginsconfigdialog.h"
+#include "plugins/pluginloader.h"
 #include "aboutdialog.h"
 
 
@@ -17,6 +18,9 @@ MainWindow::MainWindow(QWidget *parent) :
     splash.setMessage("Loading config ...");
     this->setWindowTitle(Lenna::applicationName() + " " + Lenna::applicationVersion());
     splash.setMessage("Loading Plugins ...");
+    loadInputPluginWidgets();
+    loadEditPluginWidgets();
+    loadOutputPluginWidgets();
     splash.finish(this);
 }
 
@@ -41,4 +45,35 @@ void MainWindow::on_actionPlugins_triggered()
 {
     PluginsConfigDialog dialog;
     dialog.exec();
+}
+
+
+void MainWindow::loadInputPluginWidgets(){
+    ui->inputTabWidget->clear();
+    foreach (InputPlugin *plugin, PluginLoader::getInstance().getInputPlugins())
+    {
+        if (plugin && PluginLoader::getInstance().isActivatedPlugin(plugin)){
+            ui->inputTabWidget->addTab(plugin->getWidget(), plugin->getIcon(), plugin->getTitle());
+        }
+    }
+}
+
+void MainWindow::loadEditPluginWidgets(){
+    ui->editTabWidget->clear();
+    foreach (EditPlugin *plugin, PluginLoader::getInstance().getEditPlugins())
+    {
+        if (plugin && PluginLoader::getInstance().isActivatedPlugin(plugin)){
+            ui->editTabWidget->addTab(plugin->getWidget(), plugin->getIcon(), plugin->getTitle());
+        }
+    }
+}
+
+void MainWindow::loadOutputPluginWidgets(){
+    ui->outputTabWidget->clear();
+    foreach (OutputPlugin *plugin, PluginLoader::getInstance().getOutputPlugins())
+    {
+        if (plugin && PluginLoader::getInstance().isActivatedPlugin(plugin)){
+            ui->outputTabWidget->addTab(plugin->getWidget(), plugin->getIcon(), plugin->getTitle());
+        }
+    }
 }
