@@ -1,2 +1,2 @@
 TEMPLATE	= subdirs
-SUBDIRS         = lenna
+SUBDIRS         = lenna plugins

@@ -45,4 +45,6 @@ FORMS    += mainwindow.ui \
 RESOURCES += \
     lenna.qrc
 
+DESTDIR     = ../
+
 LIBS += -lopencv_core246
