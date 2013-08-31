@@ -21,6 +21,8 @@ MainWindow::MainWindow(QWidget *parent) :
     loadInputPluginWidgets();
     loadEditPluginWidgets();
     loadOutputPluginWidgets();
+    process = new Process();
+    connect(process, SIGNAL(process(int)), ui->progressBar, SLOT(setValue(int)));
     splash.finish(this);
 }
 
@@ -76,4 +78,9 @@ void MainWindow::loadOutputPluginWidgets(){
             ui->outputTabWidget->addTab(plugin->getWidget(), plugin->getIcon(), plugin->getTitle());
         }
     }
+}
+
+void MainWindow::on_startStopButton_clicked()
+{
+    process->start();
 }

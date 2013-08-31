@@ -21,7 +21,9 @@ SOURCES += main.cpp\
     plugins/pcpluginwidget.cpp \
     splashscreen.cpp \
     translation.cpp \
-    aboutdialog.cpp
+    aboutdialog.cpp \
+    process.cpp \
+    imageprocessor.cpp
 
 HEADERS  += mainwindow.h \
     lenna.h \
@@ -35,7 +37,9 @@ HEADERS  += mainwindow.h \
     plugins/pcpluginwidget.h \
     plugins/editplugin.h \
     translation.h \
-    aboutdialog.h
+    aboutdialog.h \
+    process.h \
+    imageprocessor.h
 
 FORMS    += mainwindow.ui \
     plugins/pluginsconfigdialog.ui \

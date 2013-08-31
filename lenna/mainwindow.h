@@ -19,6 +19,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "process.h"
 
 namespace Ui {
 class MainWindow;
@@ -39,8 +40,11 @@ private slots:
 
     void on_actionPlugins_triggered();
 
+    void on_startStopButton_clicked();
+
 private:
     Ui::MainWindow *ui;
+    Process *process;
 
     void loadInputPluginWidgets();
     void loadEditPluginWidgets();
