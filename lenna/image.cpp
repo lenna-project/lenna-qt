@@ -1,6 +1,6 @@
 /**
-    This file is part of program Reihenaufnahme
-    Copyright (C) 2012  FalseCAM
+    This file is part of program Lenna
+    Copyright (C) 2013  FalseCAM
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,4 +20,20 @@
 
 Image::Image() {
 
+}
+
+QString Image::getAlbum() {
+    return this->album;
+}
+
+QString Image::getName() {
+    return this->name;
+}
+
+void Image::setAlbum(QString album) {
+    this->album = album;
+}
+
+void Image::setName(QString name) {
+    this->name = name;
 }

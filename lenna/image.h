@@ -28,6 +28,11 @@ class Image : public QObject
     Q_OBJECT
 public:
     explicit Image();
+    QString getAlbum();
+    QString getName();
+    void setAlbum(QString album);
+    void setName(QString name);
+
     
 signals:
     
@@ -35,6 +40,8 @@ public slots:
 
 private:
     IplImage *image;
+    QString name;
+    QString album;
 };
 
 #endif // IMAGE_H
