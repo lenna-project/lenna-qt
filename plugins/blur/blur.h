@@ -1,6 +1,6 @@
 /**
-    This file is part of program Lenna
-    Copyright (C) 2013  FalseCAM
+    This file is part of program Reihenaufnahme
+    Copyright (C) 2012  FalseCAM
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,43 +16,37 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef IMAGE_H
-#define IMAGE_H
+#ifndef BLUR_H
+#define BLUR_H
 
+#include "plugins/editplugin.h"
+#include "widget.h"
+
+#include <QtCore/QtPlugin>
 #include <QtCore/QObject>
-#include <QtGui/QImage>
-#include <iostream>
-#include <sstream>
-#include "opencv2/highgui/highgui.hpp"
-#include "opencv2/imgproc/imgproc.hpp"
+#include <QtGui/QIcon>
 
-using namespace cv;
-using namespace std;
-
-class Image : public QObject
+class Blur : public EditPlugin
 {
     Q_OBJECT
-public:
-    Image();
-    Image(QString file);
-    QString getAlbum();
-    QString getName();
-    void setMat(cv::Mat *img);
-    void setAlbum(QString album);
-    void setName(QString name);
-    Mat getImage();
-    Mat *getImagePointer();
-    void convolve(Mat filter);
+    Q_PLUGIN_METADATA(IID "reihenaufnahme.blur" FILE "blur.json")
+    Q_INTERFACES(EditPlugin)
 
-    
-signals:
-    
-public slots:
+public:
+    Blur();
+    ~Blur();
+    QString getName();
+    QString getTitle();
+    QString getVersion();
+    QString getAuthor();
+    QString getDescription();
+    QIcon getIcon();
+    QWidget *getWidget();
+
+    void edit(Image *image);
 
 private:
-    Mat image;
-    QString name;
-    QString album;
+    Widget *widget;
 };
 
-#endif // IMAGE_H
+#endif // BLUR_H

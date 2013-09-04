@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/plugins/blur">
+        <file alias="blur">blur.png</file>
+    </qresource>
+</RCC>

@@ -1,6 +1,6 @@
 /**
-    This file is part of program Lenna
-    Copyright (C) 2013  FalseCAM
+    This file is part of program Reihenaufnahme
+    Copyright (C) 2012  FalseCAM
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,43 +16,32 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef IMAGE_H
-#define IMAGE_H
+#ifndef PREVIEWIMAGELABEL_H
+#define PREVIEWIMAGELABEL_H
 
-#include <QtCore/QObject>
-#include <QtGui/QImage>
-#include <iostream>
-#include <sstream>
-#include "opencv2/highgui/highgui.hpp"
-#include "opencv2/imgproc/imgproc.hpp"
+#include <QtWidgets/QWidget>
+#include <QtWidgets/QLabel>
 
-using namespace cv;
-using namespace std;
+class QDragEnterEvent;
+class QDropEvent;
 
-class Image : public QObject
+class PreviewImageLabel : public QLabel
 {
     Q_OBJECT
 public:
-    Image();
-    Image(QString file);
-    QString getAlbum();
-    QString getName();
-    void setMat(cv::Mat *img);
-    void setAlbum(QString album);
-    void setName(QString name);
-    Mat getImage();
-    Mat *getImagePointer();
-    void convolve(Mat filter);
+    explicit PreviewImageLabel(QWidget *parent=0);
 
+protected:
+    void dragEnterEvent(QDragEnterEvent *event);
+    void dragMoveEvent(QDragMoveEvent *event);
+    void dragLeaveEvent(QDragLeaveEvent *event);
+    void dropEvent(QDropEvent *event);
     
 signals:
+    void imageDroped(QString);
     
 public slots:
-
-private:
-    Mat image;
-    QString name;
-    QString album;
+    
 };
 
-#endif // IMAGE_H
+#endif // PREVIEWIMAGELABEL_H

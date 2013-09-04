@@ -65,6 +65,9 @@ void MainWindow::on_actionPlugins_triggered()
 {
     PluginsConfigDialog dialog;
     dialog.exec();
+    loadInputPluginWidgets();
+    loadEditPluginWidgets();
+    loadOutputPluginWidgets();
 }
 
 

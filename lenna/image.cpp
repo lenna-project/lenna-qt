@@ -49,3 +49,11 @@ void Image::setName(QString name) {
 Mat Image::getImage(){
     return this->image;
 }
+
+Mat *Image::getImagePointer(){
+    return &this->image;
+}
+
+void Image::convolve(Mat filter){
+    cv::filter2D(this->image,this->image,-1, filter);
+}

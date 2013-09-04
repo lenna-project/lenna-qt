@@ -1,5 +1,8 @@
-	########### Subdirectories ###############
+########### Subdirectories ###############
 cmake_minimum_required(VERSION 2.8.9)
-	PROJECT(Lenna)
-	ADD_SUBDIRECTORY( filechooser )
-    ADD_SUBDIRECTORY( savefile )
+project(Lenna)
+
+add_subdirectory( filechooser )
+add_subdirectory( savefile )
+
+add_subdirectory( blur )
