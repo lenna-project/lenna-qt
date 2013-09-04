@@ -22,6 +22,14 @@ Image::Image() {
 
 }
 
+Image::Image(QString file){
+    this->image = imread(file.toStdString().c_str(), 1);
+}
+
+void Image::setMat(cv::Mat *img){
+
+}
+
 QString Image::getAlbum() {
     return this->album;
 }
@@ -36,4 +44,8 @@ void Image::setAlbum(QString album) {
 
 void Image::setName(QString name) {
     this->name = name;
+}
+
+Mat Image::getImage(){
+    return this->image;
 }

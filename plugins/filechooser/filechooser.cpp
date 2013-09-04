@@ -83,7 +83,7 @@ bool FileChooser::hasNext(){
 Image *FileChooser::next(){
     if(has_next){
         QString file = this->files.at(this->position);
-        QImage *image = new QImage(file);
+        //QImage *image = new QImage(file);
         QString album = getFolder(file);
         QString name = getName(file);
         position++;
@@ -91,7 +91,9 @@ Image *FileChooser::next(){
             has_next = false;
         }
         // TODO
-        Image *img = new Image();
+        Image *img = new Image(file);
+        img->setName(name);
+        img->setAlbum(album);
         return img;
     }
 

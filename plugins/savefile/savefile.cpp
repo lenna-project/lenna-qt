@@ -49,7 +49,16 @@ QWidget *SaveFile::getWidget(){
 }
 
 void SaveFile::out(Image *image){
-
+    getWidget();
+    QString folder = this->widget->getFolder();
+    folder.append("/");
+    folder.append(image->getAlbum());
+    folder.append("/");
+    QString file = folder + image->getName() + "." + widget->getImageFormat();
+    if(!QDir(folder).exists()){
+        QDir().mkdir(folder);
+    }
+    cv::imwrite(file.toStdString().c_str(), image->getImage());
 }
 
 void SaveFile::finnish(){

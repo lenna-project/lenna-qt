@@ -21,17 +21,26 @@
 
 #include <QtCore/QObject>
 #include <QtGui/QImage>
-#include <opencv2/core/core.hpp>
+#include <iostream>
+#include <sstream>
+#include "opencv2/highgui/highgui.hpp"
+#include "opencv2/imgproc/imgproc.hpp"
+
+using namespace cv;
+using namespace std;
 
 class Image : public QObject
 {
     Q_OBJECT
 public:
-    explicit Image();
+    Image();
+    Image(QString file);
     QString getAlbum();
     QString getName();
+    void setMat(cv::Mat *img);
     void setAlbum(QString album);
     void setName(QString name);
+    Mat getImage();
 
     
 signals:
@@ -39,7 +48,7 @@ signals:
 public slots:
 
 private:
-    IplImage *image;
+    Mat image;
     QString name;
     QString album;
 };

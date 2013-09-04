@@ -17,7 +17,7 @@
  */
 
 #include "pluginsconfigdialog.h"
-#include "../ui_pluginsconfigdialog.h"
+#include "ui_pluginsconfigdialog.h"
 #include "pluginloader.h"
 #include "pcpluginwidget.h"
 
