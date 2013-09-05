@@ -19,6 +19,9 @@
 #ifndef WIDGET_H
 #define WIDGET_H
 
+#include "previewimagelabel.h"
+#include "../../lenna/image.h"
+#include <opencv2/imgproc/imgproc.hpp>
 #include <QtWidgets/QWidget>
 
 namespace Ui {
@@ -32,30 +35,34 @@ class Widget : public QWidget
 public:
     explicit Widget(QWidget *parent = 0);
     ~Widget();
-    QStringList getFiles();
+
+    bool isFilter();
+    Mat getFilter();
     
 private slots:
-    void on_removeImagePushButton_clicked();
 
-    void on_clearListPushButton_clicked();
+    void on_resetPushButton_clicked();
+    void setPreviewImage(QString img);
+    void updateImage();
 
-    void on_addImagesPushButton_clicked();
+    void on_addRowButton_clicked();
 
-    void on_showPreviewCheckBox_toggled(bool checked);
+    void on_removeRowButton_clicked();
+
+    void on_addColButton_clicked();
+
+    void on_removeColButton_clicked();
 
 private:
     Ui::Widget *ui;
-    // Drag n Drop
-    void dragEnterEvent( QDragEnterEvent* event );
-    void dropEvent( QDropEvent* event );
-
-    QStringList filesList;
-    QString lastFolder;
     void loadState();
     void saveState();
-    void addFiles();
-    void addFiles(QStringList files);
-    void addFileItem(QString file);
+
+    void filter(Image *image);
+    PreviewImageLabel *previewImageLabel;
+
+    QString previewImageSrc;
+    Image *previewImage;
 };
 
 #endif // WIDGET_H

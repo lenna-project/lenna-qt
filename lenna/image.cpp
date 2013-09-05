@@ -22,6 +22,12 @@ Image::Image() {
 
 }
 
+Image::Image(Image &image){
+    this->name = image.name;
+    this->album = image.album;
+    image.getImage().copyTo(this->image);
+}
+
 Image::Image(QString file){
     this->image = imread(file.toStdString().c_str(), 1);
 }
@@ -56,4 +62,8 @@ Mat *Image::getImagePointer(){
 
 void Image::convolve(Mat filter){
     cv::filter2D(this->image,this->image,-1, filter);
+}
+
+QImage Image::toQImage(){
+    return QImage((uchar*)image.data, image.cols, image.rows, image.step1(), QImage::Format_RGB32);
 }

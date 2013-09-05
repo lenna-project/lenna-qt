@@ -1,6 +1,6 @@
 /**
-    This file is part of program Reihenaufnahme
-    Copyright (C) 2012  FalseCAM
+    This file is part of program Lenna
+    Copyright (C) 2013  FalseCAM
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 class Blur : public EditPlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "reihenaufnahme.blur" FILE "blur.json")
+    Q_PLUGIN_METADATA(IID "lenna.blur" FILE "blur.json")
     Q_INTERFACES(EditPlugin)
 
 public:

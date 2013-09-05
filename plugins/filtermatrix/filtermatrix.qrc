@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/plugins/filtermatrix">
+        <file alias="filtermatrix">filtermatrix.png</file>
+    </qresource>
+</RCC>

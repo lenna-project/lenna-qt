@@ -35,6 +35,7 @@ class Image : public QObject
 public:
     Image();
     Image(QString file);
+    Image(Image &image);
     QString getAlbum();
     QString getName();
     void setMat(cv::Mat *img);
@@ -43,6 +44,7 @@ public:
     Mat getImage();
     Mat *getImagePointer();
     void convolve(Mat filter);
+    QImage toQImage();
 
     
 signals:

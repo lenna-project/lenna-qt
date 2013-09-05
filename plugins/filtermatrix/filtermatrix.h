@@ -16,25 +16,26 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef FILECHOOSER_H
-#define FILECHOOSER_H
+#ifndef FILTERMATRIX_H
+#define FILTERMATRIX_H
+
+#include "plugins/editplugin.h"
+#include "widget.h"
 
 #include <QtCore/QtPlugin>
 #include <QtCore/QObject>
 #include <QtGui/QIcon>
-#include "plugins/inputplugin.h"
-#include "image.h"
-#include "widget.h"
 
-class FileChooser : public InputPlugin
+
+class FilterMatrix : public EditPlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "lenna.filechooser" FILE "filechooser.json")
-    Q_INTERFACES(InputPlugin)
+    Q_PLUGIN_METADATA(IID "lenna.filtermatrix" FILE "filtermatrix.json")
+    Q_INTERFACES(EditPlugin)
 
 public:
-    FileChooser();
-    ~FileChooser();
+    FilterMatrix();
+    ~FilterMatrix();
     QString getName();
     QString getTitle();
     QString getVersion();
@@ -43,20 +44,10 @@ public:
     QIcon getIcon();
     QWidget *getWidget();
 
-
-    void init();
-    bool hasNext();
-    Image *next();
-    int getProgress();
+    void edit(Image *image);
 
 private:
     Widget *widget;
-    bool has_next;
-    QStringList files;
-    int position;
-
-    QString getFolder(QString file);
-    QString getName(QString file);
 };
 
-#endif // FILECHOOSER_H
+#endif // FILTERMATRIX_H

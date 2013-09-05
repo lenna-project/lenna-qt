@@ -16,53 +16,55 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "blur.h"
+#include "filtermatrix.h"
 #include "widget.h"
 #include <QtGui/QPainter>
 
-Blur::Blur()
+FilterMatrix::FilterMatrix()
 {
     widget = 0;
 }
 
-Blur::~Blur()
+FilterMatrix::~FilterMatrix()
 {
     if(this->widget)
         delete this->widget;
 }
 
-QString Blur::getName(){
-    return QString("blur");
+QString FilterMatrix::getName(){
+    return QString("filtermatrix");
 }
 
-QString Blur::getTitle(){
-    return QString(tr("Blur"));
+QString FilterMatrix::getTitle(){
+    return QString(tr("FilterMatrix"));
 }
 
-QString Blur::getVersion(){
+QString FilterMatrix::getVersion(){
     return QString("0.1");
 }
 
-QString Blur::getAuthor(){
+QString FilterMatrix::getAuthor(){
     return QString("FalseCAM");
 }
 
-QString Blur::getDescription(){
-    return QString(tr("Plugin to blur images"));
+QString FilterMatrix::getDescription(){
+    return QString(tr("Plugin to filter images with custom matrix."));
 }
 
-QIcon Blur::getIcon(){
-    return QIcon(":/plugins/blur/blur");
+QIcon FilterMatrix::getIcon(){
+    return QIcon(":/plugins/filtermatrix/filtermatrix");
 }
 
-QWidget *Blur::getWidget(){
+QWidget *FilterMatrix::getWidget(){
     if(!this->widget){
         this->widget = new Widget();
     }
     return this->widget;
 }
 
-void Blur::edit(Image *img){
-    int size = widget->getRadius();
-    cv::blur(img->getImage(), img->getImage(), cv::Size(size, size));
+void FilterMatrix::edit(Image *img){
+    if(widget->isFilter()){
+        cv::filter2D(img->getImage(), img->getImage(), -1, widget->getFilter());
+        img->getImage() = img->getImage()*255; // TODO why * 255?
+    }
 }
