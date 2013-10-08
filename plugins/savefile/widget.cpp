@@ -81,7 +81,7 @@ int Widget::getImageQuality(){
 }
 
 QString Widget::getImageFormat(){
-    return ui->formatComboBox->currentText();
+    return ui->formatLineEdit->text();
 }
 
 bool Widget::getCopyMetaData(){

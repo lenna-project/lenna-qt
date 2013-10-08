@@ -58,7 +58,18 @@ void SaveFile::out(Image *image){
     if(!QDir(folder).exists()){
         QDir().mkdir(folder);
     }
-    cv::imwrite(file.toStdString().c_str(), image->getImage());
+    vector<int> params;
+
+    if(widget->getImageQuality() != 0){
+        if(widget->getImageFormat().toLower() == "png"){
+            params.push_back(cv::IMWRITE_PNG_COMPRESSION);
+            params.push_back(widget->getImageQuality()/100);
+        }else if(widget->getImageFormat().toLower() == "jpg" ||widget->getImageFormat().toLower() == "jpeg"){
+            params.push_back(cv::IMWRITE_JPEG_QUALITY);
+            params.push_back(widget->getImageQuality());
+        }
+    }
+    cv::imwrite(file.toStdString().c_str(), image->getImage(), params);
 }
 
 void SaveFile::finnish(){
