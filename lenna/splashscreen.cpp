@@ -19,6 +19,8 @@
 #include "splashscreen.h"
 #include <QtGui/QPixmap>
 
+using namespace lenna;
+
 SplashScreen::SplashScreen(QWidget *parent) :
     QSplashScreen(parent)
 {

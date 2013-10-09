@@ -23,6 +23,10 @@
 #include <QtCore/QSettings>
 #include <QtGui/QPainter>
 #include <QtDebug>
+
+using namespace lenna;
+using namespace lenna::plugin;
+
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Widget)

@@ -22,6 +22,9 @@
 #include <QtCore/QFileInfo>
 #include <QtCore/QDir>
 
+using namespace lenna;
+using namespace lenna::plugin;
+
 FileChooser::FileChooser()
 {
     this->widget = 0;

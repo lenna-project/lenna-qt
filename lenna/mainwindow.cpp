@@ -24,6 +24,8 @@
 #include "plugins/pluginloader.h"
 #include "aboutdialog.h"
 
+using namespace lenna;
+using namespace lenna::plugin;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),

@@ -26,6 +26,8 @@
 #include <QtCore/QSettings>
 #include <QtCore/QStringList>
 
+using namespace lenna::plugin;
+
 PluginLoader* PluginLoader::instance = 0;
 
 PluginLoader::PluginLoader(QObject *parent) :

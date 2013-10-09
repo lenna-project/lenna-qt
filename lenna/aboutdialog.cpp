@@ -25,6 +25,8 @@
 #include <QtCore/QUrl>
 #include <QtCore/QEventLoop>
 
+using namespace lenna;
+
 AboutDialog::AboutDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AboutDialog)

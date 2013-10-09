@@ -22,6 +22,8 @@
 #include "image.h"
 #include <QRunnable>
 
+namespace lenna{
+
 class ImageProcessor : public QRunnable
 {
 public:
@@ -35,5 +37,7 @@ private:
     void out(Image *image);
 
 };
+
+}
 
 #endif // IMAGEPROCESSOR_H

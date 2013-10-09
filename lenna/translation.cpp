@@ -24,6 +24,8 @@
 #include <QtCore/QCoreApplication>
 #include <QtCore/QSettings>
 
+using namespace lenna;
+
 Translation::Translation(QObject *parent) :
     QObject(parent)
 {

@@ -20,6 +20,9 @@
 #include "widget.h"
 #include <QtGui/QPainter>
 
+using namespace lenna;
+using namespace lenna::plugin;
+
 Blur::Blur()
 {
     widget = 0;

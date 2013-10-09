@@ -22,6 +22,9 @@
 #include <QtCore/QThread>
 #include <QtCore/QThreadPool>
 
+using namespace lenna;
+using namespace lenna::plugin;
+
 Process::Process(QObject *parent) :
     QThread(parent)
 {

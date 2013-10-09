@@ -26,6 +26,8 @@ namespace Ui {
 class AboutDialog;
 }
 
+namespace lenna{
+
 class AboutDialog : public QDialog
 {
     Q_OBJECT
@@ -47,5 +49,7 @@ private:
     void initThanksto();
     void initUpdates();
 };
+
+}
 
 #endif // ABOUTDIALOG_H

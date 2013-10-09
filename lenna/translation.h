@@ -23,6 +23,8 @@
 #include <QtCore/QStringList>
 #include <QtCore/QMultiMap>
 
+namespace lenna{
+
 class Translation : public QObject
 {
     Q_OBJECT
@@ -46,7 +48,8 @@ private:
 
     QMultiMap<QString, QString> *languages;
     QString currentLanguage;
-    
 };
+
+}
 
 #endif // TRANSLATION_H

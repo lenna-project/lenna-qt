@@ -21,6 +21,8 @@
 
 #include <QThread>
 
+namespace lenna{
+
 class Process : public QThread
 {
     Q_OBJECT
@@ -40,5 +42,7 @@ private:
     void finnish();
     
 };
+
+}
 
 #endif // PROCESS_H

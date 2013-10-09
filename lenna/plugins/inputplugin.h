@@ -24,6 +24,9 @@
 
 #include <QtCore/QtPlugin>
 
+namespace lenna{
+namespace plugin{
+
 class InputPlugin: public Plugin{
 public:
     virtual ~InputPlugin() {
@@ -35,7 +38,10 @@ public:
     virtual int getProgress() = 0;
 };
 
-Q_DECLARE_INTERFACE(InputPlugin,
-        "Lenna.InputPlugin/1.0");
+}
+}
+
+Q_DECLARE_INTERFACE(lenna::plugin::InputPlugin,
+                    "Lenna.InputPlugin/1.0");
 
 #endif // INPUTPLUGIN_H

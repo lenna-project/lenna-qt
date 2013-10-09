@@ -25,6 +25,8 @@ namespace Ui {
 class MainWindow;
 }
 
+namespace lenna{
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -50,5 +52,7 @@ private:
     void loadEditPluginWidgets();
     void loadOutputPluginWidgets();
 };
+
+}
 
 #endif // MAINWINDOW_H

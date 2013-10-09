@@ -27,6 +27,8 @@
 #include <QtCore/QMimeData>
 #include <QtGui/QDragEnterEvent>
 
+using namespace lenna::plugin;
+
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Widget)

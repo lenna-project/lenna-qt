@@ -20,6 +20,8 @@
 
 #include <QSplashScreen>
 
+namespace lenna{
+
 class SplashScreen : public QSplashScreen
 {
     Q_OBJECT
@@ -31,5 +33,7 @@ signals:
 public slots:
     void setMessage(QString message);
 };
+
+}
 
 #endif // SPLASHSCREEN_H

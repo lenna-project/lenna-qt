@@ -19,6 +19,10 @@
 #include "imageprocessor.h"
 #include "process.h"
 #include "plugins/pluginloader.h"
+
+using namespace lenna;
+using namespace lenna::plugin;
+
 ImageProcessor::ImageProcessor(Image *img)
 {
     this->image = img;

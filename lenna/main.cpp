@@ -20,6 +20,8 @@
 #include <QtWidgets/QApplication>
 #include "lenna.h"
 
+using namespace lenna;
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

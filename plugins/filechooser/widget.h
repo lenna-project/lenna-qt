@@ -25,6 +25,9 @@ namespace Ui {
 class Widget;
 }
 
+namespace lenna{
+namespace plugin{
+
 class Widget : public QWidget
 {
     Q_OBJECT
@@ -57,5 +60,8 @@ private:
     void addFiles(QStringList files);
     void addFileItem(QString file);
 };
+
+}
+}
 
 #endif // WIDGET_H

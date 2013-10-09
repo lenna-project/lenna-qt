@@ -27,6 +27,9 @@ namespace Ui {
 class PCPluginWidget;
 }
 
+namespace lenna{
+namespace plugin{
+
 class PCPluginWidget : public QWidget
 {
     Q_OBJECT
@@ -43,5 +46,8 @@ private:
 private slots:
     void checkBoxChanged();
 };
+
+}
+}
 
 #endif // PCPLUGINWIDGET_H

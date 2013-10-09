@@ -24,6 +24,9 @@
 
 #include <QtCore/QtPlugin>
 
+namespace lenna{
+namespace plugin{
+
 class OutputPlugin: public Plugin{
 public:
     virtual ~OutputPlugin() {
@@ -33,7 +36,10 @@ public:
     virtual void finnish() = 0;
 };
 
-Q_DECLARE_INTERFACE(OutputPlugin,
-        "Lenna.OutputPlugin/1.0");
+}
+}
+
+Q_DECLARE_INTERFACE(lenna::plugin::OutputPlugin,
+                    "Lenna.OutputPlugin/1.0");
 
 #endif // OUTPUTPLUGIN_H

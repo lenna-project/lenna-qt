@@ -26,6 +26,9 @@ namespace Ui {
 class PluginsConfigDialog;
 }
 
+namespace lenna{
+namespace plugin{
+
 class PluginsConfigDialog : public QDialog
 {
     Q_OBJECT
@@ -52,5 +55,8 @@ private slots:
     void on_outputUpButton_clicked();
     void on_outputDownButton_clicked();
 };
+
+}
+}
 
 #endif // PLUGINSCONFIGDIALOG_H

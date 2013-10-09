@@ -26,12 +26,14 @@
 #include <QtCore/QObject>
 #include <QtGui/QIcon>
 
+namespace lenna{
+namespace plugin{
 
 class FilterMatrix : public EditPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "lenna.filtermatrix" FILE "filtermatrix.json")
-    Q_INTERFACES(EditPlugin)
+    Q_INTERFACES(lenna::plugin::EditPlugin)
 
 public:
     FilterMatrix();
@@ -49,5 +51,8 @@ public:
 private:
     Widget *widget;
 };
+
+}
+}
 
 #endif // FILTERMATRIX_H

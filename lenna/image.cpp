@@ -18,6 +18,8 @@
 
 #include "image.h"
 
+using namespace lenna;
+
 Image::Image() {
 
 }

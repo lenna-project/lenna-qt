@@ -28,6 +28,9 @@ namespace Ui {
 class Widget;
 }
 
+namespace lenna{
+namespace plugin{
+
 class Widget : public QWidget
 {
     Q_OBJECT
@@ -64,5 +67,8 @@ private:
     QString previewImageSrc;
     Image *previewImage;
 };
+
+}
+}
 
 #endif // WIDGET_H

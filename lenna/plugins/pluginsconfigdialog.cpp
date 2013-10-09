@@ -24,6 +24,8 @@
 #include <QtWidgets/QWidget>
 #include <QtWidgets/QListWidgetItem>
 
+using namespace lenna::plugin;
+
 PluginsConfigDialog::PluginsConfigDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::PluginsConfigDialog)

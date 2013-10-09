@@ -26,6 +26,9 @@
 #include <QtCore/QObject>
 #include <QtCore/QList>
 
+namespace lenna{
+namespace plugin{
+
 class PluginLoader : public QObject
 {
     Q_OBJECT
@@ -84,5 +87,8 @@ private:
     void addOutputPlugin(OutputPlugin *plugin);
     
 };
+
+}
+}
 
 #endif // PLUGINLOADER_H

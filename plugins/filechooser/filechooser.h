@@ -26,11 +26,14 @@
 #include "image.h"
 #include "widget.h"
 
+namespace lenna{
+namespace plugin{
+
 class FileChooser : public InputPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "lenna.filechooser" FILE "filechooser.json")
-    Q_INTERFACES(InputPlugin)
+    Q_INTERFACES(lenna::plugin::InputPlugin)
 
 public:
     FileChooser();
@@ -58,5 +61,8 @@ private:
     QString getFolder(QString file);
     QString getName(QString file);
 };
+
+}
+}
 
 #endif // FILECHOOSER_H

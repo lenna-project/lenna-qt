@@ -23,6 +23,8 @@
 #include <QtCore/QTranslator>
 #include <QtGui/QIcon>
 
+namespace lenna{
+
 class Lenna : public QObject
 {
 public:
@@ -46,5 +48,7 @@ signals:
 
 public slots:
 };
+
+}
 
 #endif // LENNA_H

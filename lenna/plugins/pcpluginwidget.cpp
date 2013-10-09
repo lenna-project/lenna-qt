@@ -22,6 +22,8 @@
 
 #include <QtGui/QPixmap>
 
+using namespace lenna::plugin;
+
 PCPluginWidget::PCPluginWidget(Plugin *plugin) :
     ui(new Ui::PCPluginWidget)
 {

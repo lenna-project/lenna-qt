@@ -26,11 +26,14 @@
 #include <QtCore/QObject>
 #include <QtGui/QIcon>
 
+namespace lenna{
+namespace plugin{
+
 class Blur : public EditPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "lenna.blur" FILE "blur.json")
-    Q_INTERFACES(EditPlugin)
+    Q_INTERFACES(lenna::plugin::EditPlugin)
 
 public:
     Blur();
@@ -48,5 +51,8 @@ public:
 private:
     Widget *widget;
 };
+
+}
+}
 
 #endif // BLUR_H

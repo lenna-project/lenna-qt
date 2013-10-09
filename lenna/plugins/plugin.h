@@ -23,6 +23,9 @@
 #include <QtWidgets/QWidget>
 #include <QtGui/QIcon>
 
+namespace lenna{
+namespace plugin{
+
 class Plugin: virtual public QObject{
 public:
     virtual QString getName() = 0;
@@ -33,5 +36,8 @@ public:
     virtual QIcon getIcon() = 0;
     virtual QWidget* getWidget() = 0;
 };
+
+}
+}
 
 #endif // PLUGIN_H

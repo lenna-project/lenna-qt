@@ -19,6 +19,8 @@
 #include "lenna.h"
 #include <QtCore/QCoreApplication>
 
+using namespace lenna;
+
 void Lenna::setApplicationName(QString name){
     QCoreApplication::setApplicationName(name);
 }

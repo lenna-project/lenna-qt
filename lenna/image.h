@@ -29,6 +29,8 @@
 using namespace cv;
 using namespace std;
 
+namespace lenna{
+
 class Image : public QObject
 {
     Q_OBJECT
@@ -56,5 +58,7 @@ private:
     QString name;
     QString album;
 };
+
+}
 
 #endif // IMAGE_H
