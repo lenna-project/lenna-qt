@@ -23,6 +23,7 @@
 #include "plugins/pluginsconfigdialog.h"
 #include "plugins/pluginloader.h"
 #include "aboutdialog.h"
+#include "tipsdialog.h"
 
 using namespace lenna;
 using namespace lenna::plugin;
@@ -44,6 +45,8 @@ MainWindow::MainWindow(QWidget *parent) :
     process = new Process();
     connect(process, SIGNAL(process(int)), ui->progressBar, SLOT(setValue(int)));
     splash.finish(this);
+    TipsDialog tips;
+    tips.showOnStartup();
 }
 
 MainWindow::~MainWindow()
@@ -55,6 +58,12 @@ void MainWindow::on_actionQuit_triggered()
 {
     Lenna::destroy();
     this->close();
+}
+
+void lenna::MainWindow::on_actionTips_triggered()
+{
+    TipsDialog tips;
+    tips.exec();
 }
 
 void MainWindow::on_actionAbout_triggered()
@@ -152,3 +161,5 @@ void lenna::MainWindow::on_outputTabWidget_tabCloseRequested(int index)
     }
     loadOutputPluginWidgets();
 }
+
+

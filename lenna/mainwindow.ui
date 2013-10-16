@@ -143,6 +143,7 @@
     <property name="title">
      <string>Help</string>
     </property>
+    <addaction name="actionTips"/>
     <addaction name="actionAbout"/>
    </widget>
    <addaction name="menuLenna"/>
@@ -177,6 +178,11 @@
   <action name="actionAbout">
    <property name="text">
     <string>About</string>
+   </property>
+  </action>
+  <action name="actionTips">
+   <property name="text">
+    <string>Tips</string>
    </property>
   </action>
  </widget>

@@ -1,0 +1,2 @@
+You can activate more functions in plugins config.
+No more tips.

@@ -15,52 +15,42 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
 
-#include <QMainWindow>
-#include "process.h"
+#ifndef TIPSDIALOG_H
+#define TIPSDIALOG_H
+
+#include <QtWidgets/QDialog>
+#include <QtCore/QStringList>
 
 namespace Ui {
-class MainWindow;
+class TipsDialog;
 }
 
-namespace lenna{
-
-class MainWindow : public QMainWindow
+class TipsDialog : public QDialog
 {
     Q_OBJECT
     
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+    explicit TipsDialog(QWidget *parent = 0);
+    void showOnStartup();
+    ~TipsDialog();
     
 private slots:
-    void on_actionQuit_triggered();
+    void on_okButton_clicked();
 
-    void on_actionAbout_triggered();
+    void on_nextButton_clicked();
 
-    void on_actionPlugins_triggered();
-
-    void on_startStopButton_clicked();
-
-    void on_inputTabWidget_tabCloseRequested(int index);
-
-    void on_editTabWidget_tabCloseRequested(int index);
-
-    void on_outputTabWidget_tabCloseRequested(int index);
-
-    void on_actionTips_triggered();
+    void on_previousButton_clicked();
 
 private:
-    Ui::MainWindow *ui;
-    Process *process;
+    void loadTip();
+    void loadTips();
+    void loadState();
+    void saveState();
 
-    void loadInputPluginWidgets();
-    void loadEditPluginWidgets();
-    void loadOutputPluginWidgets();
+    Ui::TipsDialog *ui;
+    QStringList *tips;
+    int counter;
 };
 
-}
-
-#endif // MAINWINDOW_H
+#endif // TIPSDIALOG_H
