@@ -107,3 +107,48 @@ void MainWindow::on_startStopButton_clicked()
 {
     process->start();
 }
+
+void lenna::MainWindow::on_inputTabWidget_tabCloseRequested(int index)
+{
+    int counter = -1;
+    foreach (InputPlugin *plugin, PluginLoader::getInstance().getInputPlugins())
+    {
+        if (plugin && PluginLoader::getInstance().isActivatedPlugin(plugin)){
+            counter++;
+            if(counter == index){
+                PluginLoader::getInstance().deactivatePlugin(plugin);
+            }
+        }
+    }
+    loadInputPluginWidgets();
+}
+
+void lenna::MainWindow::on_editTabWidget_tabCloseRequested(int index)
+{
+    int counter = -1;
+    foreach (EditPlugin *plugin, PluginLoader::getInstance().getEditPlugins())
+    {
+        if (plugin && PluginLoader::getInstance().isActivatedPlugin(plugin)){
+            counter++;
+            if(counter == index){
+                PluginLoader::getInstance().deactivatePlugin(plugin);
+            }
+        }
+    }
+    loadEditPluginWidgets();
+}
+
+void lenna::MainWindow::on_outputTabWidget_tabCloseRequested(int index)
+{
+    int counter = -1;
+    foreach (OutputPlugin *plugin, PluginLoader::getInstance().getOutputPlugins())
+    {
+        if (plugin && PluginLoader::getInstance().isActivatedPlugin(plugin)){
+            counter++;
+            if(counter == index){
+                PluginLoader::getInstance().deactivatePlugin(plugin);
+            }
+        }
+    }
+    loadOutputPluginWidgets();
+}

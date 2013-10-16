@@ -44,6 +44,12 @@ private slots:
 
     void on_startStopButton_clicked();
 
+    void on_inputTabWidget_tabCloseRequested(int index);
+
+    void on_editTabWidget_tabCloseRequested(int index);
+
+    void on_outputTabWidget_tabCloseRequested(int index);
+
 private:
     Ui::MainWindow *ui;
     Process *process;
