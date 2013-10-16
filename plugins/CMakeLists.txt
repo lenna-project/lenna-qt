@@ -7,4 +7,5 @@ add_subdirectory( camera )
 #add_subdirectory( savefile )
 
 #add_subdirectory( blur )
+add_subdirectory( resize )
 #add_subdirectory( filtermatrix )
