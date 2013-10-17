@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/plugins/rename">
+        <file alias="rename">rename.png</file>
+    </qresource>
+</RCC>
