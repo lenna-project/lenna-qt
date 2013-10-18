@@ -70,3 +70,78 @@ int Widget::pixelWidth(){
 int Widget::pixelHeight(){
     return ui->pixelHeightSpinBox->value();
 }
+
+void Widget::on_sizeRatioComboBox_currentIndexChanged(const QString &arg1)
+{
+    if(ui->percentRadioButton->isChecked()){
+        if (arg1 == "1:1") {
+            ui->percentHeightSpinBox->setValue(
+                        ui->percentWidthSpinBox->value() * (1.0 / 1));
+        } else if (arg1 == "5:4") {
+            ui->percentHeightSpinBox->setValue(
+                        ui->percentWidthSpinBox->value() * (4.0 / 5));
+        } else if (arg1 == "4:3") {
+            ui->percentHeightSpinBox->setValue(
+                        ui->percentWidthSpinBox->value() * (3.0 / 4));
+        } else if (arg1 == "16:9") {
+            ui->percentHeightSpinBox->setValue(
+                        ui->percentWidthSpinBox->value() * (9.0 / 16));
+        }
+    } else {
+        if (arg1 == "1:1") {
+            ui->pixelHeightSpinBox->setValue(
+                        ui->pixelWidthSpinBox->value() * (1.0 / 1));
+        } else if (arg1 == "5:4") {
+            ui->pixelHeightSpinBox->setValue(
+                        ui->pixelWidthSpinBox->value() * (4.0 / 5));
+        } else if (arg1 == "4:3") {
+            ui->pixelHeightSpinBox->setValue(
+                        ui->pixelWidthSpinBox->value() * (3.0 / 4));
+        } else if (arg1 == "16:9") {
+            ui->pixelHeightSpinBox->setValue(
+                        ui->pixelWidthSpinBox->value() * (9.0 / 16));
+        }
+    }
+}
+
+void Widget::on_pixelComboBox_currentIndexChanged(const QString &arg1)
+{
+    ui->pixelRadioButton->setChecked(true);
+    if (arg1 == "VGA (640x480)") {
+        ui->pixelWidthSpinBox->setValue(640);
+        ui->pixelHeightSpinBox->setValue(480);
+    } else if (arg1 == "XGA (1024x768)") {
+        ui->pixelWidthSpinBox->setValue(1024);
+        ui->pixelHeightSpinBox->setValue(768);
+    } else if (arg1 == "NTSC (576x486)") {
+        ui->pixelWidthSpinBox->setValue(576);
+        ui->pixelHeightSpinBox->setValue(486);
+    } else if (arg1 == "PAL (720x486)") {
+        ui->pixelWidthSpinBox->setValue(720);
+        ui->pixelHeightSpinBox->setValue(486);
+    } else if (arg1 == "HD (1920x1080)") {
+        ui->pixelWidthSpinBox->setValue(1920);
+        ui->pixelHeightSpinBox->setValue(1080);
+    } else if (arg1 == "Flickr large (768x1024)") {
+        ui->pixelWidthSpinBox->setValue(768);
+        ui->pixelHeightSpinBox->setValue(1024);
+    } else if (arg1 == "iPhone landscape (480x320)") {
+        ui->pixelWidthSpinBox->setValue(480);
+        ui->pixelHeightSpinBox->setValue(320);
+    } else if (arg1 == "160x160") {
+        ui->pixelWidthSpinBox->setValue(160);
+        ui->pixelHeightSpinBox->setValue(160);
+    } else if (arg1 == "HD 720 (1280x720)") {
+        ui->pixelWidthSpinBox->setValue(1280);
+        ui->pixelHeightSpinBox->setValue(720);
+    } else if (arg1 == "SVGA (800x600)") {
+        ui->pixelWidthSpinBox->setValue(800);
+        ui->pixelHeightSpinBox->setValue(600);
+    } else if (arg1 == "PSP (480x272)") {
+        ui->pixelWidthSpinBox->setValue(480);
+        ui->pixelHeightSpinBox->setValue(272);
+    } else if (arg1 == "2K (2048x1080)") {
+        ui->pixelWidthSpinBox->setValue(2048);
+        ui->pixelHeightSpinBox->setValue(1080);
+    }
+}

@@ -47,6 +47,10 @@ public:
     
 private slots:
 
+    void on_sizeRatioComboBox_currentIndexChanged(const QString &arg1);
+
+    void on_pixelComboBox_currentIndexChanged(const QString &arg1);
+
 private:
     Ui::Widget *ui;
     void loadState();
