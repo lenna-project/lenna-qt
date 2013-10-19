@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/plugins/textoverlay">
+        <file alias="textoverlay">textoverlay.png</file>
+    </qresource>
+</RCC>
