@@ -143,6 +143,7 @@
     <property name="title">
      <string>Help</string>
     </property>
+    <addaction name="actionLogger"/>
     <addaction name="actionTips"/>
     <addaction name="actionAbout"/>
    </widget>
@@ -183,6 +184,11 @@
   <action name="actionTips">
    <property name="text">
     <string>Tips</string>
+   </property>
+  </action>
+  <action name="actionLogger">
+   <property name="text">
+    <string>Logger</string>
    </property>
   </action>
  </widget>

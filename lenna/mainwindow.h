@@ -52,6 +52,8 @@ private slots:
 
     void on_actionTips_triggered();
 
+    void on_actionLogger_triggered();
+
 private:
     Ui::MainWindow *ui;
     Process *process;

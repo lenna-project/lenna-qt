@@ -23,6 +23,7 @@
 #include "plugins/pluginsconfigdialog.h"
 #include "plugins/pluginloader.h"
 #include "aboutdialog.h"
+#include "loggerdialog.h"
 #include "tipsdialog.h"
 
 using namespace lenna;
@@ -33,18 +34,23 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     SplashScreen splash(this);
+    qDebug("showing Splashscreen");
     splash.show();
     splash.setMessage("Starting " + QCoreApplication::applicationName());
     ui->setupUi(this);
     splash.setMessage("Loading config ...");
     this->setWindowTitle(Lenna::applicationName() + " " + Lenna::applicationVersion());
     splash.setMessage("Loading Plugins ...");
+    qDebug("loading Input Plugin Widgets");
     loadInputPluginWidgets();
+    qDebug("loading Edit Plugin Widgets");
     loadEditPluginWidgets();
+    qDebug("loading Output Plugin Widgets");
     loadOutputPluginWidgets();
     process = new Process();
     connect(process, SIGNAL(process(int)), ui->progressBar, SLOT(setValue(int)));
     splash.finish(this);
+    qDebug("showing Tips");
     TipsDialog tips;
     tips.showOnStartup();
 }
@@ -58,6 +64,12 @@ void MainWindow::on_actionQuit_triggered()
 {
     Lenna::destroy();
     this->close();
+}
+
+void lenna::MainWindow::on_actionLogger_triggered()
+{
+    LoggerDialog loggerDialog;
+    loggerDialog.exec();
 }
 
 void lenna::MainWindow::on_actionTips_triggered()
@@ -161,5 +173,7 @@ void lenna::MainWindow::on_outputTabWidget_tabCloseRequested(int index)
     }
     loadOutputPluginWidgets();
 }
+
+
 
 

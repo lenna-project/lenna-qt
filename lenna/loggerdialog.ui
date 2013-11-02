@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LoggerDialog</class>
+ <widget class="QDialog" name="LoggerDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="0">
+    <widget class="QPushButton" name="pushButton">
+     <property name="text">
+      <string>OK</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>5</number>
+     </property>
+     <widget class="QWidget" name="infoTab">
+      <attribute name="title">
+       <string>Info</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QTextBrowser" name="infoTextBrowser"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="warningTab">
+      <attribute name="title">
+       <string>Warning</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QTextBrowser" name="warningTextBrowser"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="criticalTab">
+      <attribute name="title">
+       <string>Critical</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="QTextBrowser" name="criticalTextBrowser"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="fatalTab">
+      <attribute name="title">
+       <string>Fatal</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <widget class="QTextBrowser" name="fatalTextBrowser"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="debugTab">
+      <attribute name="title">
+       <string>Debug</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QTextBrowser" name="debugTextBrowser"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="messagesTab">
+      <attribute name="title">
+       <string>All Messages</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_6">
+       <item>
+        <widget class="QTextBrowser" name="messagesTextBrowser"/>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>LoggerDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>52</x>
+     <y>460</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>398</x>
+     <y>442</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

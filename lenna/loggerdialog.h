@@ -16,24 +16,27 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "mainwindow.h"
-#include <QtWidgets/QApplication>
-#include "lenna.h"
-#include "logger.h"
+#ifndef LOGGERDIALOG_H
+#define LOGGERDIALOG_H
 
-using namespace lenna;
+#include <QDialog>
+#include <QtWidgets/QTextBrowser>
 
-int main(int argc, char *argv[])
-{
-    qInstallMessageHandler(Logger::messageHandler);
-    qDebug("starting Application");
-    QApplication a(argc, argv);
-    Lenna::setApplicationName("Lenna");
-    Lenna::setApplicationVersion("0.1");
-    Lenna::setOrganizationName("FalseCAM");
-    a.setWindowIcon(Lenna::applicationIcon());
-    MainWindow w;
-    w.show();
-    
-    return a.exec();
+namespace Ui {
+class LoggerDialog;
 }
+
+class LoggerDialog : public QDialog
+{
+    Q_OBJECT
+
+public:
+    explicit LoggerDialog(QWidget *parent = 0);
+    ~LoggerDialog();
+
+private:
+    Ui::LoggerDialog *ui;
+    void setText(QTextBrowser *textBrowser, QStringList list);
+};
+
+#endif // LOGGERDIALOG_H
