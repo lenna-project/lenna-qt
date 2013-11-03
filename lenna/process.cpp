@@ -21,6 +21,7 @@
 #include "imageprocessor.h"
 #include <QtCore/QThread>
 #include <QtCore/QThreadPool>
+#include "logger.h"
 
 using namespace lenna;
 using namespace lenna::plugin;
@@ -37,6 +38,9 @@ void Process::run(){
     foreach(InputPlugin *inputPlugin, PluginLoader::getInstance().getInputPlugins()){
         if(PluginLoader::getInstance().isActivatedPlugin(inputPlugin)){
             inputPlugin->init();
+
+            Logger::info(inputPlugin->getTitle()+" initialized");
+
             QThreadPool threadPool(this);
             threadPool.setMaxThreadCount(QThread::idealThreadCount());
 

@@ -45,26 +45,36 @@ Logger* Logger::instance()
 void Logger::debug(QString msg){
     instance()->debugMsgs.append(msg);
     instance()->msgs.append("Debug: "+ msg);
+    emit instance()->newDebug(msg);
+    emit instance()->newMessage(msg);
 }
 
 void Logger::warning(QString msg){
     instance()->warningMsgs.append(msg);
     instance()->msgs.append("Warning: "+ msg);
+    emit instance()->newWarning(msg);
+    emit instance()->newMessage(msg);
 }
 
 void Logger::critical(QString msg){
     instance()->criticalMsgs.append(msg);
     instance()->msgs.append("Critical: "+ msg);
+    emit instance()->newCritical(msg);
+    emit instance()->newMessage(msg);
 }
 
 void Logger::fatal(QString msg){
     instance()->fatalMsgs.append(msg);
     instance()->msgs.append("Fatal: "+ msg);
+    emit instance()->newFatal(msg);
+    emit instance()->newMessage(msg);
 }
 
 void Logger::info(QString msg){
     instance()->infoMsgs.append(msg);
     instance()->msgs.append("Info: "+ msg);
+    emit instance()->newInfo(msg);
+    emit instance()->newMessage(msg);
 }
 
 void Logger::messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)

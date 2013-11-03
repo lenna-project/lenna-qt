@@ -36,6 +36,12 @@ public:
     static QStringList getMessages();
 
 signals:
+    void newDebug(QString msg);
+    void newWarning(QString msg);
+    void newCritical(QString msg);
+    void newFatal(QString msg);
+    void newInfo(QString msg);
+    void newMessage(QString msg);
 
 public slots:
     static void debug(QString msg);

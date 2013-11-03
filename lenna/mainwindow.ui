@@ -19,23 +19,46 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
-     <widget class="QGroupBox" name="inputGroupBox">
+    <item row="1" column="0" colspan="3">
+     <widget class="QGroupBox" name="groupBox_4">
       <property name="title">
-       <string>Input</string>
+       <string/>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
+        <widget class="QProgressBar" name="progressBar">
+         <property name="value">
+          <number>24</number>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="startStopButton">
+         <property name="text">
+          <string>Start</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QGroupBox" name="outputGroupBox">
+      <property name="title">
+       <string>Output</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QTabWidget" name="inputTabWidget">
+        <widget class="QTabWidget" name="outputTabWidget">
          <property name="tabsClosable">
           <bool>true</bool>
          </property>
-         <widget class="QWidget" name="tab">
+         <widget class="QWidget" name="tab_5">
           <attribute name="title">
            <string>Tab 1</string>
           </attribute>
          </widget>
-         <widget class="QWidget" name="tab_2">
+         <widget class="QWidget" name="tab_6">
           <attribute name="title">
            <string>Tab 2</string>
           </attribute>
@@ -71,23 +94,23 @@
       </layout>
      </widget>
     </item>
-    <item row="0" column="2">
-     <widget class="QGroupBox" name="outputGroupBox">
+    <item row="0" column="0">
+     <widget class="QGroupBox" name="inputGroupBox">
       <property name="title">
-       <string>Output</string>
+       <string>Input</string>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
+      <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QTabWidget" name="outputTabWidget">
+        <widget class="QTabWidget" name="inputTabWidget">
          <property name="tabsClosable">
           <bool>true</bool>
          </property>
-         <widget class="QWidget" name="tab_5">
+         <widget class="QWidget" name="tab">
           <attribute name="title">
            <string>Tab 1</string>
           </attribute>
          </widget>
-         <widget class="QWidget" name="tab_6">
+         <widget class="QWidget" name="tab_2">
           <attribute name="title">
            <string>Tab 2</string>
           </attribute>
@@ -97,27 +120,14 @@
       </layout>
      </widget>
     </item>
-    <item row="1" column="0" colspan="3">
-     <widget class="QGroupBox" name="groupBox_4">
-      <property name="title">
-       <string/>
+    <item row="2" column="0" colspan="3">
+     <widget class="QLineEdit" name="infoLineEdit">
+      <property name="enabled">
+       <bool>true</bool>
       </property>
-      <layout class="QGridLayout" name="gridLayout_2">
-       <item row="0" column="0">
-        <widget class="QProgressBar" name="progressBar">
-         <property name="value">
-          <number>24</number>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QPushButton" name="startStopButton">
-         <property name="text">
-          <string>Start</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
      </widget>
     </item>
    </layout>

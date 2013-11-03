@@ -24,6 +24,7 @@
 #include "plugins/pluginloader.h"
 #include "aboutdialog.h"
 #include "loggerdialog.h"
+#include "logger.h"
 #include "tipsdialog.h"
 
 using namespace lenna;
@@ -49,6 +50,8 @@ MainWindow::MainWindow(QWidget *parent) :
     loadOutputPluginWidgets();
     process = new Process();
     connect(process, SIGNAL(process(int)), ui->progressBar, SLOT(setValue(int)));
+    // connect infoLineEdit to Logger info signal
+    connect(Logger::instance(), SIGNAL(newInfo(QString)), ui->infoLineEdit, SLOT(setText(QString)));
     splash.finish(this);
     qDebug("showing Tips");
     TipsDialog tips;
