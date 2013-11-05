@@ -22,6 +22,7 @@
 #include <QObject>
 #include <QtCore/QStringList>
 
+namespace lenna{
 class Logger : public QObject
 {
     Q_OBJECT
@@ -61,5 +62,6 @@ private:
     QStringList fatalMsgs;
     QStringList infoMsgs;
 };
+}
 
 #endif // LOGGER_H

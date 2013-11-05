@@ -19,6 +19,8 @@
 #include <QtCore/QMutex>
 #include "logger.h"
 
+using namespace lenna;
+
 Logger* Logger::singleton = 0;
 
 Logger::Logger(QObject *parent) :

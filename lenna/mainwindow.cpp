@@ -48,8 +48,8 @@ MainWindow::MainWindow(QWidget *parent) :
     loadEditPluginWidgets();
     qDebug("loading Output Plugin Widgets");
     loadOutputPluginWidgets();
-    process = new Process();
-    connect(process, SIGNAL(process(int)), ui->progressBar, SLOT(setValue(int)));
+    process = new Process(this);
+    initWorker();
     // connect infoLineEdit to Logger info signal
     connect(Logger::instance(), SIGNAL(newInfo(QString)), ui->infoLineEdit, SLOT(setText(QString)));
     splash.finish(this);
@@ -61,6 +61,14 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::initWorker(){
+    worker = new Worker();
+
+    connect(worker, SIGNAL(process(int)), ui->progressBar, SLOT(setValue(int)));
+    worker->moveToThread(process);
+    connect(process, SIGNAL(started()), worker, SLOT(process()));
 }
 
 void MainWindow::on_actionQuit_triggered()

@@ -15,16 +15,31 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#ifndef WORKER_H
+#define WORKER_H
 
-#include "process.h"
-
-using namespace lenna;
-
-Process::Process(QObject *parent) :
-    QThread(parent)
+#include <QObject>
+namespace lenna{
+class Worker : public QObject
 {
+    Q_OBJECT
+public:
+    Worker();
+    ~Worker();
+
+public slots:
+    void process();
+
+signals:
+    void finished();
+    void process(int value);
+
+private:
+    bool stopped;
+
+    void finish();
+
+};
 }
 
-void Process::run(){
-
-}
+#endif // WORKER_H

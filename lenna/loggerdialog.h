@@ -25,7 +25,7 @@
 namespace Ui {
 class LoggerDialog;
 }
-
+namespace lenna{
 class LoggerDialog : public QDialog
 {
     Q_OBJECT
@@ -38,5 +38,6 @@ private:
     Ui::LoggerDialog *ui;
     void setText(QTextBrowser *textBrowser, QStringList list);
 };
+}
 
 #endif // LOGGERDIALOG_H

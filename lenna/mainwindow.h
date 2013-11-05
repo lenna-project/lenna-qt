@@ -20,6 +20,7 @@
 
 #include <QMainWindow>
 #include "process.h"
+#include "worker.h"
 
 namespace Ui {
 class MainWindow;
@@ -57,10 +58,12 @@ private slots:
 private:
     Ui::MainWindow *ui;
     Process *process;
+    Worker *worker;
 
     void loadInputPluginWidgets();
     void loadEditPluginWidgets();
     void loadOutputPluginWidgets();
+    void initWorker();
 };
 
 }

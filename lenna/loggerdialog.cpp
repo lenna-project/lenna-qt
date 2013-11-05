@@ -22,6 +22,8 @@
 #include <QtCore/QStringBuilder>
 #include "logger.h"
 
+using namespace lenna;
+
 LoggerDialog::LoggerDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::LoggerDialog)
