@@ -55,6 +55,9 @@ private slots:
 
     void on_actionLogger_triggered();
 
+    void startProcess();
+    void stopProcess();
+
 private:
     Ui::MainWindow *ui;
     Process *process;
@@ -64,6 +67,8 @@ private:
     void loadEditPluginWidgets();
     void loadOutputPluginWidgets();
     void initWorker();
+    bool startStopButtonIsStart;
+
 };
 
 }

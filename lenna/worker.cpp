@@ -54,22 +54,26 @@ void Worker::process() {
                 emit process(inputPlugin->getProgress());
                 if(stopped){
                     emit process(100);
-                    return;
+                    break;
                 }
             }
             threadPool.waitForDone();
+        }
+        if(stopped){
+            break;
         }
     }
     finish();
     emit finished();
 }
 
+void Worker::stop(){
+    this->stopped = true;
+}
+
 void Worker::finish(){
     emit process(100);
     foreach(OutputPlugin *outputPlugin, PluginLoader::getInstance().getOutputPlugins()){
-        if(stopped){
-            return;
-        }
         if(PluginLoader::getInstance().isActivatedPlugin(outputPlugin)){
             outputPlugin->finnish();
         }

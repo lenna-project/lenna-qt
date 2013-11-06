@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    startStopButtonIsStart = true;
     SplashScreen splash(this);
     qDebug("showing Splashscreen");
     splash.show();
@@ -67,6 +68,7 @@ void MainWindow::initWorker(){
     worker = new Worker();
 
     connect(worker, SIGNAL(process(int)), ui->progressBar, SLOT(setValue(int)));
+    connect(worker, SIGNAL(finished()), this, SLOT(stopProcess()));
     worker->moveToThread(process);
     connect(process, SIGNAL(started()), worker, SLOT(process()));
 }
@@ -137,7 +139,23 @@ void MainWindow::loadOutputPluginWidgets(){
 
 void MainWindow::on_startStopButton_clicked()
 {
+    if(startStopButtonIsStart){
+        startProcess();
+    }else{
+        stopProcess();
+    }
+}
+
+void MainWindow::startProcess(){
+    ui->startStopButton->setText(tr("Stop"));
+    startStopButtonIsStart = false;
     process->start();
+}
+
+void MainWindow::stopProcess(){
+    ui->startStopButton->setText(tr("Start"));
+    worker->stop();
+    startStopButtonIsStart = true;
 }
 
 void lenna::MainWindow::on_inputTabWidget_tabCloseRequested(int index)

@@ -29,6 +29,7 @@ public:
 
 public slots:
     void process();
+    void stop();
 
 signals:
     void finished();
