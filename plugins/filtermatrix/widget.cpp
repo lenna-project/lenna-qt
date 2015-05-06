@@ -67,13 +67,10 @@ void Widget::saveState(){
 
 
 void Widget::updateImage(){
-
-    Image image = Image(*previewImage);
-
     if(ui->filterCheckBox->isChecked()){
-        filter(&image);
+        filter(previewImage);
     }
-    this->previewImageLabel->setPixmap(QPixmap::fromImage(QImage(image.toQImage())));
+    this->previewImageLabel->setPixmap(QPixmap::fromImage(QImage(previewImage->toQImage())));
 
 }
 

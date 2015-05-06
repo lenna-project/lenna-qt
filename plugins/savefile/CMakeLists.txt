@@ -1,16 +1,16 @@
-cmake_minimum_required(VERSION 2.8.9)
+cmake_minimum_required(VERSION 2.8.11)
   project(savefile)
 
-  cmake_policy(SET CMP0020 OLD)
-  # Tell CMake to run moc when necessary:
-  set(CMAKE_AUTOMOC ON)
-  # As moc files are generated in the binary dir, tell CMake
-  # to always look for includes there:
-  set(CMAKE_INCLUDE_CURRENT_DIR ON)
+ set(CMAKE_AUTOMOC ON)
+ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-  # Widgets finds its own dependencies.
-  find_package(Qt5Widgets REQUIRED)
-  find_package( OpenCV REQUIRED )
+ find_package(Qt5Core REQUIRED)
+ find_package(Qt5Widgets REQUIRED)
+ find_package(Qt5Sql REQUIRED)
+ find_package(Qt5LinguistTools REQUIRED)
+ find_package(Qt5WebKit REQUIRED)
+ find_package(Qt5WebKitWidgets REQUIRED)
+ find_package( OpenCV REQUIRED )
 
   include_directories (../../lenna)
   
@@ -29,5 +29,5 @@ QT5_ADD_RESOURCES( savefile_RES ${savefile_QRC} )
 	${savefile_RES}
     )
 
-  qt5_use_modules(savefile Widgets)
-  target_link_libraries( savefile ${OpenCV_LIBS} )
+ qt5_use_modules( savefile Widgets Network WebKit WebKitWidgets)
+ target_link_libraries( savefile Qt5::Core Qt5::Widgets Qt5::WebKit Qt5::WebKitWidgets ${OpenCV_LIBS} )

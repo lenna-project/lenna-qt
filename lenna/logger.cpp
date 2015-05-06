@@ -17,6 +17,7 @@
  */
 
 #include <QtCore/QMutex>
+#include <stdio.h>
 #include "logger.h"
 
 using namespace lenna;
