@@ -17,9 +17,12 @@ cmake_minimum_required(VERSION 2.8.11)
 	
  if(NOT CMAKE_BUILD_TYPE)
  set(CMAKE_BUILD_TYPE Release CACHE STRING
-		"Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel."
+		"Choose the type of build, options are: None Debug Release."
 		FORCE)
  endif(NOT CMAKE_BUILD_TYPE)
 
+ option(BUILD_DOCUMENTATION "Create doxygen documentation for developers" OFF)
+
  add_subdirectory( lenna )
  add_subdirectory( plugins )
+ add_subdirectory( doc )
