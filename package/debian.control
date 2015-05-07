@@ -1,0 +1,9 @@
+Source: lenna
+Section: utils
+Priority: optional
+Maintainer: FalseCAM <falsecam@gmail.com>
+Build-Depends: debhelper (>= 4.1.16), g++
+Package: lenna
+Architecture: any
+Depends: ${shlibs:Depends}, qt5-default
+Description: Gui to resize and rename Images.
