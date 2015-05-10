@@ -24,5 +24,5 @@ cmake_minimum_required(VERSION 2.8.11)
  option(BUILD_DOCUMENTATION "Create doxygen documentation for developers" OFF)
 
  add_subdirectory( lenna )
- add_subdirectory( plugins )
+ #add_subdirectory( plugins )
  add_subdirectory( doc )
