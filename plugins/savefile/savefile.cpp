@@ -17,6 +17,7 @@
  */
 
 #include "savefile.h"
+#include <highgui.h>
 #include <QProxyStyle>
 #include <QDir>
 
