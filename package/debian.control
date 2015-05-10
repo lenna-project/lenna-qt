@@ -2,8 +2,10 @@ Source: lenna
 Section: utils
 Priority: optional
 Maintainer: FalseCAM <falsecam@gmail.com>
+Binary: lenna
 Build-Depends: debhelper (>= 4.1.16), g++, qtbase5-dev, qtbase5-dev-tools, qt5-qmake, qttools5-dev, libqt5webkit5-dev, libcv-dev, libhighgui-dev, libopencv-dev, libjpeg-dev, libpng-dev
 Package: lenna
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}, qt5-default, libqt5gui5, libqt5widgets5, libqt5core5
 Description: Gui to resize and rename Images.
+ Contains also plugins.
