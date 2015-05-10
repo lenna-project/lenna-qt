@@ -10,7 +10,7 @@ install:
 - sudo apt-get purge cmake -qq
 - sudo apt-get install -y -qq cmake
 - sudo apt-get install -qq qt5-qmake qtbase5-dev qtdeclarative5-dev qttools5-dev libqt5webkit5-dev
-- sudo apt-get install -qq libcv-dev libcvaux-dev libhighgui-dev libopencv-dev
+- sudo apt-get install -qq libcv-dev libcvaux-dev libhighgui-dev libopencv-dev libjpeg-dev libpng-dev
 
 before_script:
 - mkdir build
