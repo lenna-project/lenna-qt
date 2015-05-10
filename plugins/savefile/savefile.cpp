@@ -17,6 +17,7 @@
  */
 
 #include "savefile.h"
+#include <opencv2/opencv.hpp>
 #include <highgui.h>
 #include <QProxyStyle>
 #include <QDir>
