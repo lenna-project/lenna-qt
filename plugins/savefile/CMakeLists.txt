@@ -4,6 +4,8 @@ cmake_minimum_required(VERSION 2.8.11)
  set(CMAKE_AUTOMOC ON)
  set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
+ set(OPENCV_BUILD_3RDPARTY_LIBS TRUE CACHE BOOL "Build 3rd party libraries")
+
  find_package(Qt5Core REQUIRED)
  find_package(Qt5Widgets REQUIRED)
  find_package(Qt5Sql REQUIRED)
