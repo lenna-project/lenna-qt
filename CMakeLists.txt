@@ -2,10 +2,14 @@ cmake_minimum_required(VERSION 2.8.11)
 	
  ########### Project name ###########
  project(lenna)
- set(LENNA_MAJOR "0")
- set(LENNA_MINOR "9")
- set(LENNA_PATCH "3")
- set(VERSION "${LENNA_MAJOR}.${LENNA_MINOR}.${LENNA_PATCH}")
+
+ file (STRINGS "${PROJECT_SOURCE_DIR}/VERSION" PACKAGE_VERSION )
+ string(REGEX REPLACE "([0-9]+)\\.[0-9]+\\.[0-9]+.*" "\\1" CPACK_PACKAGE_VERSION_MAJOR ${PACKAGE_VERSION})
+ string(REGEX REPLACE "[0-9]+\\.([0-9])+\\.[0-9]+.*" "\\1" CPACK_PACKAGE_VERSION_MINOR ${PACKAGE_VERSION})
+ string(REGEX REPLACE "[0-9]+\\.[0-9]+\\.([0-9]+).*" "\\1" CPACK_PACKAGE_VERSION_PATCH ${PACKAGE_VERSION})
+ set(COMPLETE_VERSION ${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH})
+ set(RELEASE_NAME "Unstable-trunk")
+ set(PROJECT_VERSION ${COMPLETE_VERSION})
  set(PACKAGE lenna)
 
  ########### Subdirectories ###############
@@ -23,6 +27,6 @@ cmake_minimum_required(VERSION 2.8.11)
 
  option(BUILD_DOCUMENTATION "Create doxygen documentation for developers" OFF)
 
- add_subdirectory( lenna )
- #add_subdirectory( plugins )
+ add_subdirectory( src )
+ add_subdirectory( plugins )
  add_subdirectory( doc )

@@ -14,9 +14,9 @@ cmake_minimum_required(VERSION 2.8.11)
  find_package(Qt5WebKitWidgets REQUIRED)
  find_package( OpenCV REQUIRED )
 
-  include_directories (../../lenna)
+  include_directories (../../src)
   
-  file( GLOB_RECURSE savefile_SOURCE "*.cpp"  "../../lenna/image.cpp")
+  file( GLOB_RECURSE savefile_SOURCE "*.cpp"  "../../src/image.cpp")
 file( GLOB_RECURSE savefile_HEADERS "*.h" )
 file( GLOB_RECURSE savefile_UI "*.ui" )
 file( GLOB_RECURSE savefile_QRC "*.qrc" )

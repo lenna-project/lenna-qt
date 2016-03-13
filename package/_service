@@ -8,4 +8,7 @@
   <param name="compression">gz</param>
   <param name="file">*.tar</param>
  </service>
+ <service name="set_version">
+  <param name="basename">lenna-master</param>
+ </service>
 </services>

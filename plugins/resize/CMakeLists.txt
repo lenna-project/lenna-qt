@@ -12,9 +12,9 @@ project(resize)
  find_package(Qt5WebKitWidgets REQUIRED)
  find_package( OpenCV REQUIRED )
 
-include_directories (../../lenna)
+include_directories (../../src)
   
-file( GLOB_RECURSE resize_SOURCE "*.cpp"  "../../lenna/image.cpp")
+file( GLOB_RECURSE resize_SOURCE "*.cpp"  "../../src/image.cpp")
 file( GLOB_RECURSE resize_HEADERS "*.h" )
 file( GLOB_RECURSE resize_UI "*.ui" )
 file( GLOB_RECURSE resize_QRC "*.qrc" )

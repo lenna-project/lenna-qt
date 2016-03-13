@@ -20,6 +20,7 @@
 #include <QtWidgets/QApplication>
 #include "lenna.h"
 #include "logger.h"
+#include "defines.h"
 
 using namespace lenna;
 
@@ -28,8 +29,8 @@ int main(int argc, char *argv[])
     qInstallMessageHandler(Logger::messageHandler);
     qDebug("starting Application");
     QApplication a(argc, argv);
-    Lenna::setApplicationName("Lenna");
-    Lenna::setApplicationVersion("0.1");
+    Lenna::setApplicationName(QString::fromStdString(PROJECT_NAME));
+    Lenna::setApplicationVersion(QString::fromStdString(PROJECT_VERSION));
     Lenna::setOrganizationName("FalseCAM");
     a.setWindowIcon(Lenna::applicationIcon());
     MainWindow w;

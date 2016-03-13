@@ -12,9 +12,9 @@ project(rename)
  find_package(Qt5WebKitWidgets REQUIRED)
  find_package( OpenCV REQUIRED )
 
-include_directories (../../lenna)
+include_directories (../../src)
   
-file( GLOB_RECURSE rename_SOURCE "*.cpp"  "../../lenna/image.cpp")
+file( GLOB_RECURSE rename_SOURCE "*.cpp"  "../../src/image.cpp")
 file( GLOB_RECURSE rename_HEADERS "*.h" )
 file( GLOB_RECURSE rename_UI "*.ui" )
 file( GLOB_RECURSE rename_QRC "*.qrc" )

@@ -20,7 +20,7 @@
 #define WIDGET_H
 
 #include "previewimagelabel.h"
-#include "../../lenna/image.h"
+#include "image.h"
 #include <opencv2/imgproc/imgproc.hpp>
 #include <QtWidgets/QWidget>
 

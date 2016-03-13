@@ -13,6 +13,10 @@ cmake_minimum_required(VERSION 2.8.11)
  find_package(Qt5WebKitWidgets REQUIRED)
  find_package( OpenCV REQUIRED )
 
+ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/defines.h.cmake
+                                ${CMAKE_CURRENT_BINARY_DIR}/defines.h @ONLY)
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+
  file( GLOB_RECURSE lenna_SOURCE "*.cpp" "plugins/*.cpp")
  file( GLOB_RECURSE lenna_HEADERS "*.h" "plugins/*.h")
  file( GLOB_RECURSE lenna_UI "*.ui" "plugins/*.ui")

@@ -1,0 +1,12 @@
+#ifndef GLOBAL_DEFINES_H
+#define GLOBAL_DEFINES_H
+
+#include <string>
+
+namespace {
+  std::string PROJECT_NAME = "@PROJECT_NAME@";
+  std::string PROJECT_VERSION = "@PROJECT_VERSION@";
+}
+
+#endif
+// vim: ft=cpp

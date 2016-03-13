@@ -12,9 +12,9 @@ project(filtermatrix)
  find_package(Qt5WebKitWidgets REQUIRED)
  find_package( OpenCV REQUIRED )
 
- include_directories(../../lenna)
+ include_directories(../../src)
   
-file( GLOB_RECURSE _SOURCE "*.cpp"  "../../lenna/image.cpp")
+file( GLOB_RECURSE _SOURCE "*.cpp"  "../../src/image.cpp")
 file( GLOB_RECURSE _HEADERS "*.h" )
 file( GLOB_RECURSE _UI "*.ui" )
 file( GLOB_RECURSE _QRC "*.qrc" )
