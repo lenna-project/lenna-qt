@@ -80,10 +80,10 @@ void SaveFile::out(Image *image){
 
     if(widget->getImageQuality() != 0){
         if(widget->getImageFormat().toLower() == "png"){
-            params.push_back(cv::IMWRITE_PNG_COMPRESSION);
+            params.push_back(IMWRITE_PNG_COMPRESSION);
             params.push_back(widget->getImageQuality()/100);
         }else if(widget->getImageFormat().toLower() == "jpg" ||widget->getImageFormat().toLower() == "jpeg"){
-            params.push_back(cv::IMWRITE_JPEG_QUALITY);
+            params.push_back(IMWRITE_JPEG_QUALITY);
             params.push_back(widget->getImageQuality());
         }
     }
