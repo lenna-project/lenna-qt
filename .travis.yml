@@ -19,13 +19,13 @@ install:
       && sudo apt-get install -qq qt5-qmake qtbase5-dev qtdeclarative5-dev qttools5-dev libqt5webkit5-dev
       && sudo apt-get install -qq libcv-dev libcvaux-dev libhighgui-dev libopencv-dev libjpeg-dev libpng-dev
       ;
-   fi
- - if [ "${TRAVIS_OS_NAME}" == "osx" ]; then
+   else
          brew tap homebrew/science
       && brew update
       && brew install cmake
       && brew install qt5
       && brew install opencv3 --with-contrib
+      ;
    fi
 
 before_script:
