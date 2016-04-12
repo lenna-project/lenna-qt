@@ -34,8 +34,8 @@ Image::Image(QString file){
     this->image = imread(file.toStdString().c_str(), 1);
 }
 
-void Image::setMat(cv::Mat *img){
-    this->image = *img;   
+void Image::setMat(Mat img){
+    this->image = img;
 }
 
 QString Image::getAlbum() {

@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/plugins/crop">
+        <file alias="crop">crop.png</file>
+    </qresource>
+</RCC>

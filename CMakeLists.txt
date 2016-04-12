@@ -25,6 +25,8 @@ cmake_minimum_required(VERSION 2.8.11)
 		FORCE)
  endif(NOT CMAKE_BUILD_TYPE)
 
+ add_definitions(-std=c++11)
+
  option(BUILD_DOCUMENTATION "Create doxygen documentation for developers" OFF)
 
  add_subdirectory( src )

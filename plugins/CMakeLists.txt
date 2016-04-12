@@ -1,5 +1,5 @@
 ########### Subdirectories ###############
-cmake_minimum_required(VERSION 2.8.11)
+cmake_minimum_required(VERSION 3.0.0)
  project(lenna)
 
 # INPUT PLUGINS
@@ -9,6 +9,7 @@ cmake_minimum_required(VERSION 2.8.11)
 
 # EDIT PLUGINS
  add_subdirectory( blur )
+ add_subdirectory( crop )
  add_subdirectory( rename )
  add_subdirectory( resize )
  add_subdirectory( textoverlay )

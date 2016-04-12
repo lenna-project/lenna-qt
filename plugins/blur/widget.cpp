@@ -60,7 +60,7 @@ void Widget::loadState(){
     QSettings settings(QCoreApplication::organizationName(),
                        QCoreApplication::applicationName());
     settings.beginGroup("plugins");
-    settings.beginGroup("Color");
+    settings.beginGroup("Blur");
 
     ui->blurCheckBox->setChecked(settings.value("BlurUse", false).toBool());
     ui->posXSpinBox->setValue(settings.value("PosX", 10).toInt());
@@ -74,7 +74,7 @@ void Widget::saveState(){
     QSettings settings(QCoreApplication::organizationName(),
                        QCoreApplication::applicationName());
     settings.beginGroup("plugins");
-    settings.beginGroup("Color");
+    settings.beginGroup("Blur");
 
     settings.setValue("BlurUse", ui->blurCheckBox->isChecked());
     settings.setValue("PosX", ui->posXSpinBox->value());

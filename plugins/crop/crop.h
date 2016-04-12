@@ -1,6 +1,6 @@
 /**
     This file is part of program Lenna
-    Copyright (C) 2013  FalseCAM
+    Copyright (C) 2016  FalseCAM
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,49 +16,45 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef IMAGE_H
-#define IMAGE_H
+#ifndef CROP_H
+#define CROP_H
 
+#include "plugins/editplugin.h"
+#include "widget.h"
+
+#include <QtCore/QtPlugin>
 #include <QtCore/QObject>
-#include <QtGui/QImage>
-#include <iostream>
-#include <sstream>
-#include "opencv2/highgui/highgui.hpp"
-#include "opencv2/imgproc/imgproc.hpp"
-
-using namespace cv;
-using namespace std;
+#include <QtGui/QIcon>
 
 namespace lenna{
+namespace plugin{
+namespace crop{
 
-class Image : public QObject
+class Crop : public EditPlugin
 {
     Q_OBJECT
-public:
-    Image();
-    Image(QString file);
-    Image(Image &image);
-    QString getAlbum();
-    QString getName();
-    void setMat(cv::Mat img);
-    void setAlbum(QString album);
-    void setName(QString name);
-    Mat getImage();
-    Mat *getImagePointer();
-    void convolve(Mat filter);
-    QImage toQImage();
+    Q_PLUGIN_METADATA(IID "lenna.crop" FILE "crop.json")
+    Q_INTERFACES(lenna::plugin::EditPlugin)
 
-    
-signals:
-    
-public slots:
+public:
+    Crop();
+    ~Crop();
+    QString getName();
+    QString getTitle();
+    QString getVersion();
+    QString getAuthor();
+    QString getDescription();
+    QIcon getIcon();
+    QWidget *getWidget();
+
+    void edit(Image *image);
 
 private:
-    Mat image;
-    QString name;
-    QString album;
+    Widget *widget = nullptr;
 };
 
 }
+}
+}
 
-#endif // IMAGE_H
+#endif // CROP_H

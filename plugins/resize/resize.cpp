@@ -74,8 +74,8 @@ void Resize::edit(Image *img){
             size.width = widget->pixelWidth();
             size.height = widget->pixelHeight();
         }
-        cv::Mat* dst = new Mat(size, img->getImage().type());
-        cv::resize(img->getImage(), *dst, size, 0, 0, cv::INTER_CUBIC);
+        cv::Mat dst;
+        cv::resize(img->getImage(), dst, size, 0, 0, cv::INTER_CUBIC);
         img->setMat(dst);
     }
 }

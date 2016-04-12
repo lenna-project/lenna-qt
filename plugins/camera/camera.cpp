@@ -88,8 +88,8 @@ Image *Camera::next(){
 
     if(hasNext()){
 
-        Mat* frame = new Mat(cvQueryFrame(camera), true);
-        if(!frame->empty()){
+        Mat frame(cvQueryFrame(camera), true);
+        if(!frame.empty()){
             Image *img = new Image();
             position++;
             img->setMat(frame);
