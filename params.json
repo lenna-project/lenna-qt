@@ -1,0 +1,6 @@
+{
+  "name": "Lenna",
+  "tagline": "Lenna: Open Source Image Processing Program",
+  "body": "# lenna [![Build Status](https://travis-ci.org/FalseCAM/lenna.svg?branch=master)](https://travis-ci.org/FalseCAM/lenna)\r\n==============\r\n\r\n*Open Source Image Processing Program*\r\n\r\nThis project is using Qt5 and OpenCV.\r\n\r\n### Quick start\r\n\r\nFirst install CMake, Qt5, OpenCV.\r\n\r\nThen build and run.\r\n\r\n```sh\r\ngit clone https://github.com/FalseCAM/lenna\r\ncd lenna\r\nmkdir build\r\ncd build\r\ncmake ..\r\nmake\r\n./bin/lenna\r\n```\r\n\r\n### Contribute\r\n\r\nContributions are always welcome!\r\n\r\n### License [![GNU GPL v3.0](http://www.gnu.org/graphics/gplv3-127x51.png)](http://www.gnu.org/licenses/gpl.html)\r\n-------\r\n\r\n### License\r\n>You can check out the full license [here](https://github.com/FalseCAM/lenna/blob/master/LICENSE.md)\r\n\r\nThis project is licensed under the terms of the **GNU GPL v3.0** license.\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
