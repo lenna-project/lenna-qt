@@ -1,0 +1,9 @@
+engines:
+  fixme:
+    enabled: true
+  gnu-complexity:
+    enabled: true
+
+ratings:
+  paths: []
+exclude_paths: []
