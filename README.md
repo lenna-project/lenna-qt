@@ -1,4 +1,4 @@
-# lenna [![Build Status](https://travis-ci.org/FalseCAM/lenna.svg?branch=master)](https://travis-ci.org/FalseCAM/lenna)
+# lenna [![Build Status](https://travis-ci.org/FalseCAM/lenna.svg?branch=master)](https://travis-ci.org/FalseCAM/lenna) [![Documentation](https://codedocs.xyz/FalseCAM/lenna.svg)](https://codedocs.xyz/FalseCAM/lenna/)
 ==============
 
 *Open Source Image Processing Program*
