@@ -28,3 +28,13 @@ add_custom_target(
     COMMAND ${CMAKE_COMMAND} -P ${PROJECT_SOURCE_DIR}/cmake/ComponentInstall.cmake
     WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
 )
+
+configure_file(packages/snapcraft.yaml.in ${PROJECT_BINARY_DIR}/snapcraft.yaml)
+configure_file(packages/qt5-launch ${PROJECT_BINARY_DIR}/qt5-launch)
+configure_file(packages/snappy-qt5.conf.in ${PROJECT_BINARY_DIR}/snappy-qt5.conf)
+
+add_custom_target(
+    snap
+    COMMAND snapcraft snap
+    WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
+)

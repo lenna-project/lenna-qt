@@ -21,6 +21,11 @@ make
 ./bin/lenna
 ```
 
+#### SNAP Package
+```sh
+make snap
+```
+
 ### Contribute
 
 Contributions are always welcome!

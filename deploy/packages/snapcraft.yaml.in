@@ -1,0 +1,48 @@
+name: @META_PROJECT_NAME@
+version: @META_VERSION@
+summary: @META_PROJECT_DESCRIPTION@
+description:
+  @META_PROJECT_DESCRIPTION@
+confinement: strict
+
+build-packages: [gcc, g++, libc6-dev, libopencv-dev, qt5-default]
+
+apps:
+  @META_PROJECT_NAME@:
+    command: qt5-launch bin/lenna
+    plugs: [x11, unity7, home, opengl, network, network-bind]
+
+parts:
+  qt:
+    plugin: nil
+    stage-packages:
+      - libqt5core5a
+      - libqt5concurrent5
+      - libqt5sql5
+      - libqt5xml5
+      - libqt5printsupport5
+      - libqt5webkit5
+      - libqt5dbus5
+      - libqt5gui5
+      - libqt5network5
+      - libqt5multimedia5
+      - libqt5multimediawidgets5
+      - libqt5opengl5
+      - libqt5widgets5
+      - libqt5x11extras5
+
+  @META_PROJECT_NAME@:
+    plugin: copy
+    build-packages:
+     - qtbase5-dev
+    stage-packages:
+     - libqt5gui5
+     - ubuntu-sdk-libs
+     - qtubuntu-desktop
+     - libopencv-dev
+    files:
+      qt5-launch: qt5-launch
+      lenna: bin/lenna
+      liblennaplugin.so: bin/liblennaplugin.so
+      plugins: bin/plugins
+    after: [qt]
