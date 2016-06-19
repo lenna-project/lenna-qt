@@ -131,7 +131,7 @@ set(CPACK_RESOURCE_FILE_README                 "${PROJECT_SOURCE_DIR}/README.md"
 set(CPACK_RESOURCE_FILE_WELCOME                "${PROJECT_SOURCE_DIR}/README.md")
 set(CPACK_PACKAGE_DESCRIPTION_FILE             "${PROJECT_SOURCE_DIR}/README.md")
 set(CPACK_PACKAGE_ICON                         "${PROJECT_SOURCE_DIR}/deploy/images/logo.bmp")
-set(CPACK_PACKAGE_FILE_NAME                    "${package_name}-${CPACK_PACKAGE_VERSION}")
+set(CPACK_PACKAGE_FILE_NAME                    "${package_name}-${CPACK_PACKAGE_VERSION}-${CMAKE_SYSTEM_PROCESSOR}")
 set(CPACK_PACKAGE_INSTALL_DIRECTORY            "${package_name}")
 set(CPACK_PACKAGE_INSTALL_REGISTRY_KEY         "${package_name}")
 

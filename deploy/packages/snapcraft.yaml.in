@@ -30,6 +30,19 @@ parts:
       - libqt5opengl5
       - libqt5widgets5
       - libqt5x11extras5
+  environment:
+    plugin: copy
+    files:
+      qt5-launch: bin/qt5-launch
+  integration:
+    plugin: nil
+    stage-packages:
+      - ttf-ubuntu-font-family
+      - breeze-icon-theme
+      - hicolor-icon-theme
+      - oxygen-icon-theme
+    snap:
+      - usr/share
 
   @META_PROJECT_NAME@:
     plugin: copy
@@ -41,8 +54,7 @@ parts:
      - qtubuntu-desktop
      - libopencv-dev
     files:
-      qt5-launch: qt5-launch
       lenna: bin/lenna
       liblennaplugin.so: bin/liblennaplugin.so
       plugins: bin/plugins
-    after: [qt]
+    after: [qt, environment, integration]
