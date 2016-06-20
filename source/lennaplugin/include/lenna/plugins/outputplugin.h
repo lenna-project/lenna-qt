@@ -1,6 +1,6 @@
 /**
     This file is part of program Lenna
-    Copyright (C) 2013  FalseCAM
+    Copyright (C) 2013-2016 FalseCAM
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,27 +19,26 @@
 #ifndef OUTPUTPLUGIN_H
 #define OUTPUTPLUGIN_H
 
-#include "plugin.h"
-#include "lenna/image.h"
+#include <lenna/lennaplugin/lennaplugin_api.h>
+
+#include <lenna/image.h>
+#include <lenna/plugins/plugin.h>
 
 #include <QtCore/QtPlugin>
 
-namespace lenna{
-namespace plugin{
+namespace lenna {
+namespace plugin {
 
-class OutputPlugin: public Plugin{
-public:
-    virtual ~OutputPlugin() {
-    }
+class LENNAPLUGIN_API OutputPlugin : public Plugin {
+ public:
+  virtual ~OutputPlugin() {}
 
-    virtual void out(Image *image) = 0;
-    virtual void finnish() = 0;
+  virtual void out(Image *image) = 0;
+  virtual void finnish() = 0;
 };
-
 }
 }
 
-Q_DECLARE_INTERFACE(lenna::plugin::OutputPlugin,
-                    "Lenna.OutputPlugin/1.0");
+Q_DECLARE_INTERFACE(lenna::plugin::OutputPlugin, "Lenna.OutputPlugin/1.0");
 
-#endif // OUTPUTPLUGIN_H
+#endif  // OUTPUTPLUGIN_H

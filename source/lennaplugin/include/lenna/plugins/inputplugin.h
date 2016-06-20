@@ -1,6 +1,6 @@
 /**
     This file is part of program Lenna
-    Copyright (C) 2013  FalseCAM
+    Copyright (C) 2013-2016 FalseCAM
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,29 +19,28 @@
 #ifndef INPUTPLUGIN_H
 #define INPUTPLUGIN_H
 
-#include "plugin.h"
-#include "lenna/image.h"
+#include <lenna/lennaplugin/lennaplugin_api.h>
+
+#include <lenna/image.h>
+#include <lenna/plugins/plugin.h>
 
 #include <QtCore/QtPlugin>
 
-namespace lenna{
-namespace plugin{
+namespace lenna {
+namespace plugin {
 
-class InputPlugin: public Plugin{
-public:
-    virtual ~InputPlugin() {
-    }
+class LENNAPLUGIN_API InputPlugin : public Plugin {
+ public:
+  virtual ~InputPlugin() {}
 
-    virtual void init() = 0;
-    virtual bool hasNext() = 0;
-    virtual Image *next() = 0;
-    virtual int getProgress() = 0;
+  virtual void init() = 0;
+  virtual bool hasNext() = 0;
+  virtual Image *next() = 0;
+  virtual int getProgress() = 0;
 };
-
 }
 }
 
-Q_DECLARE_INTERFACE(lenna::plugin::InputPlugin,
-                    "Lenna.InputPlugin/1.0");
+Q_DECLARE_INTERFACE(lenna::plugin::InputPlugin, "Lenna.InputPlugin/1.0");
 
-#endif // INPUTPLUGIN_H
+#endif  // INPUTPLUGIN_H

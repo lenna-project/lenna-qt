@@ -19,13 +19,15 @@
 #ifndef LENNA_H
 #define LENNA_H
 
+#include <lenna/lennaplugin/lennaplugin_api.h>
+
 #include <QObject>
 #include <QtCore/QTranslator>
 #include <QtGui/QIcon>
 
 namespace lenna {
 
-class Lenna : public QObject {
+class LENNAPLUGIN_API Lenna : public QObject {
  public:
   static void setApplicationName(QString name);
   static void setApplicationVersion(QString version);

@@ -19,6 +19,8 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
+#include <lenna/lennaplugin/lennaplugin_api.h>
+
 #include <QtCore/QObject>
 #include <QtGui/QImage>
 #include <iostream>
@@ -31,7 +33,7 @@ using namespace std;
 
 namespace lenna {
 
-class Image : public QObject {
+class LENNAPLUGIN_API Image : public QObject {
   Q_OBJECT
  public:
   Image();

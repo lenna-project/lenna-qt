@@ -1,6 +1,6 @@
 /**
     This file is part of program Lenna
-    Copyright (C) 2013  FalseCAM
+    Copyright (C) 2013-2016 FalseCAM
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,25 +19,26 @@
 #ifndef PLUGIN_H
 #define PLUGIN_H
 
+#include <lenna/lennaplugin/lennaplugin_api.h>
+
 #include <QtCore/QObject>
-#include <QtWidgets/QWidget>
 #include <QtGui/QIcon>
+#include <QtWidgets/QWidget>
 
-namespace lenna{
-namespace plugin{
+namespace lenna {
+namespace plugin {
 
-class Plugin: virtual public QObject{
-public:
-    virtual QString getName() = 0;
-    virtual QString getTitle() = 0;
-    virtual QString getVersion() = 0;
-    virtual QString getAuthor() = 0;
-    virtual QString getDescription() = 0;
-    virtual QIcon getIcon() = 0;
-    virtual QWidget* getWidget() = 0;
+class LENNAPLUGIN_API Plugin : virtual public QObject {
+ public:
+  virtual QString getName() = 0;
+  virtual QString getTitle() = 0;
+  virtual QString getVersion() = 0;
+  virtual QString getAuthor() = 0;
+  virtual QString getDescription() = 0;
+  virtual QIcon getIcon() = 0;
+  virtual QWidget* getWidget() = 0;
 };
-
 }
 }
 
-#endif // PLUGIN_H
+#endif  // PLUGIN_H
