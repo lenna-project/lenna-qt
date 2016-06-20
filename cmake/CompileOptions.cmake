@@ -27,10 +27,8 @@ set(DEFAULT_PROJECT_OPTIONS
 
  find_package(Qt5Core REQUIRED)
  find_package(Qt5Widgets REQUIRED)
- find_package(Qt5Sql REQUIRED)
+ find_package(Qt5Network REQUIRED)
  find_package(Qt5LinguistTools REQUIRED)
- find_package(Qt5WebKit REQUIRED)
- find_package(Qt5WebKitWidgets REQUIRED)
  find_package( OpenCV REQUIRED )
 
 # 
@@ -43,7 +41,7 @@ set(DEFAULT_INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR} ${Poco_INCLUDE_DIR})
 # Libraries
 # 
 
-set(DEFAULT_LIBRARIES Qt5::Core Qt5::Widgets Qt5::WebKit Qt5::WebKitWidgets ${OpenCV_LIBS}
+set(DEFAULT_LIBRARIES Qt5::Core Qt5::Widgets Qt5::Network ${OpenCV_LIBS}
 )
 
 
