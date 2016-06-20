@@ -73,7 +73,7 @@ void Widget::on_cameraOnCheckBox_toggled(bool checked)
     camera = cvCaptureFromCAM(selectedDevice());
     cvNamedWindow("Camera", 0);
     while(ui->cameraOnCheckBox->isChecked()){
-        frame = cvQueryFrame(camera);
+        frame = cv::cvarrToMat(cvQueryFrame(camera), true);
         if(!frame.empty())
             imshow( "Camera", frame );
         key = cvWaitKey(10);

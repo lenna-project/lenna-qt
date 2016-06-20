@@ -75,7 +75,7 @@ void Camera::init(){
         camera = cvCaptureFromCAM(widget->selectedDevice());
         Mat* frame = 0;
         while(frame == 0 || frame->empty()){
-            frame = new Mat(cvQueryFrame(camera), true);
+            frame = new Mat(cv::cvarrToMat(cvQueryFrame(camera), true));
         }
     }
 }
@@ -88,7 +88,7 @@ Image *Camera::next(){
 
     if(hasNext()){
 
-        Mat frame(cvQueryFrame(camera), true);
+        Mat frame = cv::cvarrToMat(cvQueryFrame(camera), true);
         if(!frame.empty()){
             Image *img = new Image();
             position++;

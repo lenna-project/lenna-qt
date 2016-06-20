@@ -19,8 +19,6 @@
 #ifndef OUTPUTPLUGIN_H
 #define OUTPUTPLUGIN_H
 
-#include <lenna/lennaplugin/lennaplugin_api.h>
-
 #include <lenna/image.h>
 #include <lenna/plugins/plugin.h>
 
@@ -29,7 +27,7 @@
 namespace lenna {
 namespace plugin {
 
-class LENNAPLUGIN_API OutputPlugin : public Plugin {
+class OutputPlugin : public Plugin {
  public:
   virtual ~OutputPlugin() {}
 

@@ -19,8 +19,6 @@
 #ifndef INPUTPLUGIN_H
 #define INPUTPLUGIN_H
 
-#include <lenna/lennaplugin/lennaplugin_api.h>
-
 #include <lenna/image.h>
 #include <lenna/plugins/plugin.h>
 
@@ -29,7 +27,7 @@
 namespace lenna {
 namespace plugin {
 
-class LENNAPLUGIN_API InputPlugin : public Plugin {
+class InputPlugin : public Plugin {
  public:
   virtual ~InputPlugin() {}
 

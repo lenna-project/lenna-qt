@@ -19,8 +19,6 @@
 #ifndef PLUGIN_H
 #define PLUGIN_H
 
-#include <lenna/lennaplugin/lennaplugin_api.h>
-
 #include <QtCore/QObject>
 #include <QtGui/QIcon>
 #include <QtWidgets/QWidget>
@@ -28,7 +26,7 @@
 namespace lenna {
 namespace plugin {
 
-class LENNAPLUGIN_API Plugin : virtual public QObject {
+class Plugin : virtual public QObject {
  public:
   virtual QString getName() = 0;
   virtual QString getTitle() = 0;
