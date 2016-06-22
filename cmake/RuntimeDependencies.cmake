@@ -16,10 +16,17 @@ if(OPTION_SELF_CONTAINED)
     # Install 3rd-party runtime dependencies into runtime-component
     # install(FILES ... COMPONENT runtime)
 	if(WIN32)
-                set(QT_FILES $ENV{QT_DIR}/bin)
-                set(OpenCV_FILES $ENV{OpenCV_DIR}/build/bin/Release)
-                install(FILES "${QT_FILES}/Qt5Core.dll" "${QT_FILES}/Qt5Gui.dll" "${QT_FILES}/Qt5Widgets.dll" "${QT_FILES}/Qt5Network.dll"
-                    "${OpenCV_FILES}/opencv_world310.dll" "${OpenCV_FILES}/opencv_world310.dll" DESTINATION ${INSTALL_BIN} COMPONENT runtime)
+                file(TO_CMAKE_PATH $ENV{QT_DIR} QT_FILES)
+                file(TO_CMAKE_PATH $ENV{OpenCV_DIR} OpenCV_FILES) 
+				
+                install(FILES "${QT_FILES}/bin/Qt5Core.dll" "${QT_FILES}/bin/Qt5Gui.dll" "${QT_FILES}/bin/Qt5Widgets.dll" "${QT_FILES}/bin/Qt5Network.dll"
+					"${QT_FILES}/bin/Qt5Svg.dll" "${QT_FILES}/bin/libEGL.dll" "${QT_FILES}/bin/opengl32sw.dll"
+					"${QT_FILES}/bin/libGLESV2.dll" "${QT_FILES}/bin/D3Dcompiler_47.dll"
+                    "${OpenCV_FILES}/build/bin/Release/opencv_world310.dll" DESTINATION ${INSTALL_BIN} COMPONENT runtime)
+				install(FILES "${QT_FILES}/plugins/platforms/qwindows.dll" DESTINATION ${INSTALL_BIN}/platforms COMPONENT runtime)
+				install(FILES "${QT_FILES}/plugins/imageformats/qgif.dll" "${QT_FILES}/plugins/imageformats/qico.dll"
+							"${QT_FILES}/plugins/imageformats/qjpeg.dll" "${QT_FILES}/plugins/imageformats/qsvg.dll"
+							"${QT_FILES}/plugins/imageformats/qtiff.dll" "${QT_FILES}/plugins/imageformats/qwebp.dll" DESTINATION ${INSTALL_BIN}/imageformats COMPONENT runtime)
 	endif()
 
 endif()
