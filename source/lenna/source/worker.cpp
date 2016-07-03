@@ -1,6 +1,6 @@
 /**
     This file is part of program Lenna
-    Copyright (C) 2013  FalseCAM
+    Copyright (C) 2013-2016  FalseCAM
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -47,7 +47,7 @@ void Worker::process() {
             threadPool.setMaxThreadCount(QThread::idealThreadCount());
 
             while(inputPlugin->hasNext()){
-                Image *img = inputPlugin->next();
+                std::shared_ptr<LennaImage> img = inputPlugin->next();
                 ImageProcessor *imageProcessor = new ImageProcessor(img);
                 threadPool.start(imageProcessor);
 

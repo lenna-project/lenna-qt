@@ -22,6 +22,7 @@
 #include <QtCore/QMimeData>
 #include <QtCore/QSettings>
 #include <QtCore/QUrl>
+#include <QtGui/QDesktopServices>
 #include <QtGui/QDragEnterEvent>
 #include <QtGui/QImageReader>
 #include <QtWidgets/QFileDialog>
@@ -61,4 +62,9 @@ void Widget::saveState() {
                      QCoreApplication::applicationName());
   settings.beginGroup("plugins");
   settings.beginGroup("Flickrdownloader");
+}
+
+void lenna::plugin::Widget::on_getApiKeyLinkButton_clicked() {
+  QDesktopServices::openUrl(
+      QUrl("https://www.flickr.com/services/api/misc.api_keys.html"));
 }

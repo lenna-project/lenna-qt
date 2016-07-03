@@ -65,7 +65,7 @@ QWidget *Blur::getWidget(){
     return this->widget;
 }
 
-void Blur::edit(Image *img){
+void Blur::edit(std::shared_ptr<LennaImage> img){
     int size = widget->getRadius();
     cv::blur(img->getImage(), img->getImage(), cv::Size(size, size));
 }

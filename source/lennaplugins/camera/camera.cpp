@@ -17,96 +17,80 @@
  */
 
 #include "camera.h"
-#include "widget.h"
-#include <QtWidgets/QProxyStyle>
-#include <QtCore/QFileInfo>
 #include <QtCore/QDir>
+#include <QtCore/QFileInfo>
+#include <QtWidgets/QProxyStyle>
+#include "widget.h"
 
 using namespace lenna;
 using namespace lenna::plugin::camera;
 
-Camera::Camera()
-{
-    this->widget = 0;
-    this->frames = 0;
-    this->position = 0;
+Camera::Camera() {
+  this->widget = 0;
+  this->frames = 0;
+  this->position = 0;
 }
 
-Camera::~Camera()
-{
+Camera::~Camera() {}
+
+QString Camera::getName() { return QString("camera"); }
+
+QString Camera::getTitle() { return QString(tr("Camera")); }
+
+QString Camera::getVersion() { return QString("1.0"); }
+
+QString Camera::getAuthor() { return QString("FalseCAM"); }
+
+QString Camera::getDescription() {
+  return QString(tr("Plugin to get images from camera."));
 }
 
-QString Camera::getName(){
-    return QString("camera");
+QIcon Camera::getIcon() {
+  QProxyStyle s;
+  return s.standardIcon(QStyle::SP_FileIcon);
 }
 
-QString Camera::getTitle(){
-    return QString(tr("Camera"));
+QWidget *Camera::getWidget() {
+  if (!widget) {
+    widget = new Widget();
+  }
+  return widget;
 }
 
-QString Camera::getVersion(){
-    return QString("1.0");
-}
-
-QString Camera::getAuthor(){
-    return QString("FalseCAM");
-}
-
-QString Camera::getDescription(){
-    return QString(tr("Plugin to get images from camera."));
-}
-
-QIcon Camera::getIcon(){
-    QProxyStyle s;
-    return s.standardIcon (QStyle::SP_FileIcon);
-}
-
-QWidget *Camera::getWidget(){
-    if(!widget){
-        widget = new Widget();
+void Camera::init() {
+  frames = widget->getFrames();
+  position = 0;
+  if (hasNext()) {
+    camera = cvCaptureFromCAM(widget->selectedDevice());
+    cv::Mat *frame = 0;
+    while (frame == 0 || frame->empty()) {
+      frame = new cv::Mat(cv::cvarrToMat(cvQueryFrame(camera), true));
     }
-    return widget;
+  }
 }
 
-void Camera::init(){
-    frames = widget->getFrames();
-    position = 0;
-    if(hasNext()){
-        camera = cvCaptureFromCAM(widget->selectedDevice());
-        Mat* frame = 0;
-        while(frame == 0 || frame->empty()){
-            frame = new Mat(cv::cvarrToMat(cvQueryFrame(camera), true));
-        }
+bool Camera::hasNext() { return frames > position; }
+
+std::shared_ptr<LennaImage> Camera::next() {
+  if (hasNext()) {
+    cv::Mat frame = cv::cvarrToMat(cvQueryFrame(camera), true);
+    if (!frame.empty()) {
+      std::shared_ptr<LennaImage> img(new LennaImage());
+      position++;
+      img->setMat(frame);
+      img->setName(QString("Frame%1").arg(position));
+      img->setAlbum("Camera");
+      if (!hasNext()) {
+        cvReleaseCapture(&camera);
+      }
+      return img;
     }
+  }
+  return 0;
 }
 
-bool Camera::hasNext(){
-    return frames > position;
-}
-
-Image *Camera::next(){
-
-    if(hasNext()){
-
-        Mat frame = cv::cvarrToMat(cvQueryFrame(camera), true);
-        if(!frame.empty()){
-            Image *img = new Image();
-            position++;
-            img->setMat(frame);
-            img->setName(QString("Frame%1").arg(position));
-            img->setAlbum("Camera");
-            if(!hasNext()){
-                cvReleaseCapture(&camera);
-            }
-            return img;
-        }
-    }
-    return 0;
-}
-
-int Camera::getProgress(){
-    int progress = 0;
-    if(hasNext())
-        progress = 100 * position / frames;
-    return progress;
+int Camera::getProgress() {
+  int progress = 0;
+  if (hasNext()) progress = 100 * position / frames;
+  return progress;
 }

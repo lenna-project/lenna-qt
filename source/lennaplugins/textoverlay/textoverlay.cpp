@@ -1,6 +1,6 @@
 /**
     This file is part of program Lenna
-    Copyright (C) 2013  FalseCAM
+    Copyright (C) 2013-2016 FalseCAM
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,71 +17,56 @@
  */
 
 #include "textoverlay.h"
-#include "widget.h"
 #include <QtGui/QPainter>
+#include "widget.h"
 
 using namespace lenna;
 using namespace lenna::plugin::textoverlay;
 
-Textoverlay::Textoverlay()
-{
-    widget = 0;
+Textoverlay::Textoverlay() { widget = 0; }
+
+Textoverlay::~Textoverlay() {}
+
+QString Textoverlay::getName() { return QString("textoverlay"); }
+
+QString Textoverlay::getTitle() { return QString(tr("Textoverlay")); }
+
+QString Textoverlay::getVersion() { return QString("0.1"); }
+
+QString Textoverlay::getAuthor() { return QString("FalseCAM"); }
+
+QString Textoverlay::getDescription() {
+  return QString(tr("Plugin to put text onto images"));
 }
 
-Textoverlay::~Textoverlay()
-{
+QIcon Textoverlay::getIcon() {
+  return QIcon(":/plugins/textoverlay/textoverlay");
 }
 
-QString Textoverlay::getName(){
-    return QString("textoverlay");
+QWidget *Textoverlay::getWidget() {
+  if (!this->widget) {
+    this->widget = new Widget();
+  }
+  return this->widget;
 }
 
-QString Textoverlay::getTitle(){
-    return QString(tr("Textoverlay"));
-}
-
-QString Textoverlay::getVersion(){
-    return QString("0.1");
-}
-
-QString Textoverlay::getAuthor(){
-    return QString("FalseCAM");
-}
-
-QString Textoverlay::getDescription(){
-    return QString(tr("Plugin to put text onto images"));
-}
-
-QIcon Textoverlay::getIcon(){
-    return QIcon(":/plugins/textoverlay/textoverlay");
-}
-
-QWidget *Textoverlay::getWidget(){
-    if(!this->widget){
-        this->widget = new Widget();
-    }
-    return this->widget;
-}
-
-void Textoverlay::edit(Image *img){
-    getWidget();
-    if(widget->isActivated()){
-        int cols = img->getImage().cols;
-        int rows = img->getImage().rows;
-        QImage * overlay = new QImage(img->getImage().data, img->getImage().cols,
-                                      img->getImage().rows,
-                                      img->getImage().step,
-                                      QImage::Format_RGB888);
-        QPainter painter(overlay);
-        painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
-        int x = (int) ((double) cols * ((double) widget->getX()/ 100.0));
-        int y = (int) ((double) rows * ((double) widget->getY()/ 100.0));
-        painter.setPen(*widget->getColor());
-        QFont tempFont = *widget->getFont();
-        tempFont.setPointSize((int) (tempFont.pointSize() * cols / 100));
-        painter.setFont(tempFont);
-        painter.drawText(x, y, widget->getText());
-        painter.end();
-
-    }
+void Textoverlay::edit(std::shared_ptr<LennaImage> img) {
+  getWidget();
+  if (widget->isActivated()) {
+    int cols = img->getImage().cols;
+    int rows = img->getImage().rows;
+    QImage *overlay = new QImage(img->getImage().data, img->getImage().cols,
+                                 img->getImage().rows, img->getImage().step,
+                                 QImage::Format_RGB888);
+    QPainter painter(overlay);
+    painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+    int x = (int)((double)cols * ((double)widget->getX() / 100.0));
+    int y = (int)((double)rows * ((double)widget->getY() / 100.0));
+    painter.setPen(*widget->getColor());
+    QFont tempFont = *widget->getFont();
+    tempFont.setPointSize((int)(tempFont.pointSize() * cols / 100));
+    painter.setFont(tempFont);
+    painter.drawText(x, y, widget->getText());
+    painter.end();
+  }
 }

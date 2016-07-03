@@ -41,12 +41,6 @@ class LENNAPLUGIN_API Lenna : public QObject {
   static QString applicationDirPath();
 
   static void installTranslator(QTranslator *file);
-
-  static void destroy();
-
- signals:
-
- public slots:
 };
 }
 

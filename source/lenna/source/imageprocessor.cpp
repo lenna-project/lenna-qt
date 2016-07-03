@@ -1,6 +1,6 @@
 /**
     This file is part of program Lenna
-    Copyright (C) 2013  FalseCAM
+    Copyright (C) 2013-2016  FalseCAM
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,33 +18,35 @@
 
 #include "imageprocessor.h"
 #include "process.h"
-#include "plugins/pluginloader.h"
+
+#include <plugins/pluginloader.h>
 
 using namespace lenna;
 using namespace lenna::plugin;
 
-ImageProcessor::ImageProcessor(Image *img)
-{
-    this->image = img;
+ImageProcessor::ImageProcessor(std::shared_ptr<LennaImage> img) {
+  this->image = img;
 }
 
-void ImageProcessor::run(){
-    edit(image);
-    out(image);
+void ImageProcessor::run() {
+  edit(image);
+  out(image);
 }
 
-void ImageProcessor::edit(Image *image){
-    foreach(EditPlugin *editPlugin, PluginLoader::getInstance().getEditPlugins()){
-        if(PluginLoader::getInstance().isActivatedPlugin(editPlugin)){
-            editPlugin->edit(image);
-        }
+void ImageProcessor::edit(std::shared_ptr<LennaImage> image) {
+  foreach (EditPlugin *editPlugin,
+           PluginLoader::getInstance().getEditPlugins()) {
+    if (PluginLoader::getInstance().isActivatedPlugin(editPlugin)) {
+      editPlugin->edit(image);
     }
+  }
 }
 
-void ImageProcessor::out(Image *image){
-    foreach(OutputPlugin *outputPlugin, PluginLoader::getInstance().getOutputPlugins()){
-        if(PluginLoader::getInstance().isActivatedPlugin(outputPlugin)){
-            outputPlugin->out(image);
-        }
+void ImageProcessor::out(std::shared_ptr<LennaImage> image) {
+  foreach (OutputPlugin *outputPlugin,
+           PluginLoader::getInstance().getOutputPlugins()) {
+    if (PluginLoader::getInstance().isActivatedPlugin(outputPlugin)) {
+      outputPlugin->out(image);
     }
+  }
 }

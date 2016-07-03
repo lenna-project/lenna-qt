@@ -1,6 +1,6 @@
 /**
     This file is part of program Lenna
-    Copyright (C) 2013  FalseCAM
+    Copyright (C) 2013-2016 FalseCAM
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -28,13 +28,9 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <sstream>
 
-using namespace cv;
-using namespace std;
-
 namespace lenna {
 
-class LENNAPLUGIN_API Image : public QObject {
-  Q_OBJECT
+class LENNAPLUGIN_API Image {
  public:
   Image();
   Image(QString file);
@@ -44,20 +40,18 @@ class LENNAPLUGIN_API Image : public QObject {
   void setMat(cv::Mat img);
   void setAlbum(QString album);
   void setName(QString name);
-  Mat getImage();
-  Mat *getImagePointer();
-  void convolve(Mat filter);
+  cv::Mat getImage();
+  cv::Mat *getImagePointer();
+  void convolve(cv::Mat filter);
   QImage toQImage();
 
- signals:
-
- public slots:
-
  private:
-  Mat image;
+  cv::Mat image;
   QString name;
   QString album;
 };
 }
+
+typedef lenna::Image LennaImage;
 
 #endif  // IMAGE_H

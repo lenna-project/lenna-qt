@@ -52,5 +52,3 @@ QString Lenna::applicationDirPath() {
 void Lenna::installTranslator(QTranslator *file) {
   QCoreApplication::installTranslator(file);
 }
-
-void Lenna::destroy() {}

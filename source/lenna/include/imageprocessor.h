@@ -19,22 +19,26 @@
 #ifndef IMAGEPROCESSOR_H
 #define IMAGEPROCESSOR_H
 
+#include <lenna/image.h>
+
+#include <memory>
+
 #include <QRunnable>
-#include "lenna/image.h"
+
 
 namespace lenna {
 
 class ImageProcessor : public QRunnable {
  public:
-  ImageProcessor(Image *img);
+  ImageProcessor(std::shared_ptr<LennaImage> img);
 
  protected:
   void run();
 
  private:
-  Image *image;
-  void edit(Image *image);
-  void out(Image *image);
+  std::shared_ptr<LennaImage> image;
+  void edit(std::shared_ptr<LennaImage> image);
+  void out(std::shared_ptr<LennaImage> image);
 };
 }
 

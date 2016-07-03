@@ -22,6 +22,8 @@
 #include <lenna/image.h>
 #include <lenna/plugins/plugin.h>
 
+#include <memory>
+
 #include <QtCore/QtPlugin>
 
 namespace lenna {
@@ -31,11 +33,11 @@ class EditPlugin : public Plugin {
  public:
   virtual ~EditPlugin() {}
 
-  virtual void edit(Image *image) = 0;
+  virtual void edit(std::shared_ptr<LennaImage> image) = 0;
 };
 }
 }
 
-Q_DECLARE_INTERFACE(lenna::plugin::EditPlugin, "Lenna.EditPlugin/1.0");
+Q_DECLARE_INTERFACE(lenna::plugin::EditPlugin, "Lenna.EditPlugin/1.1")
 
 #endif  // EDITPLUGIN_H

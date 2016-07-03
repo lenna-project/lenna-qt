@@ -46,7 +46,7 @@ class Rename : public EditPlugin {
   QIcon getIcon();
   QWidget *getWidget();
 
-  void edit(Image *image);
+  void edit(std::shared_ptr<LennaImage> image);
 
  private:
   Widget *widget;

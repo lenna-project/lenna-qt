@@ -19,6 +19,8 @@
 #ifndef OUTPUTPLUGIN_H
 #define OUTPUTPLUGIN_H
 
+#include <memory>
+
 #include <lenna/image.h>
 #include <lenna/plugins/plugin.h>
 
@@ -31,12 +33,12 @@ class OutputPlugin : public Plugin {
  public:
   virtual ~OutputPlugin() {}
 
-  virtual void out(Image *image) = 0;
+  virtual void out(std::shared_ptr<LennaImage> image) = 0;
   virtual void finnish() = 0;
 };
 }
 }
 
-Q_DECLARE_INTERFACE(lenna::plugin::OutputPlugin, "Lenna.OutputPlugin/1.0");
+Q_DECLARE_INTERFACE(lenna::plugin::OutputPlugin, "Lenna.OutputPlugin/1.1")
 
 #endif  // OUTPUTPLUGIN_H

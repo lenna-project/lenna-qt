@@ -19,6 +19,7 @@
 #include "lenna/image.h"
 
 using namespace lenna;
+using namespace cv;
 
 Image::Image() {}
 
@@ -29,7 +30,7 @@ Image::Image(Image &image) {
 }
 
 Image::Image(QString file) {
-  this->image = imread(file.toStdString().c_str(), 1);
+  this->image = cv::imread(file.toStdString().c_str(), 1);
 }
 
 void Image::setMat(Mat img) { this->image = img; }

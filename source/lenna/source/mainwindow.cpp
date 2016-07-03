@@ -70,10 +70,7 @@ void MainWindow::initWorker() {
   connect(process, SIGNAL(started()), worker, SLOT(process()));
 }
 
-void MainWindow::on_actionQuit_triggered() {
-  Lenna::destroy();
-  this->close();
-}
+void MainWindow::on_actionQuit_triggered() { this->close(); }
 
 void lenna::MainWindow::on_actionLogger_triggered() {
   LoggerDialog loggerDialog;

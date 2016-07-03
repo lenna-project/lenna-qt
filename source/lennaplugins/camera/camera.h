@@ -48,7 +48,7 @@ class Camera : public InputPlugin {
 
   void init();
   bool hasNext();
-  Image *next();
+  std::shared_ptr<LennaImage>  next();
   int getProgress();
 
  private:

@@ -50,7 +50,7 @@ class FlickrDownloader : public InputPlugin {
 
   void init();
   bool hasNext();
-  Image *next();
+  std::shared_ptr<LennaImage> next();
   int getProgress();
 
   void startSearch();
@@ -60,7 +60,7 @@ class FlickrDownloader : public InputPlugin {
  private:
   Widget *widget;
   bool has_next;
-  int position;
+  unsigned int position;
 
   QString getFolder(QString file);
   QString getName(QString file);

@@ -19,71 +19,66 @@
 #ifndef WIDGET_H
 #define WIDGET_H
 
-#include <vector>
 #include <mutex>
-#include <QtWidgets/QWidget>
-#include <QGraphicsScene>
+#include <vector>
+
 #include <QGraphicsEllipseItem>
+#include <QGraphicsScene>
+#include <QtWidgets/QWidget>
 #include <opencv2/core/core.hpp>
 
 namespace Ui {
 class Widget;
 }
 
-namespace lenna{
-namespace plugin{
-namespace crop{
+namespace lenna {
+namespace plugin {
+namespace crop {
 
-class Widget : public QWidget
-{
-    Q_OBJECT
-    
-public:
-    explicit Widget(QWidget *parent = 0);
-    ~Widget();
+class Widget : public QWidget {
+  Q_OBJECT
 
-    void setImage(cv::Mat image);
-    void updateImage();
+ public:
+  explicit Widget(QWidget *parent = 0);
+  ~Widget();
 
+  void setImage(cv::Mat image);
+  void updateImage();
 
-    bool isActionDone();
-    bool isDoCrop();
+  bool isActionDone();
+  bool isDoCrop();
 
-    std::vector<cv::Point2f> getPoints();
+  std::vector<cv::Point2f> getPoints();
 
+ private slots:
 
-    
-private slots:
+  void on_cropPushButton_clicked();
 
-    void on_cropPushButton_clicked();
+  void on_cancelButton_clicked();
 
-    void on_cancelButton_clicked();
+ private:
+  Ui::Widget *ui;
+  void initScene();
+  void initCircles();
 
-private:
-    Ui::Widget *ui;
-    void initScene();
-    void initCircles();
+  void loadState();
+  void saveState();
 
-    void loadState();
-    void saveState();
+  void crop(QImage *image);
 
-    void crop(QImage *image);
+  std::mutex actionDoneMutex;
+  bool actionDone = false;
+  bool doCrop = false;
 
-    std::mutex actionDoneMutex;
-    bool actionDone = false;
-    bool doCrop = false;
+  cv::Mat image;
+  QGraphicsScene *scene;
+  QGraphicsEllipseItem *circles[4];
 
-    cv::Mat image;
-    QGraphicsScene *scene;
-    QGraphicsEllipseItem *circles[4];
-
-protected:
-    void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
-
+ protected:
+  void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
 };
-
 }
 }
 }
 
-#endif // WIDGET_H
+#endif  // WIDGET_H

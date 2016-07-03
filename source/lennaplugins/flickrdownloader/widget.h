@@ -42,7 +42,9 @@ class Widget : public QWidget {
 
  private slots:
 
- private:
+  void on_getApiKeyLinkButton_clicked();
+
+private:
   Ui::Widget* ui;
   void loadState();
   void saveState();

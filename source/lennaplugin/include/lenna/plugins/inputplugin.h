@@ -22,6 +22,8 @@
 #include <lenna/image.h>
 #include <lenna/plugins/plugin.h>
 
+#include <memory>
+
 #include <QtCore/QtPlugin>
 
 namespace lenna {
@@ -33,12 +35,12 @@ class InputPlugin : public Plugin {
 
   virtual void init() = 0;
   virtual bool hasNext() = 0;
-  virtual Image *next() = 0;
+  virtual std::shared_ptr<LennaImage> next() = 0;
   virtual int getProgress() = 0;
 };
 }
 }
 
-Q_DECLARE_INTERFACE(lenna::plugin::InputPlugin, "Lenna.InputPlugin/1.0");
+Q_DECLARE_INTERFACE(lenna::plugin::InputPlugin, "Lenna.InputPlugin/1.1")
 
 #endif  // INPUTPLUGIN_H

@@ -1,6 +1,6 @@
 /**
     This file is part of program Lenna
-    Copyright (C) 2016  FalseCAM
+    Copyright (C) 2016 FalseCAM
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,79 +18,65 @@
 
 #include "crop.h"
 #include "widget.h"
+
 #include <chrono>
 #include <thread>
+
 #include <QtGui/QPainter>
 #include <opencv2/calib3d/calib3d.hpp>
 
 using namespace lenna;
 using namespace lenna::plugin::crop;
 
-Crop::Crop()
-{
+Crop::Crop() {}
+
+Crop::~Crop() {
+  if (this->widget) {
+    // delete this->widget;
+    this->widget = nullptr;
+  }
 }
 
-Crop::~Crop()
-{
-    if(this->widget){
+QString Crop::getName() { return QString("crop"); }
 
-        //delete this->widget;
-        this->widget = nullptr;
-    }
+QString Crop::getTitle() { return QString(tr("Crop")); }
+
+QString Crop::getVersion() { return QString("0.1"); }
+
+QString Crop::getAuthor() { return QString("FalseCAM"); }
+
+QString Crop::getDescription() { return QString(tr("Plugin to crop images")); }
+
+QIcon Crop::getIcon() { return QIcon(":/plugins/crop/crop"); }
+
+QWidget *Crop::getWidget() {
+  if (!this->widget) {
+    this->widget = new Widget();
+  }
+  return this->widget;
 }
 
-QString Crop::getName(){
-    return QString("crop");
-}
+void Crop::edit(std::shared_ptr<LennaImage> img) {
+  cv::Mat image = img->getImage();
 
-QString Crop::getTitle(){
-    return QString(tr("Crop"));
-}
+  widget->setImage(image);
+  while (!widget->isActionDone()) {
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+  }
+  // 4 corners of image
+  std::vector<cv::Point2f> image_points;
+  image_points.push_back(cv::Point2f(float(0), float(0)));
+  image_points.push_back(cv::Point2f(float(0), float(image.rows)));
+  image_points.push_back(cv::Point2f(float(image.cols), float(image.rows)));
+  image_points.push_back(cv::Point2f(float(image.cols), float(0)));
 
-QString Crop::getVersion(){
-    return QString("0.1");
-}
+  std::vector<cv::Point2f> points = widget->getPoints();
+  cv::Mat h = cv::findHomography(points, image_points);
 
-QString Crop::getAuthor(){
-    return QString("FalseCAM");
-}
+  cv::Size s;
+  s.width = image.cols;
+  s.height = image.rows;
+  cv::warpPerspective(image, image, h, s);
 
-QString Crop::getDescription(){
-    return QString(tr("Plugin to crop images"));
-}
-
-QIcon Crop::getIcon(){
-    return QIcon(":/plugins/crop/crop");
-}
-
-QWidget *Crop::getWidget(){
-    if(!this->widget){
-        this->widget = new Widget();
-    }
-    return this->widget;
-}
-
-void Crop::edit(Image *img){
-    cv::Mat image = img->getImage();
-
-    widget->setImage(image);
-    while(!widget->isActionDone()){
-        std::this_thread::sleep_for(chrono::seconds(1));
-    }
-    // 4 corners of image
-    vector<Point2f> image_points;
-    image_points.push_back(Point2f(float(0),float(0)));
-    image_points.push_back(Point2f(float(0),float(image.rows)));
-    image_points.push_back(Point2f(float(image.cols),float(image.rows)));
-    image_points.push_back(Point2f(float(image.cols),float(0)));
-
-    std::vector<cv::Point2f> points = widget->getPoints();
-    cv::Mat h = cv::findHomography(points, image_points);
-
-    cv::Size s;
-    s.width = image.cols;
-    s.height = image.rows;
-    cv::warpPerspective(image, image, h, s);
-
-    img->setMat(image);
+  img->setMat(image);
 }

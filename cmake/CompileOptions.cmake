@@ -22,14 +22,14 @@ set(DEFAULT_PROJECT_OPTIONS
     CXX_STANDARD              11 # Not available before CMake 3.1; see below for manual command line argument addition
     LINKER_LANGUAGE           "CXX"
     POSITION_INDEPENDENT_CODE ON
-#    CXX_VISIBILITY_PRESET     "hidden"
+    CXX_VISIBILITY_PRESET     "hidden"
 )
 
  find_package(Qt5Core REQUIRED)
  find_package(Qt5Widgets REQUIRED)
  find_package(Qt5Network REQUIRED)
  find_package(Qt5LinguistTools REQUIRED)
- find_package( OpenCV REQUIRED )
+ find_package( OpenCV 3 REQUIRED )
 
 # 
 # Include directories

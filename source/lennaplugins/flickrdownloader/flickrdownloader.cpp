@@ -80,8 +80,8 @@ void FlickrDownloader::init() {
 
 bool FlickrDownloader::hasNext() { return has_next; }
 
-Image *FlickrDownloader::next() {
-  Image *image = new Image();
+std::shared_ptr<LennaImage> FlickrDownloader::next() {
+  std::shared_ptr<LennaImage> image(new LennaImage());
   if (has_next) {
     QByteArray imageData = download(this->imageUrls.at(this->position).second);
     QImage img = QImage::fromData(imageData, "JPG");

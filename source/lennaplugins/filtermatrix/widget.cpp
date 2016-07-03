@@ -97,8 +97,8 @@ bool Widget::isFilter(){
     return ui->filterCheckBox->isChecked();
 }
 
-Mat Widget::getFilter(){
-    Mat filter = Mat::eye(ui->tableWidget->rowCount(),ui->tableWidget->columnCount(),CV_32S);
+cv::Mat Widget::getFilter(){
+    cv::Mat filter = cv::Mat::eye(ui->tableWidget->rowCount(),ui->tableWidget->columnCount(),CV_32S);
     for(int row = 0; row < ui->tableWidget->rowCount(); row++){
         for(int col = 0; col < ui->tableWidget->columnCount(); col++){
 

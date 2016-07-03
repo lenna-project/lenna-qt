@@ -63,7 +63,7 @@ QWidget *Resize::getWidget(){
     return this->widget;
 }
 
-void Resize::edit(Image *img){
+void Resize::edit(std::shared_ptr<LennaImage> img){
     getWidget();
     if( this->widget->resizePercent() || this->widget->resizePixel()){
         cv::Size size = img->getImage().size();

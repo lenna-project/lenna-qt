@@ -40,7 +40,7 @@ public:
     ~Widget();
 
     bool isFilter();
-    Mat getFilter();
+    cv::Mat getFilter();
     
 private slots:
 

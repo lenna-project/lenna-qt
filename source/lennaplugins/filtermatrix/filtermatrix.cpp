@@ -17,57 +17,44 @@
  */
 
 #include "filtermatrix.h"
-#include "widget.h"
 #include <QtGui/QPainter>
+#include "widget.h"
 
 using namespace lenna;
 using namespace lenna::plugin;
 
-FilterMatrix::FilterMatrix()
-{
-    widget = 0;
+FilterMatrix::FilterMatrix() { widget = 0; }
+
+FilterMatrix::~FilterMatrix() {
+  if (this->widget) delete this->widget;
 }
 
-FilterMatrix::~FilterMatrix()
-{
-    if(this->widget)
-        delete this->widget;
+QString FilterMatrix::getName() { return QString("filtermatrix"); }
+
+QString FilterMatrix::getTitle() { return QString(tr("FilterMatrix")); }
+
+QString FilterMatrix::getVersion() { return QString("0.1"); }
+
+QString FilterMatrix::getAuthor() { return QString("FalseCAM"); }
+
+QString FilterMatrix::getDescription() {
+  return QString(tr("Plugin to filter images with custom matrix."));
 }
 
-QString FilterMatrix::getName(){
-    return QString("filtermatrix");
+QIcon FilterMatrix::getIcon() {
+  return QIcon(":/plugins/filtermatrix/filtermatrix");
 }
 
-QString FilterMatrix::getTitle(){
-    return QString(tr("FilterMatrix"));
+QWidget *FilterMatrix::getWidget() {
+  if (!this->widget) {
+    this->widget = new Widget();
+  }
+  return this->widget;
 }
 
-QString FilterMatrix::getVersion(){
-    return QString("0.1");
-}
-
-QString FilterMatrix::getAuthor(){
-    return QString("FalseCAM");
-}
-
-QString FilterMatrix::getDescription(){
-    return QString(tr("Plugin to filter images with custom matrix."));
-}
-
-QIcon FilterMatrix::getIcon(){
-    return QIcon(":/plugins/filtermatrix/filtermatrix");
-}
-
-QWidget *FilterMatrix::getWidget(){
-    if(!this->widget){
-        this->widget = new Widget();
-    }
-    return this->widget;
-}
-
-void FilterMatrix::edit(Image *img){
-    if(widget->isFilter()){
-        cv::filter2D(img->getImage(), img->getImage(), -1, widget->getFilter());
-        img->getImage() = img->getImage()*255; // TODO why * 255?
-    }
+void FilterMatrix::edit(std::shared_ptr<LennaImage> img) {
+  if (widget->isFilter()) {
+    cv::filter2D(img->getImage(), img->getImage(), -1, widget->getFilter());
+    img->getImage() = img->getImage() * 255;  // TODO why * 255?
+  }
 }
