@@ -1,9 +1,24 @@
-# lenna [![Build Status](https://travis-ci.org/FalseCAM/lenna.svg?branch=master)](https://travis-ci.org/FalseCAM/lenna) [![Documentation](https://codedocs.xyz/FalseCAM/lenna.svg)](https://codedocs.xyz/FalseCAM/lenna/)
+# lenna [ ![Build Status] [travis-image] ] [travis] [ ![Documentation] [codedocs-image] ] [codedocs] [ ![Release] [release-image] ] [releases] [ ![License] [license-image] ] [license] [ ![Gitter] [gitter-image] ] [gitter]
 ==============
 
 *Open Source Image Processing Program*
 
 This project is using Qt5 and OpenCV.
+
+[travis-image]: https://travis-ci.org/FalseCAM/lenna.png?branch=master
+[travis]: http://travis-ci.org/FalseCAM/lenna
+
+[codedocs-image]: https://codedocs.xyz/FalseCAM/lenna.svg
+[codedocs]: https://codedocs.xyz/FalseCAM/lenna/
+
+[release-image]: http://img.shields.io/badge/release-0.10.1-blue.svg?style=flat
+[releases]: https://github.com/FalseCAM/lenna/releases
+
+[license-image]: http://img.shields.io/badge/license-GPL--v3.0-red.svg?style=flat
+[license]: LICENSE
+
+[gitter-image]: https://badges.gitter.im/Join%20Chat.svg
+[gitter]: https://gitter.im/cmusatyalab/openface
 
 ### Quick start
 
