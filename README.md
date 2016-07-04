@@ -18,7 +18,7 @@ This project is using Qt5 and OpenCV.
 [license]: LICENSE
 
 [gitter-image]: https://badges.gitter.im/Join%20Chat.svg
-[gitter]: https://gitter.im/cmusatyalab/openface
+[gitter]: https://gitter.im/FalseCAM/lenna
 
 ### Quick start
 
