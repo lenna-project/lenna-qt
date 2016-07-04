@@ -7,6 +7,7 @@
 # Enable automoc
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
 set(AUTOMOC_MOC_OPTIONS PROPERTIES FOLDER CMakeAutomocTargets)
 set_property(GLOBAL PROPERTY AUTOMOC_FOLDER CMakeAutomocTargets)
 
@@ -35,7 +36,7 @@ endif()
 # 
 
 file(GLOB sources
-"*.cpp" "*.h" "*.ui")
+"*.cpp" "*.h" "*.ui" "*.qrc")
 
 
 # 

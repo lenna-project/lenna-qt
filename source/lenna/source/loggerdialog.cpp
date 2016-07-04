@@ -1,6 +1,6 @@
 /**
     This file is part of program Lenna
-    Copyright (C) 2013  FalseCAM
+    Copyright (C) 2013-2016 FalseCAM
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,35 +17,30 @@
  */
 
 #include "loggerdialog.h"
-#include "ui_loggerdialog.h"
-#include <QtCore/QStringList>
+#include <lenna/logger.h>
 #include <QtCore/QStringBuilder>
-#include "logger.h"
+#include <QtCore/QStringList>
+#include "ui_loggerdialog.h"
 
 using namespace lenna;
 
-LoggerDialog::LoggerDialog(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::LoggerDialog)
-{
-    ui->setupUi(this);
-    setText(ui->messagesTextBrowser, Logger::getMessages());
-    setText(ui->infoTextBrowser, Logger::getInfoMessages());
-    setText(ui->debugTextBrowser, Logger::getDebugMessages());
-    setText(ui->warningTextBrowser, Logger::getWarningMessages());
-    setText(ui->criticalTextBrowser, Logger::getCriticalMessages());
-    setText(ui->fatalTextBrowser, Logger::getFatalMessages());
+LoggerDialog::LoggerDialog(QWidget *parent)
+    : QDialog(parent), ui(new Ui::LoggerDialog) {
+  ui->setupUi(this);
+  setText(ui->messagesTextBrowser, Logger::getMessages());
+  setText(ui->infoTextBrowser, Logger::getInfoMessages());
+  setText(ui->debugTextBrowser, Logger::getDebugMessages());
+  setText(ui->warningTextBrowser, Logger::getWarningMessages());
+  setText(ui->criticalTextBrowser, Logger::getCriticalMessages());
+  setText(ui->fatalTextBrowser, Logger::getFatalMessages());
 }
 
-LoggerDialog::~LoggerDialog()
-{
-    delete ui;
-}
+LoggerDialog::~LoggerDialog() { delete ui; }
 
-void LoggerDialog::setText(QTextBrowser *textBrowser, QStringList list){
-    QString text;
-    for(int i = 0; i < list.length(); i++){
-        text.append(list.at(i)).append("\n");
-    }
-    textBrowser->setText(text);
+void LoggerDialog::setText(QTextBrowser *textBrowser, QStringList list) {
+  QString text;
+  for (int i = 0; i < list.length(); i++) {
+    text.append(list.at(i)).append("\n");
+  }
+  textBrowser->setText(text);
 }

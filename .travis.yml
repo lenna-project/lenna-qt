@@ -59,6 +59,6 @@ before_script:
 
  - mkdir build
  - cd build
- - cmake ..
+ - cmake -DOpenCV_DIR=$(pwd)/opencv-3.1.0/install ..
 script:
  - make

@@ -1,6 +1,6 @@
 /**
     This file is part of program Lenna
-    Copyright (C) 2013-2016  FalseCAM
+    Copyright (C) 2013-2016 FalseCAM
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,9 +17,9 @@
  */
 
 #include "mainwindow.h"
+#include <lenna/lenna.h>
+#include <lenna/logger.h>
 #include "aboutdialog.h"
-#include "lenna/lenna.h"
-#include "logger.h"
 #include "loggerdialog.h"
 #include "plugins/pluginloader.h"
 #include "plugins/pluginsconfigdialog.h"

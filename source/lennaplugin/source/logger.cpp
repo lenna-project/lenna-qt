@@ -16,7 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "logger.h"
+#include <lenna/logger.h>
 #include <stdio.h>
 #include <QtCore/QMutex>
 

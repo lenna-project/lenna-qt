@@ -43,7 +43,7 @@ set(META_AUTHOR_DOMAIN       "https://github.com/falsecam/lenna/")
 set(META_AUTHOR_MAINTAINER   "falsecam@gmail.com")
 set(META_VERSION_MAJOR       "0")
 set(META_VERSION_MINOR       "10")
-set(META_VERSION_PATCH       "0")
+set(META_VERSION_PATCH       "1")
 set(META_VERSION_REVISION    "${GIT_REV}")
 set(META_VERSION             "${META_VERSION_MAJOR}.${META_VERSION_MINOR}.${META_VERSION_PATCH}")
 set(META_NAME_VERSION        "${META_PROJECT_NAME} v${META_VERSION} (${META_VERSION_REVISION})")
@@ -173,3 +173,5 @@ install(FILES README.md DESTINATION ${INSTALL_ROOT} COMPONENT runtime)
 
 # Install runtime data
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/data DESTINATION ${INSTALL_DATA} COMPONENT runtime)
+execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_SOURCE_DIR}/data
+                                                           ${CMAKE_BINARY_DIR}/data)

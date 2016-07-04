@@ -18,64 +18,60 @@
 #include "worker.h"
 #include <QtCore/QThread>
 #include <QtCore/QThreadPool>
-#include "plugins/pluginloader.h"
 #include "imageprocessor.h"
+#include "plugins/pluginloader.h"
 
-#include "logger.h"
+#include <lenna/logger.h>
 
 using namespace lenna;
 using namespace lenna::plugin;
 
-Worker::Worker()
-{
-    stopped = true;
-}
+Worker::Worker() { stopped = true; }
 
-Worker::~Worker() {
-}
+Worker::~Worker() {}
 
 void Worker::process() {
-    stopped = false;
-    emit process(0);
-    foreach(InputPlugin *inputPlugin, PluginLoader::getInstance().getInputPlugins()){
-        if(PluginLoader::getInstance().isActivatedPlugin(inputPlugin)){
-            inputPlugin->init();
+  stopped = false;
+  emit process(0);
+  foreach (InputPlugin *inputPlugin,
+           PluginLoader::getInstance().getInputPlugins()) {
+    if (PluginLoader::getInstance().isActivatedPlugin(inputPlugin)) {
+      inputPlugin->init();
 
-            Logger::info(inputPlugin->getTitle()+" initialized");
+      Logger::info(inputPlugin->getTitle() + " initialized");
 
-            QThreadPool threadPool(this);
-            threadPool.setMaxThreadCount(QThread::idealThreadCount());
+      QThreadPool threadPool(this);
+      threadPool.setMaxThreadCount(QThread::idealThreadCount());
 
-            while(inputPlugin->hasNext()){
-                std::shared_ptr<LennaImage> img = inputPlugin->next();
-                ImageProcessor *imageProcessor = new ImageProcessor(img);
-                threadPool.start(imageProcessor);
+      while (inputPlugin->hasNext()) {
+        std::shared_ptr<LennaImage> img = inputPlugin->next();
+        ImageProcessor *imageProcessor = new ImageProcessor(img);
+        threadPool.start(imageProcessor);
 
-                emit process(inputPlugin->getProgress());
-                if(stopped){
-                    emit process(100);
-                    break;
-                }
-            }
-            threadPool.waitForDone();
+        emit process(inputPlugin->getProgress());
+        if (stopped) {
+          emit process(100);
+          break;
         }
-        if(stopped){
-            break;
-        }
+      }
+      threadPool.waitForDone();
     }
-    finish();
-    emit finished();
+    if (stopped) {
+      break;
+    }
+  }
+  finish();
+  emit finished();
 }
 
-void Worker::stop(){
-    this->stopped = true;
-}
+void Worker::stop() { this->stopped = true; }
 
-void Worker::finish(){
-    emit process(100);
-    foreach(OutputPlugin *outputPlugin, PluginLoader::getInstance().getOutputPlugins()){
-        if(PluginLoader::getInstance().isActivatedPlugin(outputPlugin)){
-            outputPlugin->finnish();
-        }
+void Worker::finish() {
+  emit process(100);
+  foreach (OutputPlugin *outputPlugin,
+           PluginLoader::getInstance().getOutputPlugins()) {
+    if (PluginLoader::getInstance().isActivatedPlugin(outputPlugin)) {
+      outputPlugin->finnish();
     }
+  }
 }

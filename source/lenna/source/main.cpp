@@ -1,6 +1,6 @@
 /**
     This file is part of program Lenna
-    Copyright (C) 2013-2016  FalseCAM
+    Copyright (C) 2013-2016 FalseCAM
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,10 +16,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <lenna/lenna.h>
+#include <lenna/logger.h>
 #include <QtWidgets/QApplication>
 #include "defines.h"
-#include "lenna/lenna.h"
-#include "logger.h"
 #include "mainwindow.h"
 
 using namespace lenna;

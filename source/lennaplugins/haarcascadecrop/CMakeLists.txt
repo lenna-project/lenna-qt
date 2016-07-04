@@ -20,7 +20,7 @@ set_policy(CMP0020 NEW)
 # 
 
 # Target name
-set(target flickrdownloader)
+set(target haarcascadecrop)
 
 # Exit here if required dependencies are not met
 if (NOT Qt5Core_FOUND)

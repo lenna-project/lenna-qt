@@ -57,11 +57,11 @@ void TipsDialog::loadTip() {
 void TipsDialog::loadTips() {
   /* Loads tips from languages tips file (/tips/tips_*locale*.txt) */
 
-  QString tipsFile(Lenna::applicationDirPath() + "/tips/" + "tips_" +
+  QString tipsFile(Lenna::applicationDirPath() + "/data/tips/" + "tips_" +
                    Translation::locale() + ".txt");
   /* if tips dont exist in your language use en. */
   if (!QFile().exists(tipsFile)) {
-    tipsFile = QString(Lenna::applicationDirPath() + "/tips/" + "tips_en.txt");
+    tipsFile = QString(Lenna::applicationDirPath() + "/data/tips/" + "tips_en.txt");
   }
 
   QFile file(tipsFile);

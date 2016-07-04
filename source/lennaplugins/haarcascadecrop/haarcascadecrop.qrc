@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/plugins/haarcascadecrop">
+        <file alias="haarcascadecrop">haarcascadecrop.png</file>
+    </qresource>
+</RCC>
