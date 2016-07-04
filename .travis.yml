@@ -48,7 +48,7 @@ install:
 before_script:
  - curl -sL https://github.com/Itseez/opencv/archive/3.1.0.zip > opencv.zip
  - unzip opencv.zip
- - cd opencv-3.0.0
+ - cd opencv-3.1.0
 
  - mkdir build install
  - cd build
