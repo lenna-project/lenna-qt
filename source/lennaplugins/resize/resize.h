@@ -46,6 +46,8 @@ class Resize : public EditPlugin {
   QIcon getIcon();
   QWidget *getWidget();
 
+  Plugin *getInstance(QString uid);
+
   void edit(std::shared_ptr<LennaImage> image);
 
  private:

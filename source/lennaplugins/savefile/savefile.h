@@ -44,6 +44,8 @@ class SaveFile : public OutputPlugin {
   QIcon getIcon();
   QWidget *getWidget();
 
+  Plugin *getInstance(QString uid);
+
   void out(std::shared_ptr<LennaImage> image);
   void finnish();
 

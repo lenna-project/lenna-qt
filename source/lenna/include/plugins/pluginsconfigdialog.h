@@ -43,7 +43,12 @@ private:
     void loadEditPlugins();
     void loadOutputPlugins();
 
+    void loadActiveInputPlugins();
+    void loadActiveEditPlugins();
+    void loadActiveOutputPlugins();
+
 private slots:
+    void on_plugin_activated(QString uid);
     void orderInputPlugins();
     void orderEditPlugins();
     void orderOutputPlugins();

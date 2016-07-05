@@ -96,6 +96,12 @@ int FileChooser::getProgress() {
   return progress;
 }
 
+Plugin *FileChooser::getInstance(QString uid) {
+  Plugin *plugin = new FileChooser();
+  plugin->setUID(uid);
+  return plugin;
+}
+
 QString FileChooser::getName(QString file) {
   QString name;
   name = QFileInfo(file).baseName();

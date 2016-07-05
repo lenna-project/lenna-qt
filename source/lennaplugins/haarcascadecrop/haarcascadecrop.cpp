@@ -65,6 +65,12 @@ QWidget *HaarcascadeCrop::getWidget() {
   return this->widget;
 }
 
+plugin::Plugin *HaarcascadeCrop::getInstance(QString uid) {
+  Plugin *plugin = new HaarcascadeCrop();
+  plugin->setUID(uid);
+  return plugin;
+}
+
 void HaarcascadeCrop::edit(std::shared_ptr<LennaImage> img) {
   cv::Mat image = img->getImage();
   if (this->widget->isCrop()) {

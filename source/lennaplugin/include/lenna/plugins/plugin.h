@@ -20,6 +20,7 @@
 #define PLUGIN_H
 
 #include <QtCore/QObject>
+#include <QtCore/QUuid>
 #include <QtGui/QIcon>
 #include <QtWidgets/QWidget>
 
@@ -35,6 +36,14 @@ class Plugin : virtual public QObject {
   virtual QString getDescription() = 0;
   virtual QIcon getIcon() = 0;
   virtual QWidget* getWidget() = 0;
+
+  virtual Plugin* getInstance(QString uid) = 0;
+
+  virtual QString getUID() { return this->id.toString(); }
+  virtual void setUID(QString uid) { this->id = QUuid(uid); }
+
+ private:
+  QUuid id;
 };
 }
 }

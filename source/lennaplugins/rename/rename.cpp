@@ -17,8 +17,9 @@
  */
 
 #include "rename.h"
-#include <QtGui/QPainter>
 #include "widget.h"
+
+#include <QtGui/QPainter>
 
 using namespace lenna;
 using namespace lenna::plugin::rename;
@@ -46,6 +47,12 @@ QWidget *Rename::getWidget() {
     this->widget = new Widget();
   }
   return this->widget;
+}
+
+plugin::Plugin *Rename::getInstance(QString uid) {
+  Plugin *plugin = new Rename();
+  plugin->setUID(uid);
+  return plugin;
 }
 
 void Rename::edit(std::shared_ptr<LennaImage> img) {

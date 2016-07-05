@@ -19,40 +19,40 @@
 #ifndef BLUR_H
 #define BLUR_H
 
-#include "lenna/plugins/editplugin.h"
+#include <lenna/plugins/editplugin.h>
 #include "widget.h"
 
-#include <QtCore/QtPlugin>
 #include <QtCore/QObject>
+#include <QtCore/QtPlugin>
 #include <QtGui/QIcon>
 
-namespace lenna{
-namespace plugin{
+namespace lenna {
+namespace plugin {
 
-class Blur : public EditPlugin
-{
-    Q_OBJECT
-    Q_PLUGIN_METADATA(IID "lenna.blur" FILE "blur.json")
-    Q_INTERFACES(lenna::plugin::EditPlugin)
+class Blur : public EditPlugin {
+  Q_OBJECT
+  Q_PLUGIN_METADATA(IID "lenna.blur" FILE "blur.json")
+  Q_INTERFACES(lenna::plugin::EditPlugin)
 
-public:
-    Blur();
-    ~Blur();
-    QString getName();
-    QString getTitle();
-    QString getVersion();
-    QString getAuthor();
-    QString getDescription();
-    QIcon getIcon();
-    QWidget *getWidget();
+ public:
+  Blur();
+  ~Blur();
+  QString getName();
+  QString getTitle();
+  QString getVersion();
+  QString getAuthor();
+  QString getDescription();
+  QIcon getIcon();
+  QWidget *getWidget();
 
-    void edit(std::shared_ptr<LennaImage> image);
+  void edit(std::shared_ptr<LennaImage> image);
 
-private:
-    Widget *widget;
+  Plugin *getInstance(QString uid);
+
+ private:
+  Widget *widget;
 };
-
 }
 }
 
-#endif // BLUR_H
+#endif  // BLUR_H

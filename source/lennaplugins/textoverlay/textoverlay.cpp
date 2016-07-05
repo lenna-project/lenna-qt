@@ -50,6 +50,12 @@ QWidget *Textoverlay::getWidget() {
   return this->widget;
 }
 
+plugin::Plugin *Textoverlay::getInstance(QString uid) {
+  Plugin *plugin = new Textoverlay();
+  plugin->setUID(uid);
+  return plugin;
+}
+
 void Textoverlay::edit(std::shared_ptr<LennaImage> img) {
   getWidget();
   if (widget->isActivated()) {

@@ -68,6 +68,12 @@ QWidget *FlickrDownloader::getWidget() {
   return widget;
 }
 
+Plugin *FlickrDownloader::getInstance(QString uid) {
+  Plugin *plugin = new FlickrDownloader();
+  plugin->setUID(uid);
+  return plugin;
+}
+
 void FlickrDownloader::init() {
   this->apiKey = widget->getApiKey();
   this->searchText = widget->getSearchText();

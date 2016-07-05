@@ -80,3 +80,9 @@ void Crop::edit(std::shared_ptr<LennaImage> img) {
 
   img->setMat(image);
 }
+
+plugin::Plugin *Crop::getInstance(QString uid) {
+  Plugin *plugin = new Crop();
+  plugin->setUID(uid);
+  return plugin;
+}

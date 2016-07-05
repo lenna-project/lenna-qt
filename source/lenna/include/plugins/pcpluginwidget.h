@@ -19,7 +19,7 @@
 #ifndef PCPLUGINWIDGET_H
 #define PCPLUGINWIDGET_H
 
-#include "lenna/plugins/plugin.h"
+#include <lenna/plugins/plugin.h>
 
 #include <QtWidgets/QWidget>
 
@@ -38,12 +38,16 @@ class PCPluginWidget : public QWidget {
   ~PCPluginWidget();
   Plugin *getPlugin();
 
+ signals:
+  void pluginActivated(QString uid);
+
  private:
   Ui::PCPluginWidget *ui;
   Plugin *plugin;
 
  private slots:
   void checkBoxChanged();
+  void on_addButton_clicked();
 };
 }
 }

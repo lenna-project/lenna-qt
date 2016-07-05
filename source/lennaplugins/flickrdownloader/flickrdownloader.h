@@ -48,6 +48,8 @@ class FlickrDownloader : public InputPlugin {
   QIcon getIcon();
   QWidget *getWidget();
 
+  Plugin *getInstance(QString uid);
+
   void init();
   bool hasNext();
   std::shared_ptr<LennaImage> next();

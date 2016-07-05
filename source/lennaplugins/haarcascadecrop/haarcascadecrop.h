@@ -48,6 +48,8 @@ class HaarcascadeCrop : public EditPlugin {
   QIcon getIcon();
   QWidget *getWidget();
 
+  Plugin *getInstance(QString uid);
+
   void loadCascade(std::string cascadeFile);
 
   void edit(std::shared_ptr<LennaImage> image);

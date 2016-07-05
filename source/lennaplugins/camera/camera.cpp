@@ -1,6 +1,6 @@
 /**
     This file is part of program Lenna
-    Copyright (C) 2013  FalseCAM
+    Copyright (C) 2013-2016 FalseCAM
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -93,4 +93,11 @@ int Camera::getProgress() {
   int progress = 0;
   if (hasNext()) progress = 100 * position / frames;
   return progress;
+}
+
+plugin::Plugin *Camera::getInstance(QString uid)
+{
+    Plugin *plugin = new Camera();
+    plugin->setUID(uid);
+    return plugin;
 }

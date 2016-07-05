@@ -59,7 +59,10 @@ MainWindow::MainWindow(QWidget *parent)
   tips.showOnStartup();
 }
 
-MainWindow::~MainWindow() { delete ui; }
+MainWindow::~MainWindow() {
+  delete ui;
+  PluginLoader::destroyInstance();
+}
 
 void MainWindow::initWorker() {
   worker = new Worker();
@@ -97,32 +100,30 @@ void MainWindow::on_actionPlugins_triggered() {
 
 void MainWindow::loadInputPluginWidgets() {
   ui->inputTabWidget->clear();
-  foreach (InputPlugin *plugin, PluginLoader::getInstance().getInputPlugins()) {
-    if (plugin && PluginLoader::getInstance().isActivatedPlugin(plugin)) {
-      ui->inputTabWidget->addTab(plugin->getWidget(), plugin->getIcon(),
-                                 plugin->getTitle());
-    }
+  for (InputPlugin *plugin :
+       PluginLoader::getInstance().getActiveInputPlugins()) {
+    assert(plugin);
+    ui->inputTabWidget->addTab(plugin->getWidget(), plugin->getIcon(),
+                               plugin->getTitle());
   }
 }
 
 void MainWindow::loadEditPluginWidgets() {
   ui->editTabWidget->clear();
-  foreach (EditPlugin *plugin, PluginLoader::getInstance().getEditPlugins()) {
-    if (plugin && PluginLoader::getInstance().isActivatedPlugin(plugin)) {
-      ui->editTabWidget->addTab(plugin->getWidget(), plugin->getIcon(),
-                                plugin->getTitle());
-    }
+  for (EditPlugin *plugin :
+       PluginLoader::getInstance().getActiveEditPlugins()) {
+    assert(plugin);
+    ui->editTabWidget->addTab(plugin->getWidget(), plugin->getIcon(),
+                              plugin->getTitle());
   }
 }
 
 void MainWindow::loadOutputPluginWidgets() {
   ui->outputTabWidget->clear();
-  foreach (OutputPlugin *plugin,
-           PluginLoader::getInstance().getOutputPlugins()) {
-    if (plugin && PluginLoader::getInstance().isActivatedPlugin(plugin)) {
-      ui->outputTabWidget->addTab(plugin->getWidget(), plugin->getIcon(),
-                                  plugin->getTitle());
-    }
+  for (OutputPlugin *plugin :
+       PluginLoader::getInstance().getActiveOutputPlugins()) {
+    ui->outputTabWidget->addTab(plugin->getWidget(), plugin->getIcon(),
+                                plugin->getTitle());
   }
 }
 
@@ -148,12 +149,12 @@ void MainWindow::stopProcess() {
 
 void lenna::MainWindow::on_inputTabWidget_tabCloseRequested(int index) {
   int counter = -1;
-  foreach (InputPlugin *plugin, PluginLoader::getInstance().getInputPlugins()) {
-    if (plugin && PluginLoader::getInstance().isActivatedPlugin(plugin)) {
-      counter++;
-      if (counter == index) {
-        PluginLoader::getInstance().deactivatePlugin(plugin);
-      }
+  for (InputPlugin *plugin :
+       PluginLoader::getInstance().getActiveInputPlugins()) {
+    counter++;
+    if (counter == index) {
+      PluginLoader::getInstance().deactivatePlugin(plugin);
+      break;
     }
   }
   loadInputPluginWidgets();
@@ -161,12 +162,12 @@ void lenna::MainWindow::on_inputTabWidget_tabCloseRequested(int index) {
 
 void lenna::MainWindow::on_editTabWidget_tabCloseRequested(int index) {
   int counter = -1;
-  foreach (EditPlugin *plugin, PluginLoader::getInstance().getEditPlugins()) {
-    if (plugin && PluginLoader::getInstance().isActivatedPlugin(plugin)) {
-      counter++;
-      if (counter == index) {
-        PluginLoader::getInstance().deactivatePlugin(plugin);
-      }
+  for (EditPlugin *plugin :
+       PluginLoader::getInstance().getActiveEditPlugins()) {
+    counter++;
+    if (counter == index) {
+      PluginLoader::getInstance().deactivatePlugin(plugin);
+      break;
     }
   }
   loadEditPluginWidgets();
@@ -174,13 +175,11 @@ void lenna::MainWindow::on_editTabWidget_tabCloseRequested(int index) {
 
 void lenna::MainWindow::on_outputTabWidget_tabCloseRequested(int index) {
   int counter = -1;
-  foreach (OutputPlugin *plugin,
-           PluginLoader::getInstance().getOutputPlugins()) {
-    if (plugin && PluginLoader::getInstance().isActivatedPlugin(plugin)) {
-      counter++;
-      if (counter == index) {
-        PluginLoader::getInstance().deactivatePlugin(plugin);
-      }
+  for (OutputPlugin *plugin :
+       PluginLoader::getInstance().getActiveOutputPlugins()) {
+    counter++;
+    if (counter == index) {
+      PluginLoader::getInstance().deactivatePlugin(plugin);
     }
   }
   loadOutputPluginWidgets();

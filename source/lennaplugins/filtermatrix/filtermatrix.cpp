@@ -1,6 +1,6 @@
 /**
     This file is part of program Lenna
-    Copyright (C) 2013  FalseCAM
+    Copyright (C) 2013-2016 FalseCAM
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,8 +17,9 @@
  */
 
 #include "filtermatrix.h"
-#include <QtGui/QPainter>
 #include "widget.h"
+
+#include <QtGui/QPainter>
 
 using namespace lenna;
 using namespace lenna::plugin;
@@ -57,4 +58,10 @@ void FilterMatrix::edit(std::shared_ptr<LennaImage> img) {
     cv::filter2D(img->getImage(), img->getImage(), -1, widget->getFilter());
     img->getImage() = img->getImage() * 255;  // TODO why * 255?
   }
+}
+
+Plugin *FilterMatrix::getInstance(QString uid) {
+  Plugin *plugin = new FilterMatrix();
+  plugin->setUID(uid);
+  return plugin;
 }

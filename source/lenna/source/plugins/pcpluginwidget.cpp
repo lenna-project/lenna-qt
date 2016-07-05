@@ -17,10 +17,10 @@
  */
 
 #include "plugins/pcpluginwidget.h"
-
-#include <QtGui/QPixmap>
 #include "plugins/pluginloader.h"
 #include "ui_pcpluginwidget.h"
+
+#include <QtGui/QPixmap>
 
 using namespace lenna::plugin;
 
@@ -35,21 +35,28 @@ PCPluginWidget::PCPluginWidget(Plugin *plugin) : ui(new Ui::PCPluginWidget) {
   ui->descriptionBrowser->setText(plugin->getDescription());
   ui->iconLabel->setPixmap(plugin->getIcon().pixmap(32, 32));
   ui->authorLabel->setText(plugin->getAuthor());
-  if (PluginLoader::getInstance().isActivatedPlugin(plugin)) {
-    ui->checkBox->setChecked(true);
-  }
+  // if (PluginLoader::getInstance().isActivatedPlugin(plugin)) {
+  // ui->checkBox->setChecked(true);
+  //}
 
-  connect(ui->checkBox, SIGNAL(toggled(bool)), this, SLOT(checkBoxChanged()));
+  // connect(ui->checkBox, SIGNAL(toggled(bool)), this,
+  // SLOT(checkBoxChanged()));
 }
 
 PCPluginWidget::~PCPluginWidget() { delete ui; }
 
 void PCPluginWidget::checkBoxChanged() {
-  if (ui->checkBox->isChecked()) {
-    PluginLoader::getInstance().activatePlugin(plugin);
-  } else {
-    PluginLoader::getInstance().deactivatePlugin(plugin);
-  }
+  // if (ui->checkBox->isChecked()) {
+  //  PluginLoader::getInstance().activatePlugin(plugin);
+  //} else {
+  //  PluginLoader::getInstance().deactivatePlugin(plugin);
+  //}
 }
 
 Plugin *PCPluginWidget::getPlugin() { return this->plugin; }
+
+void lenna::plugin::PCPluginWidget::on_addButton_clicked() {
+  QString uid = QUuid::createUuid().toString();
+  PluginLoader::getInstance().activatePlugin(uid, plugin->getName());
+  emit pluginActivated(uid);
+}

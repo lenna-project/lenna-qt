@@ -34,6 +34,10 @@ PluginsConfigDialog::PluginsConfigDialog(QWidget *parent)
   loadEditPlugins();
   loadOutputPlugins();
 
+  loadActiveInputPlugins();
+  loadActiveEditPlugins();
+  loadActiveOutputPlugins();
+
   connect(this, SIGNAL(finished(int)), this, SLOT(orderInputPlugins()));
   connect(this, SIGNAL(finished(int)), this, SLOT(orderEditPlugins()));
   connect(this, SIGNAL(finished(int)), this, SLOT(orderOutputPlugins()));
@@ -45,6 +49,8 @@ void PluginsConfigDialog::loadInputPlugins() {
   ui->inputPluginsListWidget->clear();
   foreach (InputPlugin *plugin, PluginLoader::getInstance().getInputPlugins()) {
     PCPluginWidget *widget = new PCPluginWidget(plugin);
+    connect(widget, SIGNAL(pluginActivated(QString)), this,
+            SLOT(on_plugin_activated(QString)));
     QListWidgetItem *item = new QListWidgetItem();
     item->setSizeHint(QSize(0, 150));
     ui->inputPluginsListWidget->addItem(item);
@@ -66,6 +72,8 @@ void PluginsConfigDialog::loadEditPlugins() {
   ui->editPluginsListWidget->clear();
   foreach (EditPlugin *plugin, PluginLoader::getInstance().getEditPlugins()) {
     PCPluginWidget *widget = new PCPluginWidget(plugin);
+    connect(widget, SIGNAL(pluginActivated(QString)), this,
+            SLOT(on_plugin_activated(QString)));
     QListWidgetItem *item = new QListWidgetItem();
     item->setSizeHint(QSize(0, 150));
     ui->editPluginsListWidget->addItem(item);
@@ -88,11 +96,40 @@ void PluginsConfigDialog::loadOutputPlugins() {
   foreach (OutputPlugin *plugin,
            PluginLoader::getInstance().getOutputPlugins()) {
     PCPluginWidget *widget = new PCPluginWidget(plugin);
+    connect(widget, SIGNAL(pluginActivated(QString)), this,
+            SLOT(on_plugin_activated(QString)));
     QListWidgetItem *item = new QListWidgetItem();
     item->setSizeHint(QSize(0, 150));
     ui->outputPluginsListWidget->addItem(item);
     ui->outputPluginsListWidget->setItemWidget(item, widget);
   }
+}
+
+void PluginsConfigDialog::loadActiveInputPlugins() {
+  ui->activeInputPluginsList->clear();
+  for (Plugin *plugin : PluginLoader::getInstance().getActiveInputPlugins()) {
+    ui->activeInputPluginsList->addItem(plugin->getName());
+  }
+}
+
+void PluginsConfigDialog::loadActiveEditPlugins() {
+  ui->activeEditPluginsList->clear();
+  for (Plugin *plugin : PluginLoader::getInstance().getActiveEditPlugins()) {
+    ui->activeEditPluginsList->addItem(plugin->getName());
+  }
+}
+
+void PluginsConfigDialog::loadActiveOutputPlugins() {
+  ui->activeOutputPluginsList->clear();
+  for (Plugin *plugin : PluginLoader::getInstance().getActiveOutputPlugins()) {
+    ui->activeOutputPluginsList->addItem(plugin->getName());
+  }
+}
+
+void PluginsConfigDialog::on_plugin_activated(QString uid) {
+  loadActiveInputPlugins();
+  loadActiveEditPlugins();
+  loadActiveOutputPlugins();
 }
 
 void PluginsConfigDialog::orderOutputPlugins() {
@@ -108,80 +145,92 @@ void PluginsConfigDialog::orderOutputPlugins() {
 void PluginsConfigDialog::on_pushButton_clicked() { this->accept(); }
 
 void PluginsConfigDialog::on_inputUpButton_clicked() {
-  int currentRow = ui->inputPluginsListWidget->currentRow();
+  int currentRow = ui->activeInputPluginsList->currentRow();
   if (currentRow > 0) {
-    PCPluginWidget *widget =
-        (PCPluginWidget *)ui->inputPluginsListWidget->itemWidget(
-            ui->inputPluginsListWidget->item(currentRow));
-    InputPlugin *plugin = (InputPlugin *)widget->getPlugin();
+    InputPlugin *plugin =
+        (InputPlugin *)PluginLoader::getInstance().getActivePlugin(
+            PluginLoader::getInstance()
+                .getActiveInputPlugins()
+                .at(currentRow)
+                ->getUID());
     PluginLoader::getInstance().moveInputPlugin(plugin, currentRow - 1);
-    loadInputPlugins();
-    ui->inputPluginsListWidget->setCurrentRow(currentRow - 1);
+    loadActiveInputPlugins();
+    ui->activeInputPluginsList->setCurrentRow(currentRow - 1);
   }
 }
 void PluginsConfigDialog::on_inputDownButton_clicked() {
-  int currentRow = ui->inputPluginsListWidget->currentRow();
-  int count = ui->inputPluginsListWidget->count();
+  int currentRow = ui->activeInputPluginsList->currentRow();
+  int count = ui->activeInputPluginsList->count();
   if (currentRow >= 0 && currentRow < count - 1) {
-    PCPluginWidget *widget =
-        (PCPluginWidget *)ui->inputPluginsListWidget->itemWidget(
-            ui->inputPluginsListWidget->item(currentRow));
-    InputPlugin *plugin = (InputPlugin *)widget->getPlugin();
+    InputPlugin *plugin =
+        (InputPlugin *)PluginLoader::getInstance().getActivePlugin(
+            PluginLoader::getInstance()
+                .getActiveInputPlugins()
+                .at(currentRow)
+                ->getUID());
     PluginLoader::getInstance().moveInputPlugin(plugin, currentRow + 1);
-    loadInputPlugins();
-    ui->inputPluginsListWidget->setCurrentRow(currentRow + 1);
+    loadActiveInputPlugins();
+    ui->activeInputPluginsList->setCurrentRow(currentRow + 1);
   }
 }
 void PluginsConfigDialog::on_editUpButton_clicked() {
-  int currentRow = ui->editPluginsListWidget->currentRow();
+  int currentRow = ui->activeEditPluginsList->currentRow();
   if (currentRow > 0) {
-    PCPluginWidget *widget =
-        (PCPluginWidget *)ui->editPluginsListWidget->itemWidget(
-            ui->editPluginsListWidget->item(currentRow));
-    EditPlugin *plugin = (EditPlugin *)widget->getPlugin();
+    EditPlugin *plugin =
+        (EditPlugin *)PluginLoader::getInstance().getActivePlugin(
+            PluginLoader::getInstance()
+                .getActiveEditPlugins()
+                .at(currentRow)
+                ->getUID());
     PluginLoader::getInstance().moveEditPlugin(plugin, currentRow - 1);
-    loadEditPlugins();
-    ui->editPluginsListWidget->setCurrentRow(currentRow - 1);
+    loadActiveEditPlugins();
+    ui->activeEditPluginsList->setCurrentRow(currentRow - 1);
   }
 }
 
 void PluginsConfigDialog::on_editDownButton_clicked() {
-  int currentRow = ui->editPluginsListWidget->currentRow();
-  int count = ui->editPluginsListWidget->count();
+  int currentRow = ui->activeEditPluginsList->currentRow();
+  int count = ui->activeEditPluginsList->count();
   if (currentRow >= 0 && currentRow < count - 1) {
-    PCPluginWidget *widget =
-        (PCPluginWidget *)ui->editPluginsListWidget->itemWidget(
-            ui->editPluginsListWidget->item(currentRow));
-    EditPlugin *plugin = (EditPlugin *)widget->getPlugin();
+    EditPlugin *plugin =
+        (EditPlugin *)PluginLoader::getInstance().getActivePlugin(
+            PluginLoader::getInstance()
+                .getActiveEditPlugins()
+                .at(currentRow)
+                ->getUID());
     PluginLoader::getInstance().moveEditPlugin(plugin, currentRow + 1);
-    loadEditPlugins();
-    ui->editPluginsListWidget->setCurrentRow(currentRow + 1);
+    loadActiveEditPlugins();
+    ui->activeEditPluginsList->setCurrentRow(currentRow + 1);
   }
 }
 
 void PluginsConfigDialog::on_outputUpButton_clicked() {
-  int currentRow = ui->outputPluginsListWidget->currentRow();
+  int currentRow = ui->activeOutputPluginsList->currentRow();
   if (currentRow > 0) {
-    PCPluginWidget *widget =
-        (PCPluginWidget *)ui->outputPluginsListWidget->itemWidget(
-            ui->outputPluginsListWidget->item(currentRow));
-    OutputPlugin *plugin = (OutputPlugin *)widget->getPlugin();
+    OutputPlugin *plugin =
+        (OutputPlugin *)PluginLoader::getInstance().getActivePlugin(
+            PluginLoader::getInstance()
+                .getActiveOutputPlugins()
+                .at(currentRow)
+                ->getUID());
     PluginLoader::getInstance().moveOutputPlugin(plugin, currentRow - 1);
-    loadOutputPlugins();
-    ui->outputPluginsListWidget->setCurrentRow(currentRow - 1);
+    loadActiveOutputPlugins();
+    ui->activeOutputPluginsList->setCurrentRow(currentRow - 1);
   }
 }
 
 void PluginsConfigDialog::on_outputDownButton_clicked() {
-  int currentRow = ui->outputPluginsListWidget->currentRow();
-  int count = ui->outputPluginsListWidget->count();
+  int currentRow = ui->activeOutputPluginsList->currentRow();
+  int count = ui->activeOutputPluginsList->count();
   if (currentRow >= 0 && currentRow < count - 1) {
-    PCPluginWidget *widget =
-        (PCPluginWidget *)ui->outputPluginsListWidget->itemWidget(
-            ui->outputPluginsListWidget->item(currentRow));
-    OutputPlugin *plugin = (OutputPlugin *)widget->getPlugin();
+    OutputPlugin *plugin =
+        (OutputPlugin *)PluginLoader::getInstance().getActivePlugin(
+            PluginLoader::getInstance()
+                .getActiveOutputPlugins()
+                .at(currentRow)
+                ->getUID());
     PluginLoader::getInstance().moveOutputPlugin(plugin, currentRow + 1);
-    loadOutputPlugins();
-    ui->outputPluginsListWidget->setCurrentRow(currentRow + 1);
+    loadActiveOutputPlugins();
+    ui->activeOutputPluginsList->setCurrentRow(currentRow + 1);
   }
 }

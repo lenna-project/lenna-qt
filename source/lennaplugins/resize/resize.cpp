@@ -1,6 +1,6 @@
 /**
     This file is part of program Lenna
-    Copyright (C) 2013  FalseCAM
+    Copyright (C) 2013-2016 FalseCAM
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,65 +17,56 @@
  */
 
 #include "resize.h"
-#include "widget.h"
 #include <QtGui/QPainter>
+#include "widget.h"
 
 using namespace lenna;
 using namespace lenna::plugin::resize;
 
-Resize::Resize()
-{
-    widget = 0;
+Resize::Resize() { widget = 0; }
+
+Resize::~Resize() {}
+
+QString Resize::getName() { return QString("resize"); }
+
+QString Resize::getTitle() { return QString(tr("Resize")); }
+
+QString Resize::getVersion() { return QString("0.1"); }
+
+QString Resize::getAuthor() { return QString("FalseCAM"); }
+
+QString Resize::getDescription() {
+  return QString(tr("Plugin to resize images"));
 }
 
-Resize::~Resize()
-{
+QIcon Resize::getIcon() { return QIcon(":/plugins/resize/resize"); }
+
+QWidget *Resize::getWidget() {
+  if (!this->widget) {
+    this->widget = new Widget();
+  }
+  return this->widget;
 }
 
-QString Resize::getName(){
-    return QString("resize");
+plugin::Plugin *Resize::getInstance(QString uid) {
+  Plugin *plugin = new Resize();
+  plugin->setUID(uid);
+  return plugin;
 }
 
-QString Resize::getTitle(){
-    return QString(tr("Resize"));
-}
-
-QString Resize::getVersion(){
-    return QString("0.1");
-}
-
-QString Resize::getAuthor(){
-    return QString("FalseCAM");
-}
-
-QString Resize::getDescription(){
-    return QString(tr("Plugin to resize images"));
-}
-
-QIcon Resize::getIcon(){
-    return QIcon(":/plugins/resize/resize");
-}
-
-QWidget *Resize::getWidget(){
-    if(!this->widget){
-        this->widget = new Widget();
+void Resize::edit(std::shared_ptr<LennaImage> img) {
+  getWidget();
+  if (this->widget->resizePercent() || this->widget->resizePixel()) {
+    cv::Size size = img->getImage().size();
+    if (this->widget->resizePercent()) {
+      size.width *= widget->percentWidth() / 100.0;
+      size.height *= widget->percentHeight() / 100.0;
+    } else if (this->widget->resizePixel()) {
+      size.width = widget->pixelWidth();
+      size.height = widget->pixelHeight();
     }
-    return this->widget;
-}
-
-void Resize::edit(std::shared_ptr<LennaImage> img){
-    getWidget();
-    if( this->widget->resizePercent() || this->widget->resizePixel()){
-        cv::Size size = img->getImage().size();
-        if(this->widget->resizePercent()){
-            size.width *= widget->percentWidth()/100.0;
-            size.height *= widget->percentHeight()/100.0;
-        }else if(this->widget->resizePixel()){
-            size.width = widget->pixelWidth();
-            size.height = widget->pixelHeight();
-        }
-        cv::Mat dst;
-        cv::resize(img->getImage(), dst, size, 0, 0, cv::INTER_CUBIC);
-        img->setMat(dst);
-    }
+    cv::Mat dst;
+    cv::resize(img->getImage(), dst, size, 0, 0, cv::INTER_CUBIC);
+    img->setMat(dst);
+  }
 }

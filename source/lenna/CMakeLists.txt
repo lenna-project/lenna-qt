@@ -9,6 +9,7 @@
 # Enable automoc
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
 set(AUTOMOC_MOC_OPTIONS PROPERTIES FOLDER CMakeAutomocTargets)
 set_property(GLOBAL PROPERTY AUTOMOC_FOLDER CMakeAutomocTargets)
 
@@ -53,9 +54,12 @@ file(GLOB sources
 "${source_path}/plugins/*.cpp"
 )
 
+file(GLOB uis
+"${source_path}/*.ui"
+"${source_path}/plugins/*.ui"
+)
 
 file(GLOB resources "${resource_path}/*.qrc" )
-qt5_add_resources(resourcesources ${resources})
 
 # Group source files
 set(header_group "Header Files (API)")
@@ -75,7 +79,8 @@ add_executable(${target}
     MACOSX_BUNDLE
     ${sources}
     ${headers}
-    ${resourcesources}
+    ${uis}
+    ${resources}
 )
 
 # Create namespaced alias

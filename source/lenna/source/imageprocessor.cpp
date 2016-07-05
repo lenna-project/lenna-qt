@@ -35,18 +35,14 @@ void ImageProcessor::run() {
 
 void ImageProcessor::edit(std::shared_ptr<LennaImage> image) {
   foreach (EditPlugin *editPlugin,
-           PluginLoader::getInstance().getEditPlugins()) {
-    if (PluginLoader::getInstance().isActivatedPlugin(editPlugin)) {
-      editPlugin->edit(image);
-    }
+           PluginLoader::getInstance().getActiveEditPlugins()) {
+    editPlugin->edit(image);
   }
 }
 
 void ImageProcessor::out(std::shared_ptr<LennaImage> image) {
   foreach (OutputPlugin *outputPlugin,
-           PluginLoader::getInstance().getOutputPlugins()) {
-    if (PluginLoader::getInstance().isActivatedPlugin(outputPlugin)) {
-      outputPlugin->out(image);
-    }
+           PluginLoader::getInstance().getActiveOutputPlugins()) {
+    outputPlugin->out(image);
   }
 }

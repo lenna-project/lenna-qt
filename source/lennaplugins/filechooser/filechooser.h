@@ -50,6 +50,8 @@ class FileChooser : public InputPlugin {
   std::shared_ptr<LennaImage> next();
   int getProgress();
 
+  Plugin *getInstance(QString uid);
+
  private:
   Widget *widget;
   bool has_next;

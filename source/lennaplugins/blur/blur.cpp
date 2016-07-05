@@ -1,6 +1,6 @@
 /**
     This file is part of program Lenna
-    Copyright (C) 2013  FalseCAM
+    Copyright (C) 2013-2016 FalseCAM
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,54 +18,44 @@
 
 #include "blur.h"
 #include "widget.h"
+
 #include <QtGui/QPainter>
 
 using namespace lenna;
 using namespace lenna::plugin;
 
-Blur::Blur()
-{
-    widget = 0;
+Blur::Blur() { widget = 0; }
+
+Blur::~Blur() {
+  if (this->widget) delete this->widget;
 }
 
-Blur::~Blur()
-{
-    if(this->widget)
-        delete this->widget;
+QString Blur::getName() { return QString("blur"); }
+
+QString Blur::getTitle() { return QString(tr("Blur")); }
+
+QString Blur::getVersion() { return QString("0.1"); }
+
+QString Blur::getAuthor() { return QString("FalseCAM"); }
+
+QString Blur::getDescription() { return QString(tr("Plugin to blur images")); }
+
+QIcon Blur::getIcon() { return QIcon(":/plugins/blur/blur"); }
+
+QWidget *Blur::getWidget() {
+  if (!this->widget) {
+    this->widget = new Widget();
+  }
+  return this->widget;
 }
 
-QString Blur::getName(){
-    return QString("blur");
+void Blur::edit(std::shared_ptr<LennaImage> img) {
+  int size = widget->getRadius();
+  cv::blur(img->getImage(), img->getImage(), cv::Size(size, size));
 }
 
-QString Blur::getTitle(){
-    return QString(tr("Blur"));
-}
-
-QString Blur::getVersion(){
-    return QString("0.1");
-}
-
-QString Blur::getAuthor(){
-    return QString("FalseCAM");
-}
-
-QString Blur::getDescription(){
-    return QString(tr("Plugin to blur images"));
-}
-
-QIcon Blur::getIcon(){
-    return QIcon(":/plugins/blur/blur");
-}
-
-QWidget *Blur::getWidget(){
-    if(!this->widget){
-        this->widget = new Widget();
-    }
-    return this->widget;
-}
-
-void Blur::edit(std::shared_ptr<LennaImage> img){
-    int size = widget->getRadius();
-    cv::blur(img->getImage(), img->getImage(), cv::Size(size, size));
+Plugin *Blur::getInstance(QString uid) {
+  Plugin *plugin = new Blur();
+  plugin->setUID(uid);
+  return plugin;
 }

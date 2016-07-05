@@ -17,8 +17,10 @@
  */
 
 #include "savefile.h"
+
 #include <QDir>
 #include <QProxyStyle>
+
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/opencv.hpp>
 
@@ -51,6 +53,12 @@ QWidget *SaveFile::getWidget() {
     widget = new Widget();
   }
   return widget;
+}
+
+Plugin *SaveFile::getInstance(QString uid) {
+  Plugin *plugin = new SaveFile();
+  plugin->setUID(uid);
+  return plugin;
 }
 
 void SaveFile::out(std::shared_ptr<LennaImage> image) {

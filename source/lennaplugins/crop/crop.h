@@ -48,6 +48,8 @@ class Crop : public EditPlugin {
 
   void edit(std::shared_ptr<LennaImage> image);
 
+  Plugin *getInstance(QString uid);
+
  private:
   Widget *widget = nullptr;
 };

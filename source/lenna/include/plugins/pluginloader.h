@@ -24,6 +24,7 @@
 #include "lenna/plugins/outputplugin.h"
 
 #include <QtCore/QList>
+#include <QtCore/QMap>
 #include <QtCore/QObject>
 
 namespace lenna {
@@ -37,24 +38,28 @@ class PluginLoader : public QObject {
   static void destroyInstance();
   static PluginLoader &getInstance();
 
-  void activatePlugin(QString name);
+  void activatePlugin(QString uid, QString name);
   void activatePlugin(Plugin *plugin);
   void activatePlugins(QStringList list);
   void deactivatePlugin(Plugin *plugin);
   void deactivatePlugin(int index);
   bool isActivatedPlugin(Plugin *plugin);
   Plugin *getPlugin(QString name);
+  Plugin *getActivePlugin(QString uid);
 
   // InputPlugin
   QList<InputPlugin *> getInputPlugins();
+  QList<InputPlugin *> getActiveInputPlugins();
   void moveInputPlugin(InputPlugin *plugin, int index);
 
   // EditPlugin
   QList<EditPlugin *> getEditPlugins();
+  QList<EditPlugin *> getActiveEditPlugins();
   void moveEditPlugin(EditPlugin *plugin, int index);
 
   // OutputPlugin
   QList<OutputPlugin *> getOutputPlugins();
+  QList<OutputPlugin *> getActiveOutputPlugins();
   void moveOutputPlugin(OutputPlugin *plugin, int index);
 
  signals:
@@ -68,20 +73,23 @@ class PluginLoader : public QObject {
   void loadConfig();
   void saveConfig();
 
-  QList<Plugin *> activatedPlugins;
+  QMap<QString, Plugin *> activatedPlugins;
 
   // InputPlugin
   QList<InputPlugin *> inputPlugins;
+  QList<QString> activeInputPlugins;
   void loadInputPlugins(QString dir);
   void addInputPlugin(InputPlugin *plugin);
 
   // EditPlugin
   QList<EditPlugin *> editPlugins;
+  QList<QString> activeEditPlugins;
   void loadEditPlugins(QString dir);
   void addEditPlugin(EditPlugin *plugin);
 
   // OutputPlugin
   QList<OutputPlugin *> outputPlugins;
+  QList<QString> activeOutputPlugins;
   void loadOutputPlugins(QString dir);
   void addOutputPlugin(OutputPlugin *plugin);
 };
