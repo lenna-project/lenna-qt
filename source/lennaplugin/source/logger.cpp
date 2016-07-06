@@ -98,11 +98,11 @@ void Logger::messageHandler(QtMsgType type, const QMessageLogContext &context,
       fprintf(stderr, "Fatal: %s (%s:%u, %s)\n", localMsg.constData(),
               context.file, context.line, context.function);
       break;
-    case QtInfoMsg:
+    /*case QtInfoMsg:
       debug(msg);
       fprintf(stderr, "Info: %s (%s:%u, %s)\n", localMsg.constData(),
               context.file, context.line, context.function);
-      break;
+      break;*/
     default:
       break;
   }
