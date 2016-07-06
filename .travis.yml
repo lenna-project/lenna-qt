@@ -53,7 +53,7 @@ before_script:
  - cd build
  - cmake -DCMAKE_BUILD_TYPE=RELEASE -DWITH_FFMPEG=OFF -DWITH_IPP=OFF ..
  - make -j4
- - make install
+ - sudo make install
  - cd ../../
 
  - mkdir build
