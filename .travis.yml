@@ -45,6 +45,14 @@ install:
    fi
 
 before_script:
+ - wget http://www.cmake.org/files/v3.6/cmake-3.6.0.tar.gz
+ - tar xf cmake-3.6.0.tar.gz
+ - cd cmake-3.6.0
+ - ./configure
+ - make
+ - sudo make install
+ - cd ..
+
  - curl -sL https://github.com/Itseez/opencv/archive/3.1.0.zip > opencv.zip
  - unzip opencv.zip
  - cd opencv-3.1.0
