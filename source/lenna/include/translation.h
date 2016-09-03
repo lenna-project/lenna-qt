@@ -19,37 +19,36 @@
 #ifndef TRANSLATION_H
 #define TRANSLATION_H
 
+#include <QtCore/QMultiMap>
 #include <QtCore/QObject>
 #include <QtCore/QStringList>
-#include <QtCore/QMultiMap>
 
-namespace lenna{
+namespace lenna {
 
-class Translation : public QObject
-{
-    Q_OBJECT
-public:
-    explicit Translation(QObject *parent = 0);
-    QStringList getLanguages();
-    QString language();
-    static QString locale();
-    void loadLanguageFile();
-    static void installPluginTranslation(QString pluginName);
-    ~Translation();
-    
-signals:
-    
-public slots:
-    void setLanguage(QString language);
-private:
-    QStringList qmFiles();
-    QString languageName(const QString &qmFile);
-    void loadLanguage();
+class Translation : public QObject {
+  Q_OBJECT
+ public:
+  explicit Translation(QObject *parent = 0);
+  QStringList getLanguages();
+  QString language();
+  static QString locale();
+  void loadLanguageFile();
+  static void installPluginTranslation(QString pluginName);
+  ~Translation();
 
-    QMultiMap<QString, QString> *languages;
-    QString currentLanguage;
+ signals:
+
+ public slots:
+  void setLanguage(QString language);
+
+ private:
+  QStringList qmFiles();
+  QString languageName(const QString &qmFile);
+  void loadLanguage();
+
+  QMultiMap<QString, QString> *languages;
+  QString currentLanguage;
 };
-
 }
 
-#endif // TRANSLATION_H
+#endif  // TRANSLATION_H

@@ -19,38 +19,37 @@
 #ifndef TIPSDIALOG_H
 #define TIPSDIALOG_H
 
-#include <QtWidgets/QDialog>
 #include <QtCore/QStringList>
+#include <QtWidgets/QDialog>
 
 namespace Ui {
 class TipsDialog;
 }
 
-class TipsDialog : public QDialog
-{
-    Q_OBJECT
-    
-public:
-    explicit TipsDialog(QWidget *parent = 0);
-    void showOnStartup();
-    ~TipsDialog();
-    
-private slots:
-    void on_okButton_clicked();
+class TipsDialog : public QDialog {
+  Q_OBJECT
 
-    void on_nextButton_clicked();
+ public:
+  explicit TipsDialog(QWidget *parent = 0);
+  void showOnStartup();
+  ~TipsDialog();
 
-    void on_previousButton_clicked();
+ private slots:
+  void on_okButton_clicked();
 
-private:
-    void loadTip();
-    void loadTips();
-    void loadState();
-    void saveState();
+  void on_nextButton_clicked();
 
-    Ui::TipsDialog *ui;
-    QStringList *tips;
-    int counter;
+  void on_previousButton_clicked();
+
+ private:
+  void loadTip();
+  void loadTips();
+  void loadState();
+  void saveState();
+
+  Ui::TipsDialog *ui;
+  QStringList *tips;
+  int counter;
 };
 
-#endif // TIPSDIALOG_H
+#endif  // TIPSDIALOG_H

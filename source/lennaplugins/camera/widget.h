@@ -25,30 +25,28 @@ namespace Ui {
 class Widget;
 }
 
-namespace lenna{
-namespace plugin{
-namespace camera{
+namespace lenna {
+namespace plugin {
+namespace camera {
 
-class Widget : public QWidget
-{
-    Q_OBJECT
-    
-public:
-    explicit Widget(QWidget *parent = 0);
-    ~Widget();
-    int getFrames();
-    int selectedDevice();
-    
-private slots:
-    void on_cameraOnCheckBox_toggled(bool checked);
+class Widget : public QWidget {
+  Q_OBJECT
 
-private:
-    Ui::Widget *ui;
-    void listCameras();
+ public:
+  explicit Widget(QWidget *parent = 0);
+  ~Widget();
+  int getFrames();
+  int selectedDevice();
+
+ private slots:
+  void on_cameraOnCheckBox_toggled(bool checked);
+
+ private:
+  Ui::Widget *ui;
+  void listCameras();
 };
-
 }
 }
 }
 
-#endif // WIDGET_H
+#endif  // WIDGET_H

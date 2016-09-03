@@ -25,42 +25,40 @@ namespace Ui {
 class Widget;
 }
 
-namespace lenna{
-namespace plugin{
-namespace textoverlay{
+namespace lenna {
+namespace plugin {
+namespace textoverlay {
 
-class Widget : public QWidget
-{
-    Q_OBJECT
-    
-public:
-    explicit Widget(QWidget *parent = 0);
-    ~Widget();
+class Widget : public QWidget {
+  Q_OBJECT
 
-    bool isActivated();
-    QString getText();
-    int getX();
-    int getY();
-    QColor *getColor();
-    QFont* getFont();
-    
-private slots:
-    void on_fontButton_clicked();
+ public:
+  explicit Widget(QWidget *parent = 0);
+  ~Widget();
 
-    void on_colorPushButton_clicked();
+  bool isActivated();
+  QString getText();
+  int getX();
+  int getY();
+  QColor *getColor();
+  QFont *getFont();
 
-private:
-    Ui::Widget *ui;
-    QColor * color;
-    QFont * font;
-    void loadState();
-    void saveState();
-    void setColor(QColor *c);
-    void setFont(QFont *f);
+ private slots:
+  void on_fontButton_clicked();
+
+  void on_colorPushButton_clicked();
+
+ private:
+  Ui::Widget *ui;
+  QColor *color;
+  QFont *font;
+  void loadState();
+  void saveState();
+  void setColor(QColor *c);
+  void setFont(QFont *f);
 };
-
 }
 }
 }
 
-#endif // WIDGET_H
+#endif  // WIDGET_H

@@ -95,9 +95,8 @@ int Camera::getProgress() {
   return progress;
 }
 
-plugin::Plugin *Camera::getInstance(QString uid)
-{
-    Plugin *plugin = new Camera();
-    plugin->setUID(uid);
-    return plugin;
+plugin::Plugin *Camera::getInstance(QString uid) {
+  Plugin *plugin = new Camera();
+  plugin->setUID(uid);
+  return plugin;
 }

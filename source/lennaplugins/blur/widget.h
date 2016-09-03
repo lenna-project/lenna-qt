@@ -27,45 +27,43 @@ namespace Ui {
 class Widget;
 }
 
-namespace lenna{
-namespace plugin{
+namespace lenna {
+namespace plugin {
 
-class Widget : public QWidget
-{
-    Q_OBJECT
-    
-public:
-    explicit Widget(QWidget *parent = 0);
-    ~Widget();
+class Widget : public QWidget {
+  Q_OBJECT
 
-    bool isBlur();
-    bool isInverted();
+ public:
+  explicit Widget(QWidget *parent = 0);
+  ~Widget();
 
-    int getPosX();
-    int getPosY();
-    int getWidth();
-    int getHeight();
-    int getRadius();
-    
-private slots:
+  bool isBlur();
+  bool isInverted();
 
-    void on_resetPushButton_clicked();
-    void setPreviewImage(QString img);
-    void updateImage();
+  int getPosX();
+  int getPosY();
+  int getWidth();
+  int getHeight();
+  int getRadius();
 
-private:
-    Ui::Widget *ui;
-    void loadState();
-    void saveState();
+ private slots:
 
-    void blur(QImage *image);
-    PreviewImageLabel *previewImageLabel;
+  void on_resetPushButton_clicked();
+  void setPreviewImage(QString img);
+  void updateImage();
 
-    QString previewImageSrc;
-    QImage *previewImage;
+ private:
+  Ui::Widget *ui;
+  void loadState();
+  void saveState();
+
+  void blur(QImage *image);
+  PreviewImageLabel *previewImageLabel;
+
+  QString previewImageSrc;
+  QImage *previewImage;
 };
-
 }
 }
 
-#endif // WIDGET_H
+#endif  // WIDGET_H

@@ -61,7 +61,8 @@ void TipsDialog::loadTips() {
                    Translation::locale() + ".txt");
   /* if tips dont exist in your language use en. */
   if (!QFile().exists(tipsFile)) {
-    tipsFile = QString(Lenna::applicationDirPath() + "/data/tips/" + "tips_en.txt");
+    tipsFile =
+        QString(Lenna::applicationDirPath() + "/data/tips/" + "tips_en.txt");
   }
 
   QFile file(tipsFile);

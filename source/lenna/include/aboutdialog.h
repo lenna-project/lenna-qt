@@ -19,37 +19,35 @@
 #ifndef ABOUTDIALOG_H
 #define ABOUTDIALOG_H
 
-#include <QtWidgets/QDialog>
 #include <QtNetwork/QNetworkAccessManager>
+#include <QtWidgets/QDialog>
 
 namespace Ui {
 class AboutDialog;
 }
 
-namespace lenna{
+namespace lenna {
 
-class AboutDialog : public QDialog
-{
-    Q_OBJECT
-    
-public:
-    explicit AboutDialog(QWidget *parent = 0);
-    ~AboutDialog();
-    
-private slots:
-    void on_pushButton_clicked();
-    void on_tabWidget_currentChanged(int index);
+class AboutDialog : public QDialog {
+  Q_OBJECT
 
-private:
-    Ui::AboutDialog *ui;
-    QNetworkAccessManager *manager;
-    void initLicense();
-    void initAbout();
-    void initAuthors();
-    void initThanksto();
-    void initUpdates();
+ public:
+  explicit AboutDialog(QWidget *parent = 0);
+  ~AboutDialog();
+
+ private slots:
+  void on_pushButton_clicked();
+  void on_tabWidget_currentChanged(int index);
+
+ private:
+  Ui::AboutDialog *ui;
+  QNetworkAccessManager *manager;
+  void initLicense();
+  void initAbout();
+  void initAuthors();
+  void initThanksto();
+  void initUpdates();
 };
-
 }
 
-#endif // ABOUTDIALOG_H
+#endif  // ABOUTDIALOG_H

@@ -25,7 +25,6 @@
 
 #include <QRunnable>
 
-
 namespace lenna {
 
 class ImageProcessor : public QRunnable {

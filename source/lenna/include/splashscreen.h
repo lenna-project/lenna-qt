@@ -20,20 +20,18 @@
 
 #include <QSplashScreen>
 
-namespace lenna{
+namespace lenna {
 
-class SplashScreen : public QSplashScreen
-{
-    Q_OBJECT
-public:
-    explicit SplashScreen(QWidget *parent = 0);
+class SplashScreen : public QSplashScreen {
+  Q_OBJECT
+ public:
+  explicit SplashScreen(QWidget *parent = 0);
 
-signals:
-    
-public slots:
-    void setMessage(QString message);
+ signals:
+
+ public slots:
+  void setMessage(QString message);
 };
-
 }
 
-#endif // SPLASHSCREEN_H
+#endif  // SPLASHSCREEN_H

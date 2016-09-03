@@ -1,0 +1,11 @@
+---
+Checks:          'google-*,modernize-*'
+HeaderFilterRegex: ''
+AnalyzeTemporaryDtors: false
+CheckOptions:
+  - key:             cert-err61-cpp.CheckThrowTemporaries
+    value:           '1'
+  - key:             cert-oop11-cpp.IncludeStyle
+    value:           llvm
+...
+

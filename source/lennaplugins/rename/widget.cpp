@@ -17,51 +17,35 @@
  */
 
 #include "widget.h"
-#include "ui_widget.h"
 #include "rename.h"
+#include "ui_widget.h"
 
 #include <QtCore/QSettings>
 #include <QtGui/QPainter>
 
 using namespace lenna::plugin::rename;
 
-Widget::Widget(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::Widget)
-{
-    ui->setupUi(this);
+Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget) {
+  ui->setupUi(this);
 
-    loadState();
+  loadState();
 }
 
-Widget::~Widget()
-{
-    saveState();
-    delete ui;
+Widget::~Widget() {
+  saveState();
+  delete ui;
 }
 
-void Widget::loadState(){
-}
+void Widget::loadState() {}
 
-void Widget::saveState(){
-}
+void Widget::saveState() {}
 
-bool Widget::isRename(){
-    return ui->renameRadioButton->isChecked();
-}
+bool Widget::isRename() { return ui->renameRadioButton->isChecked(); }
 
-bool Widget::isNewName(){
-    return ui->newNameCheckBox->isChecked();
-}
+bool Widget::isNewName() { return ui->newNameCheckBox->isChecked(); }
 
-QString Widget::newName(){
-    return ui->nameLineEdit->text();
-}
+QString Widget::newName() { return ui->nameLineEdit->text(); }
 
-QString Widget::prefix(){
-    return ui->prefixLineEdit->text();
-}
+QString Widget::prefix() { return ui->prefixLineEdit->text(); }
 
-QString Widget::suffix(){
-    return ui->suffixLineEdit->text();
-}
+QString Widget::suffix() { return ui->suffixLineEdit->text(); }

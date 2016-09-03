@@ -19,28 +19,26 @@
 #define WORKER_H
 
 #include <QObject>
-namespace lenna{
-class Worker : public QObject
-{
-    Q_OBJECT
-public:
-    Worker();
-    ~Worker();
+namespace lenna {
+class Worker : public QObject {
+  Q_OBJECT
+ public:
+  Worker();
+  ~Worker();
 
-public slots:
-    void process();
-    void stop();
+ public slots:
+  void process();
+  void stop();
 
-signals:
-    void finished();
-    void process(int value);
+ signals:
+  void finished();
+  void process(int value);
 
-private:
-    bool stopped;
+ private:
+  bool stopped;
 
-    void finish();
-
+  void finish();
 };
 }
 
-#endif // WORKER_H
+#endif  // WORKER_H

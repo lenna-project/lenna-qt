@@ -38,13 +38,13 @@ class Widget : public QWidget {
   QString getApiKey();
   QString getSearchText();
   int getMaxImages();
-  void setPreview(QImage &image);
+  void setPreview(QImage& image);
 
  private slots:
 
   void on_getApiKeyLinkButton_clicked();
 
-private:
+ private:
   Ui::Widget* ui;
   void loadState();
   void saveState();

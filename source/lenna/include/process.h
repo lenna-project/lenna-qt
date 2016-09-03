@@ -21,25 +21,20 @@
 
 #include <QThread>
 
-namespace lenna{
+namespace lenna {
 
-class Process : public QThread
-{
-    Q_OBJECT
-public:
-    explicit Process(QObject *parent = 0);
-signals:
+class Process : public QThread {
+  Q_OBJECT
+ public:
+  explicit Process(QObject *parent = 0);
+ signals:
 
+ public slots:
+ protected:
+  void run();
 
-public slots:
-protected:
-    void run();
-
-private:
-
-    
+ private:
 };
-
 }
 
-#endif // PROCESS_H
+#endif  // PROCESS_H

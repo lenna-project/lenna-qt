@@ -17,119 +17,99 @@
  */
 
 #include "widget.h"
-#include "ui_widget.h"
 #include "filtermatrix.h"
+#include "ui_widget.h"
 
 #include <QtCore/QSettings>
-#include <QtGui/QPainter>
 #include <QtDebug>
+#include <QtGui/QPainter>
 
 using namespace lenna;
 using namespace lenna::plugin;
 
-Widget::Widget(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::Widget)
-{
-    this->previewImage = 0;
-    ui->setupUi(this);
+Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget) {
+  this->previewImage = 0;
+  ui->setupUi(this);
 
-    previewImageLabel = new PreviewImageLabel(this);
-    ui->imageGridLayout->addWidget(previewImageLabel);
-    on_resetPushButton_clicked();
+  previewImageLabel = new PreviewImageLabel(this);
+  ui->imageGridLayout->addWidget(previewImageLabel);
+  on_resetPushButton_clicked();
 
-    loadState();
-    connect(previewImageLabel, SIGNAL(imageDroped(QString)), this, SLOT(setPreviewImage(QString)));
-    updateImage();
-    ui->tableWidget->resizeColumnsToContents();
+  loadState();
+  connect(previewImageLabel, SIGNAL(imageDroped(QString)), this,
+          SLOT(setPreviewImage(QString)));
+  updateImage();
+  ui->tableWidget->resizeColumnsToContents();
 }
 
-Widget::~Widget()
-{
-    saveState();
-    delete ui;
+Widget::~Widget() {
+  saveState();
+  delete ui;
 }
 
-void Widget::loadState(){
-    QSettings settings(QCoreApplication::organizationName(),
-                       QCoreApplication::applicationName());
-    settings.beginGroup("plugins");
-    settings.beginGroup("FilterMatrix");
+void Widget::loadState() {
+  QSettings settings(QCoreApplication::organizationName(),
+                     QCoreApplication::applicationName());
+  settings.beginGroup("plugins");
+  settings.beginGroup("FilterMatrix");
 }
 
-void Widget::saveState(){
-    QSettings settings(QCoreApplication::organizationName(),
-                       QCoreApplication::applicationName());
-    settings.beginGroup("plugins");
-    settings.beginGroup("FilterMatrix");
+void Widget::saveState() {
+  QSettings settings(QCoreApplication::organizationName(),
+                     QCoreApplication::applicationName());
+  settings.beginGroup("plugins");
+  settings.beginGroup("FilterMatrix");
 }
 
-
-
-void Widget::updateImage(){
-    if(ui->filterCheckBox->isChecked()){
-        filter(previewImage);
-    }
-    this->previewImageLabel->setPixmap(QPixmap::fromImage(QImage(previewImage->toQImage())));
-
+void Widget::updateImage() {
+  if (ui->filterCheckBox->isChecked()) {
+    filter(previewImage);
+  }
+  this->previewImageLabel->setPixmap(
+      QPixmap::fromImage(QImage(previewImage->toQImage())));
 }
 
-void Widget::setPreviewImage(QString img){
-        this->previewImageSrc = img;
-        if(this->previewImage)
-            delete this->previewImage;
-        this->previewImage = new Image(img);
-        updateImage();
+void Widget::setPreviewImage(QString img) {
+  this->previewImageSrc = img;
+  if (this->previewImage) delete this->previewImage;
+  this->previewImage = new Image(img);
+  updateImage();
 }
 
-void Widget::on_resetPushButton_clicked()
-{
-    setPreviewImage(QString(":/logo/lenna_logo"));
+void Widget::on_resetPushButton_clicked() {
+  setPreviewImage(QString(":/logo/lenna_logo"));
 }
 
 // Function blurs a rect of image by percentage
-void Widget::filter(Image *image){
-    cv::filter2D(image->getImage(), image->getImage(), -1, getFilter());
-    image->getImage() = image->getImage()*255; // TODO why * 255?
+void Widget::filter(Image *image) {
+  cv::filter2D(image->getImage(), image->getImage(), -1, getFilter());
+  image->getImage() = image->getImage() * 255;  // TODO why * 255?
 }
 
-bool Widget::isFilter(){
-    return ui->filterCheckBox->isChecked();
-}
+bool Widget::isFilter() { return ui->filterCheckBox->isChecked(); }
 
-cv::Mat Widget::getFilter(){
-    cv::Mat filter = cv::Mat::eye(ui->tableWidget->rowCount(),ui->tableWidget->columnCount(),CV_32S);
-    for(int row = 0; row < ui->tableWidget->rowCount(); row++){
-        for(int col = 0; col < ui->tableWidget->columnCount(); col++){
+cv::Mat Widget::getFilter() {
+  cv::Mat filter = cv::Mat::eye(ui->tableWidget->rowCount(),
+                                ui->tableWidget->columnCount(), CV_32S);
+  for (int row = 0; row < ui->tableWidget->rowCount(); row++) {
+    for (int col = 0; col < ui->tableWidget->columnCount(); col++) {
+      //
+      if (ui->tableWidget->item(row, col) != 0) {
+        filter.at<int>(row, col) =
+            ui->tableWidget->item(row, col)->text().toInt();
 
-            //
-            if( ui->tableWidget->item(row, col)!= 0){
-                filter.at<int>(row, col) = ui->tableWidget->item(row, col)->text().toInt();
-
-            }else {
-                filter.at<int>(row, col) = 0;
-            }
-        }
+      } else {
+        filter.at<int>(row, col) = 0;
+      }
     }
-    return filter;
+  }
+  return filter;
 }
 
-void Widget::on_addRowButton_clicked()
-{
-    ui->tableWidget->insertRow(0);
-}
+void Widget::on_addRowButton_clicked() { ui->tableWidget->insertRow(0); }
 
-void Widget::on_removeRowButton_clicked()
-{
-    ui->tableWidget->removeRow(0);
-}
+void Widget::on_removeRowButton_clicked() { ui->tableWidget->removeRow(0); }
 
-void Widget::on_addColButton_clicked()
-{
-    ui->tableWidget->insertColumn(0);
-}
+void Widget::on_addColButton_clicked() { ui->tableWidget->insertColumn(0); }
 
-void Widget::on_removeColButton_clicked()
-{
-    ui->tableWidget->removeColumn(0);
-}
+void Widget::on_removeColButton_clicked() { ui->tableWidget->removeColumn(0); }

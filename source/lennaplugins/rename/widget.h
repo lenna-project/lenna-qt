@@ -25,35 +25,33 @@ namespace Ui {
 class Widget;
 }
 
-namespace lenna{
-namespace plugin{
-namespace rename{
+namespace lenna {
+namespace plugin {
+namespace rename {
 
-class Widget : public QWidget
-{
-    Q_OBJECT
-    
-public:
-    explicit Widget(QWidget *parent = 0);
-    ~Widget();
+class Widget : public QWidget {
+  Q_OBJECT
 
-    bool isNewName();
-    bool isRename();
+ public:
+  explicit Widget(QWidget *parent = 0);
+  ~Widget();
 
-    QString newName();
-    QString prefix();
-    QString suffix();
-    
-private slots:
+  bool isNewName();
+  bool isRename();
 
-private:
-    Ui::Widget *ui;
-    void loadState();
-    void saveState();
+  QString newName();
+  QString prefix();
+  QString suffix();
+
+ private slots:
+
+ private:
+  Ui::Widget *ui;
+  void loadState();
+  void saveState();
 };
-
 }
 }
 }
 
-#endif // WIDGET_H
+#endif  // WIDGET_H

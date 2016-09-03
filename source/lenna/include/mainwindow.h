@@ -26,51 +26,48 @@ namespace Ui {
 class MainWindow;
 }
 
-namespace lenna{
+namespace lenna {
 
-class MainWindow : public QMainWindow
-{
-    Q_OBJECT
-    
-public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
-    
-private slots:
-    void on_actionQuit_triggered();
+class MainWindow : public QMainWindow {
+  Q_OBJECT
 
-    void on_actionAbout_triggered();
+ public:
+  explicit MainWindow(QWidget *parent = 0);
+  ~MainWindow();
 
-    void on_actionPlugins_triggered();
+ private slots:
+  void on_actionQuit_triggered();
 
-    void on_startStopButton_clicked();
+  void on_actionAbout_triggered();
 
-    void on_inputTabWidget_tabCloseRequested(int index);
+  void on_actionPlugins_triggered();
 
-    void on_editTabWidget_tabCloseRequested(int index);
+  void on_startStopButton_clicked();
 
-    void on_outputTabWidget_tabCloseRequested(int index);
+  void on_inputTabWidget_tabCloseRequested(int index);
 
-    void on_actionTips_triggered();
+  void on_editTabWidget_tabCloseRequested(int index);
 
-    void on_actionLogger_triggered();
+  void on_outputTabWidget_tabCloseRequested(int index);
 
-    void startProcess();
-    void stopProcess();
+  void on_actionTips_triggered();
 
-private:
-    Ui::MainWindow *ui;
-    Process *process;
-    Worker *worker;
+  void on_actionLogger_triggered();
 
-    void loadInputPluginWidgets();
-    void loadEditPluginWidgets();
-    void loadOutputPluginWidgets();
-    void initWorker();
-    bool startStopButtonIsStart;
+  void startProcess();
+  void stopProcess();
 
+ private:
+  Ui::MainWindow *ui;
+  Process *process;
+  Worker *worker;
+
+  void loadInputPluginWidgets();
+  void loadEditPluginWidgets();
+  void loadOutputPluginWidgets();
+  void initWorker();
+  bool startStopButtonIsStart;
 };
-
 }
 
-#endif // MAINWINDOW_H
+#endif  // MAINWINDOW_H

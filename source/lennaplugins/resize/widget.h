@@ -25,40 +25,38 @@ namespace Ui {
 class Widget;
 }
 
-namespace lenna{
-namespace plugin{
-namespace resize{
+namespace lenna {
+namespace plugin {
+namespace resize {
 
-class Widget : public QWidget
-{
-    Q_OBJECT
-    
-public:
-    explicit Widget(QWidget *parent = 0);
-    ~Widget();
+class Widget : public QWidget {
+  Q_OBJECT
 
-    bool resizePixel();
-    bool resizePercent();
+ public:
+  explicit Widget(QWidget *parent = 0);
+  ~Widget();
 
-    int percentWidth();
-    int percentHeight();
-    int pixelWidth();
-    int pixelHeight();
-    
-private slots:
+  bool resizePixel();
+  bool resizePercent();
 
-    void on_sizeRatioComboBox_currentIndexChanged(const QString &arg1);
+  int percentWidth();
+  int percentHeight();
+  int pixelWidth();
+  int pixelHeight();
 
-    void on_pixelComboBox_currentIndexChanged(const QString &arg1);
+ private slots:
 
-private:
-    Ui::Widget *ui;
-    void loadState();
-    void saveState();
+  void on_sizeRatioComboBox_currentIndexChanged(const QString &arg1);
+
+  void on_pixelComboBox_currentIndexChanged(const QString &arg1);
+
+ private:
+  Ui::Widget *ui;
+  void loadState();
+  void saveState();
 };
-
 }
 }
 }
 
-#endif // WIDGET_H
+#endif  // WIDGET_H

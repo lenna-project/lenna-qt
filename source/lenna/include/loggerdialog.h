@@ -25,19 +25,18 @@
 namespace Ui {
 class LoggerDialog;
 }
-namespace lenna{
-class LoggerDialog : public QDialog
-{
-    Q_OBJECT
+namespace lenna {
+class LoggerDialog : public QDialog {
+  Q_OBJECT
 
-public:
-    explicit LoggerDialog(QWidget *parent = 0);
-    ~LoggerDialog();
+ public:
+  explicit LoggerDialog(QWidget *parent = 0);
+  ~LoggerDialog();
 
-private:
-    Ui::LoggerDialog *ui;
-    void setText(QTextBrowser *textBrowser, QStringList list);
+ private:
+  Ui::LoggerDialog *ui;
+  void setText(QTextBrowser *textBrowser, QStringList list);
 };
 }
 
-#endif // LOGGERDIALOG_H
+#endif  // LOGGERDIALOG_H

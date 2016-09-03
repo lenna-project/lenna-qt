@@ -96,7 +96,7 @@ std::vector<cv::Point2f> Widget::getPoints() {
     int x = circles[i]->scenePos().x() + 15;
     int y = circles[i]->scenePos().y() + 15;
     points.push_back(cv::Point2f(x * image.cols / scene->sceneRect().width(),
-                             y * image.rows / scene->sceneRect().height()));
+                                 y * image.rows / scene->sceneRect().height()));
   }
   return points;
 }

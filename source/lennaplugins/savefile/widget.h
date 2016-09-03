@@ -25,35 +25,33 @@ namespace Ui {
 class Widget;
 }
 
-namespace lenna{
-namespace plugin{
+namespace lenna {
+namespace plugin {
 
-class Widget : public QWidget
-{
-    Q_OBJECT
-    
-public:
-    explicit Widget(QWidget *parent = 0);
-    ~Widget();
+class Widget : public QWidget {
+  Q_OBJECT
 
-    int getImageQuality(); // returns 0 if not chosen
-    QString getImageFormat();
-    bool getCopyMetaData();
-    QString getFolder();
-    
-private slots:
-    void on_selectFolderPushButton_clicked();
+ public:
+  explicit Widget(QWidget *parent = 0);
+  ~Widget();
 
-private:
-    Ui::Widget *ui;
-    void loadState();
-    void saveState();
+  int getImageQuality();  // returns 0 if not chosen
+  QString getImageFormat();
+  bool getCopyMetaData();
+  QString getFolder();
 
-    void initFolder();
-    void initImageFormats();
+ private slots:
+  void on_selectFolderPushButton_clicked();
+
+ private:
+  Ui::Widget *ui;
+  void loadState();
+  void saveState();
+
+  void initFolder();
+  void initImageFormats();
 };
-
 }
 }
 
-#endif // WIDGET_H
+#endif  // WIDGET_H

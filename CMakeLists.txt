@@ -20,6 +20,8 @@ include(WriteCompilerDetectionHeader OPTIONAL RESULT_VARIABLE WriterCompilerDete
 include(cmake/GetGitRevisionDescription.cmake)
 include(cmake/Custom.cmake)
 
+include(cmake/Clang-Format.cmake)
+include(cmake/Clang-Tidy.cmake)
 # Set policies
 set_policy(CMP0028 NEW) # ENABLE CMP0028: Double colon in target name means ALIAS or IMPORTED target.
 set_policy(CMP0054 NEW) # ENABLE CMP0054: Only interpret if() arguments as variables or keywords when unquoted.

@@ -26,42 +26,40 @@ namespace Ui {
 class PluginsConfigDialog;
 }
 
-namespace lenna{
-namespace plugin{
+namespace lenna {
+namespace plugin {
 
-class PluginsConfigDialog : public QDialog
-{
-    Q_OBJECT
-    
-public:
-    explicit PluginsConfigDialog(QWidget *parent = 0);
-    ~PluginsConfigDialog();
-    
-private:
-    Ui::PluginsConfigDialog *ui;
-    void loadInputPlugins();
-    void loadEditPlugins();
-    void loadOutputPlugins();
+class PluginsConfigDialog : public QDialog {
+  Q_OBJECT
 
-    void loadActiveInputPlugins();
-    void loadActiveEditPlugins();
-    void loadActiveOutputPlugins();
+ public:
+  explicit PluginsConfigDialog(QWidget *parent = 0);
+  ~PluginsConfigDialog();
 
-private slots:
-    void on_plugin_activated(QString uid);
-    void orderInputPlugins();
-    void orderEditPlugins();
-    void orderOutputPlugins();
-    void on_pushButton_clicked();
-    void on_inputUpButton_clicked();
-    void on_editUpButton_clicked();
-    void on_editDownButton_clicked();
-    void on_inputDownButton_clicked();
-    void on_outputUpButton_clicked();
-    void on_outputDownButton_clicked();
+ private:
+  Ui::PluginsConfigDialog *ui;
+  void loadInputPlugins();
+  void loadEditPlugins();
+  void loadOutputPlugins();
+
+  void loadActiveInputPlugins();
+  void loadActiveEditPlugins();
+  void loadActiveOutputPlugins();
+
+ private slots:
+  void on_plugin_activated(QString uid);
+  void orderInputPlugins();
+  void orderEditPlugins();
+  void orderOutputPlugins();
+  void on_pushButton_clicked();
+  void on_inputUpButton_clicked();
+  void on_editUpButton_clicked();
+  void on_editDownButton_clicked();
+  void on_inputDownButton_clicked();
+  void on_outputUpButton_clicked();
+  void on_outputDownButton_clicked();
 };
-
 }
 }
 
-#endif // PLUGINSCONFIGDIALOG_H
+#endif  // PLUGINSCONFIGDIALOG_H

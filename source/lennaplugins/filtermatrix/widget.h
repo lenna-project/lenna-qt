@@ -19,56 +19,54 @@
 #ifndef WIDGET_H
 #define WIDGET_H
 
-#include "previewimagelabel.h"
-#include "lenna/image.h"
-#include <opencv2/imgproc/imgproc.hpp>
 #include <QtWidgets/QWidget>
+#include <opencv2/imgproc/imgproc.hpp>
+#include "lenna/image.h"
+#include "previewimagelabel.h"
 
 namespace Ui {
 class Widget;
 }
 
-namespace lenna{
-namespace plugin{
+namespace lenna {
+namespace plugin {
 
-class Widget : public QWidget
-{
-    Q_OBJECT
-    
-public:
-    explicit Widget(QWidget *parent = 0);
-    ~Widget();
+class Widget : public QWidget {
+  Q_OBJECT
 
-    bool isFilter();
-    cv::Mat getFilter();
-    
-private slots:
+ public:
+  explicit Widget(QWidget *parent = 0);
+  ~Widget();
 
-    void on_resetPushButton_clicked();
-    void setPreviewImage(QString img);
-    void updateImage();
+  bool isFilter();
+  cv::Mat getFilter();
 
-    void on_addRowButton_clicked();
+ private slots:
 
-    void on_removeRowButton_clicked();
+  void on_resetPushButton_clicked();
+  void setPreviewImage(QString img);
+  void updateImage();
 
-    void on_addColButton_clicked();
+  void on_addRowButton_clicked();
 
-    void on_removeColButton_clicked();
+  void on_removeRowButton_clicked();
 
-private:
-    Ui::Widget *ui;
-    void loadState();
-    void saveState();
+  void on_addColButton_clicked();
 
-    void filter(Image *image);
-    PreviewImageLabel *previewImageLabel;
+  void on_removeColButton_clicked();
 
-    QString previewImageSrc;
-    Image *previewImage;
+ private:
+  Ui::Widget *ui;
+  void loadState();
+  void saveState();
+
+  void filter(Image *image);
+  PreviewImageLabel *previewImageLabel;
+
+  QString previewImageSrc;
+  Image *previewImage;
 };
-
 }
 }
 
-#endif // WIDGET_H
+#endif  // WIDGET_H

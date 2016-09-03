@@ -20,11 +20,6 @@
 
 using namespace lenna;
 
-Process::Process(QObject *parent) :
-    QThread(parent)
-{
-}
+Process::Process(QObject *parent) : QThread(parent) {}
 
-void Process::run(){
-
-}
+void Process::run() {}

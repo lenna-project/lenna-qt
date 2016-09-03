@@ -17,93 +17,73 @@
  */
 
 #include "widget.h"
-#include "ui_widget.h"
 #include "textoverlay.h"
+#include "ui_widget.h"
 
 #include <QtCore/QSettings>
 #include <QtGui/QPainter>
-#include <QtWidgets/QFontDialog>
 #include <QtWidgets/QColorDialog>
+#include <QtWidgets/QFontDialog>
 
 using namespace lenna::plugin::textoverlay;
 
-Widget::Widget(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::Widget)
-{
-    color = 0;
-    font = 0;
-    ui->setupUi(this);
-    setColor(new QColor(Qt::black));
-    setFont(new QFont("Times", 10));
-    loadState();
+Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget) {
+  color = 0;
+  font = 0;
+  ui->setupUi(this);
+  setColor(new QColor(Qt::black));
+  setFont(new QFont("Times", 10));
+  loadState();
 }
 
-Widget::~Widget()
-{
-    saveState();
-    delete ui;
+Widget::~Widget() {
+  saveState();
+  delete ui;
 }
 
-void Widget::loadState(){
+void Widget::loadState() {}
+
+void Widget::saveState() {}
+
+bool Widget::isActivated() { return ui->textCheckBox->isChecked(); }
+
+QString Widget::getText() { return ui->textLineEdit->text(); }
+
+int Widget::getX() { return ui->xSpinBox->value(); }
+
+int Widget::getY() { return ui->ySpinBox->value(); }
+
+void Widget::setFont(QFont *f) {
+  if (font == f) return;
+  delete font;
+  font = new QFont(*f);
+  ui->fontButton->setText(
+      QString("%1 %2").arg(font->family()).arg(font->pointSize()));
 }
 
-void Widget::saveState(){
-
+void Widget::setColor(QColor *c) {
+  if (color == c) return;
+  delete color;
+  color = new QColor(*c);
+  QPixmap pixmap(16, 16);
+  pixmap.fill(*color);
+  ui->colorPushButton->setIcon(QIcon(pixmap));
 }
 
-bool Widget::isActivated(){
-    return ui->textCheckBox->isChecked();
+void Widget::on_fontButton_clicked() {
+  bool ok;
+  QFont temp = QFontDialog::getFont(&ok, *font, this);
+  if (ok) {
+    setFont(&temp);
+  } else {
+  }
 }
 
-QString Widget::getText(){
-    return ui->textLineEdit->text();
+void Widget::on_colorPushButton_clicked() {
+  QColor temp = QColorDialog::getColor(*color, this);
+  setColor(&temp);
 }
 
-int Widget::getX(){
-    return ui->xSpinBox->value();
-}
+QColor *Widget::getColor() { return color; }
 
-int Widget::getY(){
-    return ui->ySpinBox->value();
-}
-
-void Widget::setFont(QFont *f){
-    if(font == f) return;
-    delete font;
-    font = new QFont(*f);
-    ui->fontButton->setText(QString("%1 %2").arg(font->family()).arg(font->pointSize()));
-}
-
-void Widget::setColor(QColor *c){
-    if(color == c) return;
-    delete color;
-    color = new QColor(*c);
-    QPixmap pixmap(16,16);
-    pixmap.fill(*color);
-    ui->colorPushButton->setIcon(QIcon(pixmap));
-}
-
-void Widget::on_fontButton_clicked()
-{
-    bool ok;
-    QFont temp = QFontDialog::getFont(&ok, *font, this);
-    if (ok) {
-        setFont(&temp);
-    } else {
-    }
-}
-
-void Widget::on_colorPushButton_clicked()
-{
-    QColor temp = QColorDialog::getColor(*color, this);
-    setColor(&temp);
-}
-
-QColor *Widget::getColor(){
-    return color;
-}
-
-QFont *Widget::getFont(){
-    return font;
-}
+QFont *Widget::getFont() { return font; }
