@@ -20,8 +20,6 @@ include(WriteCompilerDetectionHeader OPTIONAL RESULT_VARIABLE WriterCompilerDete
 include(cmake/GetGitRevisionDescription.cmake)
 include(cmake/Custom.cmake)
 
-include(cmake/Clang-Format.cmake)
-include(cmake/Clang-Tidy.cmake)
 # Set policies
 set_policy(CMP0028 NEW) # ENABLE CMP0028: Double colon in target name means ALIAS or IMPORTED target.
 set_policy(CMP0054 NEW) # ENABLE CMP0054: Only interpret if() arguments as variables or keywords when unquoted.
@@ -58,7 +56,7 @@ set(META_NAME_VERSION        "${META_PROJECT_NAME} v${META_VERSION} (${META_VERS
 # Project options
 option(BUILD_SHARED_LIBS     "Build shared instead of static libraries."              ON)
 option(OPTION_SELF_CONTAINED "Create a self-contained install with all dependencies." OFF)
-option(OPTION_BUILD_TESTS    "Build tests."                                           ON)
+option(OPTION_BUILD_TESTS    "Build tests."                                           OFF)
 option(OPTION_BUILD_DOCS     "Build documentation."                                   OFF)
 option(OPTION_BUILD_PLUGINS  "Build plugins."                                         ON)
 
@@ -87,8 +85,11 @@ file(WRITE "${PROJECT_BINARY_DIR}/VERSION" "${META_NAME_VERSION}")
 # Compiler settings and options
 # 
 
+include(cmake/3rdParty.cmake)
 include(cmake/CompileOptions.cmake)
 
+include(cmake/Clang-Format.cmake)
+include(cmake/Clang-Tidy.cmake)
 
 # 
 # Deployment/installation setup
