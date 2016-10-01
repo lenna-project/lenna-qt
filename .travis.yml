@@ -15,6 +15,7 @@ addons:
    - build-essential
    - cmake
    - git
+   - rpm
    - libgtk2.0-dev
    - pkg-config
    - libavcodec-dev
@@ -29,6 +30,13 @@ addons:
    - libtiff-dev
    - libjasper-dev
    - libdc1394-22-dev
+   - lcov
+   - texlive-fonts-recommended
+   - texlive-latex-extra
+   - texlive-fonts-extra
+   - dvipng
+   - texlive-latex-recommended
+   - texlive-full
 
 install:
  - if [ "${TRAVIS_OS_NAME}" == "linux" ]; then
@@ -66,9 +74,22 @@ before_script:
 
  - mkdir build
  - cd build
- - cmake ..
+ - cmake -DCMAKE_CXX_COMPILER=$CXX -DOPTION_BUILD_DOCS=1 ..
 script:
  - make
+ - make pack
+
+deploy:
+  provider: releases
+  api_key: "$GH_TOKEN"
+  file:
+   - $TRAVIS_BUILD_DIR/build/docs/manual/lenna.pdf
+   - $TRAVIS_BUILD_DIR/build/*.deb
+   - $TRAVIS_BUILD_DIR/build/*.rpm
+  skip_cleanup: true
+  on:
+    tags: true
+
 
 notifications:
   webhooks:

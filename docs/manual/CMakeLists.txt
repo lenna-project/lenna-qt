@@ -22,8 +22,8 @@ message(STATUS "Doc ${target}")
 # Input and output files
 # 
 
-set(source "${CMAKE_CURRENT_SOURCE_DIR}/cmake-init.tex")
-set(pdf    "${CMAKE_CURRENT_BINARY_DIR}/cmake-init.pdf")
+set(source "${CMAKE_CURRENT_SOURCE_DIR}/lenna.tex")
+set(pdf    "${CMAKE_CURRENT_BINARY_DIR}/lenna.pdf")
 
 
 # 
