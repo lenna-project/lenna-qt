@@ -65,8 +65,9 @@ QWidget *HaarcascadeCrop::getWidget() {
   return this->widget;
 }
 
-plugin::Plugin *HaarcascadeCrop::getInstance(QString uid) {
-  Plugin *plugin = new HaarcascadeCrop();
+std::shared_ptr<plugin::Plugin> HaarcascadeCrop::getInstance(QString uid) {
+  std::shared_ptr<Plugin> plugin =
+      std::shared_ptr<Plugin>(new HaarcascadeCrop());
   plugin->setUID(uid);
   return plugin;
 }

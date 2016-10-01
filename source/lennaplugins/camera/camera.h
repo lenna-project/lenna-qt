@@ -38,7 +38,7 @@ class Camera : public InputPlugin {
  public:
   Camera();
   ~Camera();
-  QString getName();
+  virtual QString getName();
   QString getTitle();
   QString getVersion();
   QString getAuthor();
@@ -51,7 +51,7 @@ class Camera : public InputPlugin {
   std::shared_ptr<LennaImage> next();
   int getProgress();
 
-  Plugin *getInstance(QString uid);
+  std::shared_ptr<Plugin> getInstance(QString uid);
 
  private:
   camera::Widget *widget;

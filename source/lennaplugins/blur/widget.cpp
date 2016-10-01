@@ -125,7 +125,7 @@ void Widget::blur(QImage *image) {
 
   if (!ui->invertCheckBox->isChecked()) {
     //*image = Blur::blurred(*image, QRect(x, y, w, h),
-    //ui->radiusSpinBox->value());
+    // ui->radiusSpinBox->value());
   } else {
   }
 }

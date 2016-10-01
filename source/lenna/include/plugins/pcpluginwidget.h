@@ -34,16 +34,16 @@ class PCPluginWidget : public QWidget {
   Q_OBJECT
 
  public:
-  PCPluginWidget(Plugin *plugin);
+  PCPluginWidget(std::shared_ptr<Plugin> plugin);
   ~PCPluginWidget();
-  Plugin *getPlugin();
+  std::shared_ptr<Plugin> getPlugin();
 
  signals:
   void pluginActivated(QString uid);
 
  private:
   Ui::PCPluginWidget *ui;
-  Plugin *plugin;
+  std::shared_ptr<Plugin> plugin;
 
  private slots:
   void checkBoxChanged();

@@ -100,7 +100,7 @@ void MainWindow::on_actionPlugins_triggered() {
 
 void MainWindow::loadInputPluginWidgets() {
   ui->inputTabWidget->clear();
-  for (InputPlugin *plugin :
+  for (std::shared_ptr<InputPlugin> plugin :
        PluginLoader::getInstance().getActiveInputPlugins()) {
     assert(plugin);
     ui->inputTabWidget->addTab(plugin->getWidget(), plugin->getIcon(),
@@ -110,7 +110,7 @@ void MainWindow::loadInputPluginWidgets() {
 
 void MainWindow::loadEditPluginWidgets() {
   ui->editTabWidget->clear();
-  for (EditPlugin *plugin :
+  for (std::shared_ptr<EditPlugin> plugin :
        PluginLoader::getInstance().getActiveEditPlugins()) {
     assert(plugin);
     ui->editTabWidget->addTab(plugin->getWidget(), plugin->getIcon(),
@@ -120,7 +120,7 @@ void MainWindow::loadEditPluginWidgets() {
 
 void MainWindow::loadOutputPluginWidgets() {
   ui->outputTabWidget->clear();
-  for (OutputPlugin *plugin :
+  for (std::shared_ptr<OutputPlugin> plugin :
        PluginLoader::getInstance().getActiveOutputPlugins()) {
     ui->outputTabWidget->addTab(plugin->getWidget(), plugin->getIcon(),
                                 plugin->getTitle());
@@ -149,7 +149,7 @@ void MainWindow::stopProcess() {
 
 void lenna::MainWindow::on_inputTabWidget_tabCloseRequested(int index) {
   int counter = -1;
-  for (InputPlugin *plugin :
+  for (std::shared_ptr<InputPlugin> plugin :
        PluginLoader::getInstance().getActiveInputPlugins()) {
     counter++;
     if (counter == index) {
@@ -162,7 +162,7 @@ void lenna::MainWindow::on_inputTabWidget_tabCloseRequested(int index) {
 
 void lenna::MainWindow::on_editTabWidget_tabCloseRequested(int index) {
   int counter = -1;
-  for (EditPlugin *plugin :
+  for (std::shared_ptr<EditPlugin> plugin :
        PluginLoader::getInstance().getActiveEditPlugins()) {
     counter++;
     if (counter == index) {
@@ -175,7 +175,7 @@ void lenna::MainWindow::on_editTabWidget_tabCloseRequested(int index) {
 
 void lenna::MainWindow::on_outputTabWidget_tabCloseRequested(int index) {
   int counter = -1;
-  for (OutputPlugin *plugin :
+  for (std::shared_ptr<OutputPlugin> plugin :
        PluginLoader::getInstance().getActiveOutputPlugins()) {
     counter++;
     if (counter == index) {

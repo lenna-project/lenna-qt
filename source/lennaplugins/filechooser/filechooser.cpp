@@ -24,6 +24,7 @@
 
 using namespace lenna;
 using namespace lenna::plugin;
+using namespace lenna::plugin::filechooser;
 
 FileChooser::FileChooser() {
   this->widget = 0;
@@ -96,8 +97,8 @@ int FileChooser::getProgress() {
   return progress;
 }
 
-Plugin *FileChooser::getInstance(QString uid) {
-  Plugin *plugin = new FileChooser();
+std::shared_ptr<Plugin> FileChooser::getInstance(QString uid) {
+  std::shared_ptr<Plugin> plugin = std::shared_ptr<Plugin>(new FileChooser());
   plugin->setUID(uid);
   return plugin;
 }

@@ -34,14 +34,14 @@ void ImageProcessor::run() {
 }
 
 void ImageProcessor::edit(std::shared_ptr<LennaImage> image) {
-  foreach (EditPlugin *editPlugin,
+  foreach (std::shared_ptr<EditPlugin> editPlugin,
            PluginLoader::getInstance().getActiveEditPlugins()) {
     editPlugin->edit(image);
   }
 }
 
 void ImageProcessor::out(std::shared_ptr<LennaImage> image) {
-  foreach (OutputPlugin *outputPlugin,
+  foreach (std::shared_ptr<OutputPlugin> outputPlugin,
            PluginLoader::getInstance().getActiveOutputPlugins()) {
     outputPlugin->out(image);
   }

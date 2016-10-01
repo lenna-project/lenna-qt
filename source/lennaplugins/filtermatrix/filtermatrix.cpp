@@ -23,6 +23,7 @@
 
 using namespace lenna;
 using namespace lenna::plugin;
+using namespace lenna::plugin::filtermatrix;
 
 FilterMatrix::FilterMatrix() { widget = 0; }
 
@@ -60,8 +61,8 @@ void FilterMatrix::edit(std::shared_ptr<LennaImage> img) {
   }
 }
 
-Plugin *FilterMatrix::getInstance(QString uid) {
-  Plugin *plugin = new FilterMatrix();
+std::shared_ptr<Plugin> FilterMatrix::getInstance(QString uid) {
+  std::shared_ptr<Plugin> plugin = std::shared_ptr<Plugin>(new FilterMatrix());
   plugin->setUID(uid);
   return plugin;
 }

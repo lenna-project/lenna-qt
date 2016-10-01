@@ -95,8 +95,8 @@ int Camera::getProgress() {
   return progress;
 }
 
-plugin::Plugin *Camera::getInstance(QString uid) {
-  Plugin *plugin = new Camera();
+std::shared_ptr<plugin::Plugin> Camera::getInstance(QString uid) {
+  std::shared_ptr<Plugin> plugin = std::shared_ptr<Plugin>(new Camera());
   plugin->setUID(uid);
   return plugin;
 }

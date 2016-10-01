@@ -28,6 +28,7 @@
 
 namespace lenna {
 namespace plugin {
+namespace blur {
 
 class Blur : public EditPlugin {
   Q_OBJECT
@@ -47,11 +48,12 @@ class Blur : public EditPlugin {
 
   void edit(std::shared_ptr<LennaImage> image);
 
-  Plugin *getInstance(QString uid);
+  std::shared_ptr<Plugin> getInstance(QString uid);
 
  private:
   Widget *widget;
 };
+}
 }
 }
 

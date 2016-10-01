@@ -48,8 +48,8 @@ QWidget *Resize::getWidget() {
   return this->widget;
 }
 
-plugin::Plugin *Resize::getInstance(QString uid) {
-  Plugin *plugin = new Resize();
+std::shared_ptr<plugin::Plugin> Resize::getInstance(QString uid) {
+  std::shared_ptr<Plugin> plugin = std::shared_ptr<Plugin>(new Resize());
   plugin->setUID(uid);
   return plugin;
 }

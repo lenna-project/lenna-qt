@@ -28,6 +28,7 @@
 
 namespace lenna {
 namespace plugin {
+namespace filechooser {
 
 class FileChooser : public InputPlugin {
   Q_OBJECT
@@ -37,7 +38,7 @@ class FileChooser : public InputPlugin {
  public:
   FileChooser();
   ~FileChooser();
-  QString getName();
+  virtual QString getName();
   QString getTitle();
   QString getVersion();
   QString getAuthor();
@@ -50,7 +51,7 @@ class FileChooser : public InputPlugin {
   std::shared_ptr<LennaImage> next();
   int getProgress();
 
-  Plugin *getInstance(QString uid);
+  std::shared_ptr<Plugin> getInstance(QString uid);
 
  private:
   Widget *widget;
@@ -61,7 +62,8 @@ class FileChooser : public InputPlugin {
   QString getFolder(QString file);
   QString getName(QString file);
 };
-}
-}
+}  // namespace filechooser
+}  // namespace plugin
+}  // namespace lenna
 
 #endif  // FILECHOOSER_H

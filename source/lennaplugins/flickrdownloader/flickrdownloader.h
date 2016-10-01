@@ -31,6 +31,7 @@
 
 namespace lenna {
 namespace plugin {
+namespace flickrdownloader {
 
 class FlickrDownloader : public InputPlugin {
   Q_OBJECT
@@ -48,7 +49,7 @@ class FlickrDownloader : public InputPlugin {
   QIcon getIcon();
   QWidget *getWidget();
 
-  Plugin *getInstance(QString uid);
+  std::shared_ptr<Plugin> getInstance(QString uid);
 
   void init();
   bool hasNext();
@@ -73,7 +74,8 @@ class FlickrDownloader : public InputPlugin {
 
   std::vector<std::pair<QString, QString>> imageUrls;
 };
-}
-}
+}  // namespace flickrdownloader
+}  // namespace plugin
+}  // namespace lenna
 
 #endif  // FLICKRDOWNLOADER_H

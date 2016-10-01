@@ -33,7 +33,7 @@ Worker::~Worker() {}
 void Worker::process() {
   stopped = false;
   emit process(0);
-  foreach (InputPlugin *inputPlugin,
+  foreach (std::shared_ptr<InputPlugin> inputPlugin,
            PluginLoader::getInstance().getActiveInputPlugins()) {
     inputPlugin->init();
 
@@ -66,7 +66,7 @@ void Worker::stop() { this->stopped = true; }
 
 void Worker::finish() {
   emit process(100);
-  foreach (OutputPlugin *outputPlugin,
+  foreach (std::shared_ptr<OutputPlugin> outputPlugin,
            PluginLoader::getInstance().getActiveOutputPlugins()) {
     outputPlugin->finnish();
   }

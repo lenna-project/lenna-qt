@@ -55,8 +55,8 @@ QWidget *SaveFile::getWidget() {
   return widget;
 }
 
-Plugin *SaveFile::getInstance(QString uid) {
-  Plugin *plugin = new SaveFile();
+std::shared_ptr<Plugin> SaveFile::getInstance(QString uid) {
+  std::shared_ptr<Plugin> plugin = std::shared_ptr<Plugin>(new SaveFile());
   plugin->setUID(uid);
   return plugin;
 }

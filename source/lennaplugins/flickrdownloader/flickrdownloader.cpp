@@ -33,6 +33,7 @@
 
 using namespace lenna;
 using namespace lenna::plugin;
+using namespace lenna::plugin::flickrdownloader;
 
 FlickrDownloader::FlickrDownloader() {
   this->widget = 0;
@@ -68,8 +69,9 @@ QWidget *FlickrDownloader::getWidget() {
   return widget;
 }
 
-Plugin *FlickrDownloader::getInstance(QString uid) {
-  Plugin *plugin = new FlickrDownloader();
+std::shared_ptr<Plugin> FlickrDownloader::getInstance(QString uid) {
+  std::shared_ptr<Plugin> plugin =
+      std::shared_ptr<Plugin>(new FlickrDownloader());
   plugin->setUID(uid);
   return plugin;
 }

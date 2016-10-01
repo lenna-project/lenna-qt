@@ -23,6 +23,7 @@
 
 using namespace lenna;
 using namespace lenna::plugin;
+using namespace lenna::plugin::blur;
 
 Blur::Blur() { widget = 0; }
 
@@ -54,8 +55,8 @@ void Blur::edit(std::shared_ptr<LennaImage> img) {
   cv::blur(img->getImage(), img->getImage(), cv::Size(size, size));
 }
 
-Plugin *Blur::getInstance(QString uid) {
-  Plugin *plugin = new Blur();
+std::shared_ptr<Plugin> Blur::getInstance(QString uid) {
+  std::shared_ptr<Plugin> plugin = std::shared_ptr<Plugin>(new Blur());
   plugin->setUID(uid);
   return plugin;
 }

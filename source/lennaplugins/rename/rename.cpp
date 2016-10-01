@@ -49,8 +49,8 @@ QWidget *Rename::getWidget() {
   return this->widget;
 }
 
-plugin::Plugin *Rename::getInstance(QString uid) {
-  Plugin *plugin = new Rename();
+std::shared_ptr<plugin::Plugin> Rename::getInstance(QString uid) {
+  std::shared_ptr<Plugin> plugin = std::shared_ptr<Plugin>(new Rename());
   plugin->setUID(uid);
   return plugin;
 }

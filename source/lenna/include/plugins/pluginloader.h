@@ -23,6 +23,8 @@
 #include "lenna/plugins/inputplugin.h"
 #include "lenna/plugins/outputplugin.h"
 
+#include <vector>
+
 #include <QtCore/QList>
 #include <QtCore/QMap>
 #include <QtCore/QObject>
@@ -39,28 +41,28 @@ class PluginLoader : public QObject {
   static PluginLoader &getInstance();
 
   void activatePlugin(QString uid, QString name);
-  void activatePlugin(Plugin *plugin);
+  void activatePlugin(std::shared_ptr<Plugin> plugin);
   void activatePlugins(QStringList list);
-  void deactivatePlugin(Plugin *plugin);
+  void deactivatePlugin(std::shared_ptr<Plugin> plugin);
   void deactivatePlugin(int index);
-  bool isActivatedPlugin(Plugin *plugin);
-  Plugin *getPlugin(QString name);
-  Plugin *getActivePlugin(QString uid);
+  bool isActivatedPlugin(std::shared_ptr<Plugin> plugin);
+  std::shared_ptr<Plugin> getPlugin(QString name);
+  std::shared_ptr<Plugin> getActivePlugin(QString uid);
 
   // InputPlugin
-  QList<InputPlugin *> getInputPlugins();
-  QList<InputPlugin *> getActiveInputPlugins();
-  void moveInputPlugin(InputPlugin *plugin, int index);
+  std::vector<std::shared_ptr<InputPlugin>> getInputPlugins();
+  QList<std::shared_ptr<InputPlugin>> getActiveInputPlugins();
+  void moveInputPlugin(std::shared_ptr<InputPlugin> plugin, int index);
 
   // EditPlugin
-  QList<EditPlugin *> getEditPlugins();
-  QList<EditPlugin *> getActiveEditPlugins();
-  void moveEditPlugin(EditPlugin *plugin, int index);
+  std::vector<std::shared_ptr<EditPlugin>> getEditPlugins();
+  QList<std::shared_ptr<EditPlugin>> getActiveEditPlugins();
+  void moveEditPlugin(std::shared_ptr<EditPlugin> plugin, int index);
 
   // OutputPlugin
-  QList<OutputPlugin *> getOutputPlugins();
-  QList<OutputPlugin *> getActiveOutputPlugins();
-  void moveOutputPlugin(OutputPlugin *plugin, int index);
+  std::vector<std::shared_ptr<OutputPlugin>> getOutputPlugins();
+  QList<std::shared_ptr<OutputPlugin>> getActiveOutputPlugins();
+  void moveOutputPlugin(std::shared_ptr<OutputPlugin> plugin, int index);
 
  signals:
 
@@ -73,25 +75,25 @@ class PluginLoader : public QObject {
   void loadConfig();
   void saveConfig();
 
-  QMap<QString, Plugin *> activatedPlugins;
+  QMap<QString, std::shared_ptr<Plugin>> activatedPlugins;
 
   // InputPlugin
-  QList<InputPlugin *> inputPlugins;
+  std::vector<std::shared_ptr<InputPlugin>> inputPlugins;
   QList<QString> activeInputPlugins;
   void loadInputPlugins(QString dir);
-  void addInputPlugin(InputPlugin *plugin);
+  void addInputPlugin(std::shared_ptr<InputPlugin> plugin);
 
   // EditPlugin
-  QList<EditPlugin *> editPlugins;
+  std::vector<std::shared_ptr<EditPlugin>> editPlugins;
   QList<QString> activeEditPlugins;
   void loadEditPlugins(QString dir);
-  void addEditPlugin(EditPlugin *plugin);
+  void addEditPlugin(std::shared_ptr<EditPlugin> plugin);
 
   // OutputPlugin
-  QList<OutputPlugin *> outputPlugins;
+  std::vector<std::shared_ptr<OutputPlugin>> outputPlugins;
   QList<QString> activeOutputPlugins;
   void loadOutputPlugins(QString dir);
-  void addOutputPlugin(OutputPlugin *plugin);
+  void addOutputPlugin(std::shared_ptr<OutputPlugin> plugin);
 };
 }
 }

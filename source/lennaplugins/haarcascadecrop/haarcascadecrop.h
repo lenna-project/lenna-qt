@@ -48,7 +48,7 @@ class HaarcascadeCrop : public EditPlugin {
   QIcon getIcon();
   QWidget *getWidget();
 
-  Plugin *getInstance(QString uid);
+  std::shared_ptr<Plugin> getInstance(QString uid);
 
   void loadCascade(std::string cascadeFile);
 

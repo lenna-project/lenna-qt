@@ -24,7 +24,8 @@
 
 using namespace lenna::plugin;
 
-PCPluginWidget::PCPluginWidget(Plugin *plugin) : ui(new Ui::PCPluginWidget) {
+PCPluginWidget::PCPluginWidget(std::shared_ptr<Plugin> plugin)
+    : ui(new Ui::PCPluginWidget) {
   this->plugin = plugin;
   ui->setupUi(this);
   ui->nameLabel->setText(plugin->getName());
@@ -53,7 +54,7 @@ void PCPluginWidget::checkBoxChanged() {
   //}
 }
 
-Plugin *PCPluginWidget::getPlugin() { return this->plugin; }
+std::shared_ptr<Plugin> PCPluginWidget::getPlugin() { return this->plugin; }
 
 void lenna::plugin::PCPluginWidget::on_addButton_clicked() {
   QString uid = QUuid::createUuid().toString();

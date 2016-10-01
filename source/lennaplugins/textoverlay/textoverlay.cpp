@@ -50,8 +50,8 @@ QWidget *Textoverlay::getWidget() {
   return this->widget;
 }
 
-plugin::Plugin *Textoverlay::getInstance(QString uid) {
-  Plugin *plugin = new Textoverlay();
+std::shared_ptr<plugin::Plugin> Textoverlay::getInstance(QString uid) {
+  std::shared_ptr<Plugin> plugin = std::shared_ptr<Plugin>(new Textoverlay());
   plugin->setUID(uid);
   return plugin;
 }

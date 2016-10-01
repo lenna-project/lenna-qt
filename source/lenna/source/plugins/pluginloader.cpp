@@ -21,6 +21,8 @@
 #include "lenna/lenna.h"
 #include "translation.h"
 
+#include <memory>
+
 #include <QtCore/QCoreApplication>
 #include <QtCore/QDir>
 #include <QtCore/QPluginLoader>
@@ -53,11 +55,13 @@ void PluginLoader::activatePlugin(QString uid, QString name) {
     uid = QUuid::createUuid().toString();
   assert(uid != "{00000000-0000-0000-0000-000000000000}");
   if (this->activatedPlugins.contains(uid)) return;
-  Plugin *plugin = getPlugin(name);
+  std::shared_ptr<Plugin> plugin = getPlugin(name);
   if (plugin == nullptr)
     Logger::warning("Plugin could not been loaded: " + name);
-  Plugin *pluginInstance = plugin->getInstance(uid);
-  activatePlugin(pluginInstance);
+  else {
+    std::shared_ptr<Plugin> pluginInstance = plugin->getInstance(uid);
+    activatePlugin(pluginInstance);
+  }
 }
 
 /**
@@ -101,22 +105,25 @@ void PluginLoader::saveConfig() {
 
 void PluginLoader::activatePlugins(QStringList list) {
   for (int i = 0, in = 0, edit = 0, out = 0; i < list.size(); i++) {
-    Plugin *plugin = getPlugin(list.at(i));
+    std::shared_ptr<Plugin> plugin = getPlugin(list.at(i));
     activatePlugin(plugin);
     // sort inputplugins
-    InputPlugin *inputPlugin = qobject_cast<InputPlugin *>(plugin);
+    std::shared_ptr<InputPlugin> inputPlugin =
+        std::static_pointer_cast<InputPlugin>(plugin);
     if (inputPlugin) {
       moveInputPlugin(inputPlugin, in);
       in++;
     }
     // sort editplugins
-    EditPlugin *editPlugin = qobject_cast<EditPlugin *>(plugin);
+    std::shared_ptr<EditPlugin> editPlugin =
+        std::static_pointer_cast<EditPlugin>(plugin);
     if (editPlugin) {
       moveEditPlugin(editPlugin, edit);
       edit++;
     }
     // sort outputplugins
-    OutputPlugin *outputPlugin = qobject_cast<OutputPlugin *>(plugin);
+    std::shared_ptr<OutputPlugin> outputPlugin =
+        std::static_pointer_cast<OutputPlugin>(plugin);
     if (outputPlugin) {
       moveOutputPlugin(outputPlugin, out);
       out++;
@@ -124,37 +131,43 @@ void PluginLoader::activatePlugins(QStringList list) {
   }
 }
 
-void PluginLoader::activatePlugin(Plugin *plugin) {
+void PluginLoader::activatePlugin(std::shared_ptr<Plugin> plugin) {
   assert(plugin);
   assert(plugin->getUID() != "{00000000-0000-0000-0000-000000000000}");
   if (!activatedPlugins.values().contains(plugin)) {
     activatedPlugins.insert(plugin->getUID(), plugin);
-    InputPlugin *inputPlugin = qobject_cast<InputPlugin *>(plugin);
+    std::shared_ptr<InputPlugin> inputPlugin =
+        std::static_pointer_cast<InputPlugin>(plugin);
     if (inputPlugin) {
       activeInputPlugins.append(plugin->getUID());
     }
-    EditPlugin *editPlugin = qobject_cast<EditPlugin *>(plugin);
+    std::shared_ptr<EditPlugin> editPlugin =
+        std::static_pointer_cast<EditPlugin>(plugin);
     if (editPlugin) {
       activeEditPlugins.append(plugin->getUID());
     }
-    OutputPlugin *outputPlugin = qobject_cast<OutputPlugin *>(plugin);
+    std::shared_ptr<OutputPlugin> outputPlugin =
+        std::static_pointer_cast<OutputPlugin>(plugin);
     if (outputPlugin) {
       activeOutputPlugins.append(plugin->getUID());
     }
   }
 }
 
-void PluginLoader::deactivatePlugin(Plugin *plugin) {
+void PluginLoader::deactivatePlugin(std::shared_ptr<Plugin> plugin) {
   if (activatedPlugins.values().contains(plugin)) {
-    InputPlugin *inputPlugin = qobject_cast<InputPlugin *>(plugin);
+    std::shared_ptr<InputPlugin> inputPlugin =
+        std::static_pointer_cast<InputPlugin>(plugin);
     if (inputPlugin) {
       activeInputPlugins.removeAll(plugin->getUID());
     }
-    EditPlugin *editPlugin = qobject_cast<EditPlugin *>(plugin);
+    std::shared_ptr<EditPlugin> editPlugin =
+        std::static_pointer_cast<EditPlugin>(plugin);
     if (editPlugin) {
       activeEditPlugins.removeAll(plugin->getUID());
     }
-    OutputPlugin *outputPlugin = qobject_cast<OutputPlugin *>(plugin);
+    std::shared_ptr<OutputPlugin> outputPlugin =
+        std::static_pointer_cast<OutputPlugin>(plugin);
     if (outputPlugin) {
       activeOutputPlugins.removeAll(plugin->getUID());
     }
@@ -172,20 +185,20 @@ void PluginLoader::deactivatePlugin(int index) {
 }
 
 // returns plugin from string in format "name version"
-Plugin *PluginLoader::getPlugin(QString name) {
-  foreach (InputPlugin *plugin, this->inputPlugins) {
+std::shared_ptr<Plugin> PluginLoader::getPlugin(QString name) {
+  for (std::shared_ptr<InputPlugin> plugin : this->inputPlugins) {
     if (QString(plugin->getName() + " " + plugin->getVersion()) == name ||
         QString(plugin->getName()) == name) {
       return plugin;
     }
   }
-  foreach (EditPlugin *plugin, this->editPlugins) {
+  for (std::shared_ptr<EditPlugin> plugin : this->editPlugins) {
     if (QString(plugin->getName() + " " + plugin->getVersion()) == name ||
         QString(plugin->getName()) == name) {
       return plugin;
     }
   }
-  foreach (OutputPlugin *plugin, this->outputPlugins) {
+  for (std::shared_ptr<OutputPlugin> plugin : this->outputPlugins) {
     if (QString(plugin->getName() + " " + plugin->getVersion()) == name ||
         QString(plugin->getName()) == name) {
       return plugin;
@@ -194,8 +207,8 @@ Plugin *PluginLoader::getPlugin(QString name) {
   return nullptr;
 }
 
-Plugin *PluginLoader::getActivePlugin(QString uid) {
-  for (Plugin *plugin : this->activatedPlugins) {
+std::shared_ptr<Plugin> PluginLoader::getActivePlugin(QString uid) {
+  for (std::shared_ptr<Plugin> plugin : this->activatedPlugins) {
     if (plugin->getUID() == uid) return plugin;
   }
   return nullptr;
@@ -207,17 +220,17 @@ Plugin *PluginLoader::getActivePlugin(QString uid) {
 void PluginLoader::loadPlugins() {
   // Loads Plugins in plugins dir
   QDir pluginsDir(Lenna::applicationDirPath());
-  loadInputPlugins(pluginsDir.currentPath());
-  loadEditPlugins(pluginsDir.currentPath());
-  loadOutputPlugins(pluginsDir.currentPath());
+  // loadInputPlugins(pluginsDir.currentPath());
+  // loadEditPlugins(pluginsDir.currentPath());
+  // loadOutputPlugins(pluginsDir.currentPath());
 
-  foreach (QString path, QCoreApplication::libraryPaths()) {
+  for (QString path : QCoreApplication::libraryPaths()) {
     loadInputPlugins(path);
-    loadInputPlugins(path + Lenna::applicationName().toLower());
+    // loadInputPlugins(path + Lenna::applicationName().toLower());
     loadEditPlugins(path);
-    loadEditPlugins(path + Lenna::applicationName().toLower());
+    // loadEditPlugins(path + Lenna::applicationName().toLower());
     loadOutputPlugins(path);
-    loadOutputPlugins(path + Lenna::applicationName().toLower());
+    // loadOutputPlugins(path + Lenna::applicationName().toLower());
   }
 #if defined(Q_OS_WIN)
   if (pluginsDir.dirName().toLower() == "debug" ||
@@ -243,9 +256,9 @@ void PluginLoader::loadPlugins() {
   loadOutputPlugins("/usr/lib64/" +
                     QCoreApplication::applicationName().toLower());
 #endif
-  loadInputPlugins(pluginsDir.currentPath());
-  loadEditPlugins(pluginsDir.currentPath());
-  loadOutputPlugins(pluginsDir.currentPath());
+  // loadInputPlugins(pluginsDir.currentPath());
+  // loadEditPlugins(pluginsDir.currentPath());
+  // loadOutputPlugins(pluginsDir.currentPath());
 }
 
 /*
@@ -258,48 +271,49 @@ void PluginLoader::loadInputPlugins(QString dir) {
     if (!pluginsDir.cd("plugins")) return;
   }
 
-  foreach (QString fileName, pluginsDir.entryList(QDir::Files)) {
+  for (QString fileName : pluginsDir.entryList(QDir::Files)) {
     QPluginLoader pluginLoader(pluginsDir.absoluteFilePath(fileName));
     QObject *plugin = pluginLoader.instance();
 
     if (plugin) {
       // loads Plugins
-      InputPlugin *plugin_ = qobject_cast<InputPlugin *>(plugin);
-      if (plugin_) {
-        addInputPlugin(plugin_);
-      } else {
-        delete plugin_;
+      if (qobject_cast<InputPlugin *>(plugin)) {
+        addInputPlugin(
+            std::shared_ptr<InputPlugin>(qobject_cast<InputPlugin *>(plugin)));
       }
     } else {
     }
   }
 }
 
-void PluginLoader::addInputPlugin(InputPlugin *plugin) {
+void PluginLoader::addInputPlugin(std::shared_ptr<InputPlugin> plugin) {
   if (plugin) {
-    foreach (InputPlugin *plugin_, inputPlugins) {
+    for (std::shared_ptr<InputPlugin> plugin_ : inputPlugins) {
+      assert(plugin_.get());
       if (plugin_->getName() == plugin->getName()) return;
     }
-    inputPlugins.append(plugin);
+    inputPlugins.push_back(plugin);
     Translation::installPluginTranslation(plugin->getName());
   }
 }
 
-QList<InputPlugin *> PluginLoader::getInputPlugins() {
+std::vector<std::shared_ptr<InputPlugin>> PluginLoader::getInputPlugins() {
   return this->inputPlugins;
 }
 
-QList<InputPlugin *> PluginLoader::getActiveInputPlugins() {
-  QList<InputPlugin *> plugins;
+QList<std::shared_ptr<InputPlugin>> PluginLoader::getActiveInputPlugins() {
+  QList<std::shared_ptr<InputPlugin>> plugins;
   for (QString uid : activeInputPlugins) {
-    InputPlugin *plugin = (InputPlugin *)this->activatedPlugins.value(uid);
-    assert(plugin);
-    plugins.append(plugin);
+    std::shared_ptr<InputPlugin> plugin =
+        std::dynamic_pointer_cast<InputPlugin>(
+            this->activatedPlugins.value(uid));
+    if (plugin) plugins.append(plugin);
   }
   return plugins;
 }
 
-void PluginLoader::moveInputPlugin(InputPlugin *plugin, int index) {
+void PluginLoader::moveInputPlugin(std::shared_ptr<InputPlugin> plugin,
+                                   int index) {
   assert(plugin);
   if (!plugin) return;
   if (index > activeInputPlugins.size() - 1) return;
@@ -319,44 +333,45 @@ void PluginLoader::loadEditPlugins(QString dir) {
     if (!pluginsDir.cd("plugins")) return;
   }
 
-  foreach (QString fileName, pluginsDir.entryList(QDir::Files)) {
+  for (QString fileName : pluginsDir.entryList(QDir::Files)) {
     QPluginLoader pluginLoader(pluginsDir.absoluteFilePath(fileName));
     QObject *plugin = pluginLoader.instance();
     if (plugin) {
       // loads Plugins
-      EditPlugin *plugin_ = qobject_cast<EditPlugin *>(plugin);
-      if (plugin_) {
-        addEditPlugin(plugin_);
-      } else {
-        delete plugin_;
+      if (qobject_cast<EditPlugin *>(plugin)) {
+        addEditPlugin(
+            std::shared_ptr<EditPlugin>(qobject_cast<EditPlugin *>(plugin)));
       }
     }
   }
 }
 
-void PluginLoader::addEditPlugin(EditPlugin *plugin) {
+void PluginLoader::addEditPlugin(std::shared_ptr<EditPlugin> plugin) {
   if (plugin) {
-    foreach (EditPlugin *plugin_, editPlugins) {
+    for (std::shared_ptr<EditPlugin> plugin_ : editPlugins) {
       if (plugin_->getName() == plugin->getName()) return;
     }
-    editPlugins.append(plugin);
+    editPlugins.push_back(plugin);
     Translation::installPluginTranslation(plugin->getName());
   }
 }
 
-QList<EditPlugin *> PluginLoader::getEditPlugins() { return this->editPlugins; }
+std::vector<std::shared_ptr<EditPlugin>> PluginLoader::getEditPlugins() {
+  return this->editPlugins;
+}
 
-QList<EditPlugin *> PluginLoader::getActiveEditPlugins() {
-  QList<EditPlugin *> plugins;
+QList<std::shared_ptr<EditPlugin>> PluginLoader::getActiveEditPlugins() {
+  QList<std::shared_ptr<EditPlugin>> plugins;
   for (QString uid : activeEditPlugins) {
-    EditPlugin *plugin = (EditPlugin *)this->activatedPlugins.value(uid);
-    assert(plugin);
-    plugins.append(plugin);
+    std::shared_ptr<EditPlugin> plugin = std::dynamic_pointer_cast<EditPlugin>(
+        this->activatedPlugins.value(uid));
+    if (plugin) plugins.append(plugin);
   }
   return plugins;
 }
 
-void PluginLoader::moveEditPlugin(EditPlugin *plugin, int index) {
+void PluginLoader::moveEditPlugin(std::shared_ptr<EditPlugin> plugin,
+                                  int index) {
   if (!plugin) return;
   if (index > activeEditPlugins.size() - 1) return;
   if (activeEditPlugins.contains(plugin->getUID())) {
@@ -379,41 +394,42 @@ void PluginLoader::loadOutputPlugins(QString dir) {
     QObject *plugin = pluginLoader.instance();
     if (plugin) {
       // loads Plugins
-      OutputPlugin *plugin_ = qobject_cast<OutputPlugin *>(plugin);
+      std::shared_ptr<OutputPlugin> plugin_ =
+          std::shared_ptr<OutputPlugin>(qobject_cast<OutputPlugin *>(plugin));
       if (plugin_) {
         addOutputPlugin(plugin_);
-      } else {
-        delete plugin_;
       }
     }
   }
 }
 
-void PluginLoader::addOutputPlugin(OutputPlugin *plugin) {
+void PluginLoader::addOutputPlugin(std::shared_ptr<OutputPlugin> plugin) {
   if (plugin) {
-    foreach (OutputPlugin *plugin_, outputPlugins) {
+    foreach (std::shared_ptr<OutputPlugin> plugin_, outputPlugins) {
       if (plugin_->getName() == plugin->getName()) return;
     }
-    outputPlugins.append(plugin);
+    outputPlugins.push_back(plugin);
     Translation::installPluginTranslation(plugin->getName());
   }
 }
 
-QList<OutputPlugin *> PluginLoader::getOutputPlugins() {
+std::vector<std::shared_ptr<OutputPlugin>> PluginLoader::getOutputPlugins() {
   return this->outputPlugins;
 }
 
-QList<OutputPlugin *> PluginLoader::getActiveOutputPlugins() {
-  QList<OutputPlugin *> plugins;
+QList<std::shared_ptr<OutputPlugin>> PluginLoader::getActiveOutputPlugins() {
+  QList<std::shared_ptr<OutputPlugin>> plugins;
   for (QString uid : activeOutputPlugins) {
-    OutputPlugin *plugin = (OutputPlugin *)this->activatedPlugins.value(uid);
-    assert(plugin);
-    plugins.append(plugin);
+    std::shared_ptr<OutputPlugin> plugin =
+        std::dynamic_pointer_cast<OutputPlugin>(
+            this->activatedPlugins.value(uid));
+    if (plugin) plugins.append(plugin);
   }
   return plugins;
 }
 
-void PluginLoader::moveOutputPlugin(OutputPlugin *plugin, int index) {
+void PluginLoader::moveOutputPlugin(std::shared_ptr<OutputPlugin> plugin,
+                                    int index) {
   if (!plugin) return;
   if (index > activeOutputPlugins.size() - 1) return;
   if (activeOutputPlugins.contains(plugin->getUID())) {

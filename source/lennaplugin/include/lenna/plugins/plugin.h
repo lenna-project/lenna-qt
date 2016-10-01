@@ -18,18 +18,18 @@
 
 #ifndef PLUGIN_H
 #define PLUGIN_H
-
 #include <QtCore/QObject>
 #include <QtCore/QUuid>
 #include <QtGui/QIcon>
 #include <QtWidgets/QWidget>
+#include <memory>
 
 namespace lenna {
 namespace plugin {
 
-class Plugin : virtual public QObject {
+class Plugin : public QObject {
  public:
-  virtual QString getName() = 0;
+  virtual QString getName() { return QString("unknown"); }
   virtual QString getTitle() = 0;
   virtual QString getVersion() = 0;
   virtual QString getAuthor() = 0;
@@ -37,7 +37,7 @@ class Plugin : virtual public QObject {
   virtual QIcon getIcon() = 0;
   virtual QWidget* getWidget() = 0;
 
-  virtual Plugin* getInstance(QString uid) = 0;
+  virtual std::shared_ptr<Plugin> getInstance(QString uid) = 0;
 
   virtual QString getUID() { return this->id.toString(); }
   virtual void setUID(QString uid) { this->id = QUuid(uid); }
