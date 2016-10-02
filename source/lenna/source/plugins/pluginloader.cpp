@@ -56,11 +56,11 @@ void PluginLoader::activatePlugin(QString uid, QString name) {
   assert(uid != "{00000000-0000-0000-0000-000000000000}");
   if (this->activatedPlugins.contains(uid)) return;
   std::shared_ptr<Plugin> plugin = getPlugin(name);
-  if (plugin == nullptr)
-    Logger::warning("Plugin could not been loaded: " + name);
-  else {
+  if (plugin){
     std::shared_ptr<Plugin> pluginInstance = plugin->getInstance(uid);
     activatePlugin(pluginInstance);
+  } else {
+      Logger::warning("Plugin could not been loaded: " + name);
   }
 }
 
@@ -109,21 +109,21 @@ void PluginLoader::activatePlugins(QStringList list) {
     activatePlugin(plugin);
     // sort inputplugins
     std::shared_ptr<InputPlugin> inputPlugin =
-        std::static_pointer_cast<InputPlugin>(plugin);
+        std::dynamic_pointer_cast<InputPlugin>(plugin);
     if (inputPlugin) {
       moveInputPlugin(inputPlugin, in);
       in++;
     }
     // sort editplugins
     std::shared_ptr<EditPlugin> editPlugin =
-        std::static_pointer_cast<EditPlugin>(plugin);
+        std::dynamic_pointer_cast<EditPlugin>(plugin);
     if (editPlugin) {
       moveEditPlugin(editPlugin, edit);
       edit++;
     }
     // sort outputplugins
     std::shared_ptr<OutputPlugin> outputPlugin =
-        std::static_pointer_cast<OutputPlugin>(plugin);
+        std::dynamic_pointer_cast<OutputPlugin>(plugin);
     if (outputPlugin) {
       moveOutputPlugin(outputPlugin, out);
       out++;
@@ -137,17 +137,17 @@ void PluginLoader::activatePlugin(std::shared_ptr<Plugin> plugin) {
   if (!activatedPlugins.values().contains(plugin)) {
     activatedPlugins.insert(plugin->getUID(), plugin);
     std::shared_ptr<InputPlugin> inputPlugin =
-        std::static_pointer_cast<InputPlugin>(plugin);
+        std::dynamic_pointer_cast<InputPlugin>(plugin);
     if (inputPlugin) {
       activeInputPlugins.append(plugin->getUID());
     }
     std::shared_ptr<EditPlugin> editPlugin =
-        std::static_pointer_cast<EditPlugin>(plugin);
+        std::dynamic_pointer_cast<EditPlugin>(plugin);
     if (editPlugin) {
       activeEditPlugins.append(plugin->getUID());
     }
     std::shared_ptr<OutputPlugin> outputPlugin =
-        std::static_pointer_cast<OutputPlugin>(plugin);
+        std::dynamic_pointer_cast<OutputPlugin>(plugin);
     if (outputPlugin) {
       activeOutputPlugins.append(plugin->getUID());
     }
@@ -157,17 +157,17 @@ void PluginLoader::activatePlugin(std::shared_ptr<Plugin> plugin) {
 void PluginLoader::deactivatePlugin(std::shared_ptr<Plugin> plugin) {
   if (activatedPlugins.values().contains(plugin)) {
     std::shared_ptr<InputPlugin> inputPlugin =
-        std::static_pointer_cast<InputPlugin>(plugin);
+        std::dynamic_pointer_cast<InputPlugin>(plugin);
     if (inputPlugin) {
       activeInputPlugins.removeAll(plugin->getUID());
     }
     std::shared_ptr<EditPlugin> editPlugin =
-        std::static_pointer_cast<EditPlugin>(plugin);
+        std::dynamic_pointer_cast<EditPlugin>(plugin);
     if (editPlugin) {
       activeEditPlugins.removeAll(plugin->getUID());
     }
     std::shared_ptr<OutputPlugin> outputPlugin =
-        std::static_pointer_cast<OutputPlugin>(plugin);
+        std::dynamic_pointer_cast<OutputPlugin>(plugin);
     if (outputPlugin) {
       activeOutputPlugins.removeAll(plugin->getUID());
     }
@@ -290,7 +290,7 @@ void PluginLoader::addInputPlugin(std::shared_ptr<InputPlugin> plugin) {
   if (plugin) {
     for (std::shared_ptr<InputPlugin> plugin_ : inputPlugins) {
       assert(plugin_.get());
-      if (plugin_->getName() == plugin->getName()) return;
+      if (plugin_.get() == plugin.get()) return;
     }
     inputPlugins.push_back(plugin);
     Translation::installPluginTranslation(plugin->getName());

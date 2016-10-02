@@ -11,7 +11,7 @@ This project is using Qt5 and OpenCV.
 [codedocs-image]: https://codedocs.xyz/FalseCAM/lenna.svg
 [codedocs]: https://codedocs.xyz/FalseCAM/lenna/
 
-[release-image]: http://img.shields.io/badge/release-0.10.1-blue.svg?style=flat
+[release-image]: http://img.shields.io/badge/release-0.11.0-blue.svg?style=flat
 [releases]: https://github.com/FalseCAM/lenna/releases
 
 [license-image]: http://img.shields.io/badge/license-GPL--v3.0-red.svg?style=flat
