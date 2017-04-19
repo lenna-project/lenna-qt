@@ -1,6 +1,8 @@
 # lenna [ ![Build Status] [travis-image] ] [travis] [ ![Documentation] [codedocs-image] ] [codedocs] [ ![Release] [release-image] ] [releases] [ ![License] [license-image] ] [license] [ ![Gitter] [gitter-image] ] [gitter]
 ==============
 
+[![Join the chat at https://gitter.im/FalseCAM/lenna](https://badges.gitter.im/FalseCAM/lenna.svg)](https://gitter.im/FalseCAM/lenna?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 *Open Source Image Processing Program*
 
 This project is using Qt5 and OpenCV.
