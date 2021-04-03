@@ -20,9 +20,12 @@
 #include "crop.h"
 #include "ui_widget.h"
 
+#include <opencv2/core.hpp>
+#include <opencv2/imgproc.hpp>
 #include <QGraphicsItem>
 #include <QtCore/QSettings>
 #include <QtGui/QPainter>
+#include <QtWidgets/QWidget>
 
 using namespace lenna::plugin::crop;
 
@@ -60,7 +63,7 @@ void Widget::updateImage() {
   size.height = scene->sceneRect().height();
 
   // cv::resize(image, tmp, size);
-  cv::cvtColor(image, tmp, CV_BGR2RGB);
+  cv::cvtColor(image, tmp, cv::COLOR_BGR2RGB);
   tmp.convertTo(tmp, CV_8U);
 
   QImage img = QImage((const unsigned char *)(tmp.data), tmp.cols, tmp.rows,

@@ -22,6 +22,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QtPlugin>
 #include <QtGui/QIcon>
+#include <opencv2/videoio.hpp>
 #include "lenna/image.h"
 #include "lenna/plugins/inputplugin.h"
 #include "widget.h"
@@ -57,7 +58,7 @@ class Camera : public InputPlugin {
   camera::Widget *widget;
   int position;
   int frames;
-  CvCapture *camera;
+  cv::VideoCapture *camera;
 };
 }
 }

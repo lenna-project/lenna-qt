@@ -19,7 +19,7 @@ endif()
 
 set(DEFAULT_PROJECT_OPTIONS
     DEBUG_POSTFIX             "d"
-    CXX_STANDARD              11 # Not available before CMake 3.1; see below for manual command line argument addition
+    CXX_STANDARD              17 # Not available before CMake 3.1; see below for manual command line argument addition
     LINKER_LANGUAGE           "CXX"
     POSITION_INDEPENDENT_CODE ON
     CXX_VISIBILITY_PRESET     "hidden"
@@ -29,13 +29,13 @@ set(DEFAULT_PROJECT_OPTIONS
  find_package(Qt5Widgets REQUIRED)
  find_package(Qt5Network REQUIRED)
  find_package(Qt5LinguistTools REQUIRED)
- find_package( OpenCV 3 REQUIRED )
+ find_package( OpenCV 4 REQUIRED )
 
 # 
 # Include directories
 # 
 
-set(DEFAULT_INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR} ${Poco_INCLUDE_DIR})
+set(DEFAULT_INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR} ${Poco_INCLUDE_DIR} ${OpenCV_INCLUDE_DIRS})
 
 # 
 # Libraries

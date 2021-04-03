@@ -20,6 +20,7 @@
 #include <QtCore/QDir>
 #include <QtCore/QFileInfo>
 #include <QtWidgets/QProxyStyle>
+#include <opencv2/imgproc.hpp>
 #include "widget.h"
 
 using namespace lenna;
@@ -61,10 +62,15 @@ void Camera::init() {
   frames = widget->getFrames();
   position = 0;
   if (hasNext()) {
-    camera = cvCaptureFromCAM(widget->selectedDevice());
-    cv::Mat *frame = 0;
+
+      camera = new cv::VideoCapture();
+      int deviceID = 0;             // 0 = open default camera
+      int apiID = cv::CAP_ANY;      // 0 = autodetect default API
+      // open selected camera using selected API
+      camera->open(deviceID, apiID);
+      cv::Mat *frame = 0;
     while (frame == 0 || frame->empty()) {
-      frame = new cv::Mat(cv::cvarrToMat(cvQueryFrame(camera), true));
+        camera->read(*frame);
     }
   }
 }
@@ -73,7 +79,8 @@ bool Camera::hasNext() { return frames > position; }
 
 std::shared_ptr<LennaImage> Camera::next() {
   if (hasNext()) {
-    cv::Mat frame = cv::cvarrToMat(cvQueryFrame(camera), true);
+    cv::Mat frame;
+    camera->read(frame);
     if (!frame.empty()) {
       std::shared_ptr<LennaImage> img(new LennaImage());
       position++;
@@ -81,7 +88,7 @@ std::shared_ptr<LennaImage> Camera::next() {
       img->setName(QString("Frame%1").arg(position));
       img->setAlbum("Camera");
       if (!hasNext()) {
-        cvReleaseCapture(&camera);
+        camera->release();
       }
       return img;
     }

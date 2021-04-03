@@ -29,6 +29,7 @@
 #include <QtCore/QDir>
 #include <QtCore/QFileInfo>
 #include <QtWidgets/QProxyStyle>
+#include <opencv2/imgproc.hpp>
 #include "widget.h"
 
 using namespace lenna;
@@ -98,7 +99,7 @@ std::shared_ptr<LennaImage> FlickrDownloader::next() {
     cv::Mat mat;
     cv::cvtColor(cv::Mat(img.height(), img.width(), CV_8UC3,
                          (uchar *)img.bits(), img.bytesPerLine()),
-                 mat, CV_BGR2RGB);
+                 mat, cv::COLOR_BGR2RGB);
     image->setMat(mat);
     image->setAlbum(this->searchText);
     image->setName(this->imageUrls.at(this->position).first);

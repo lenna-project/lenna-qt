@@ -26,9 +26,12 @@
 #include <QtCore/QUrl>
 #include <QtGui/QDragEnterEvent>
 #include <QtGui/QImageReader>
+#include <QtWidgets/QWidget>
 #include <QtWidgets/QFileDialog>
-#include <opencv2/highgui/highgui.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/core.hpp>
+#include <opencv2/highgui.hpp>
+#include <opencv2/videoio.hpp>
+#include <opencv2/imgproc.hpp>
 
 using namespace lenna::plugin::camera;
 using namespace cv;
@@ -45,7 +48,7 @@ int Widget::getFrames() { return ui->framesSpinBox->value(); }
 void Widget::listCameras() {
   for (int device = 0; device < 3; device++) {
     try {
-      VideoCapture cap(device);
+      cv::VideoCapture cap(device);
       if (!cap.isOpened()) return;
       ui->camerasComboBox->addItem(QString("device %1").arg(device));
     } catch (std::exception &e) {
@@ -57,16 +60,16 @@ int Widget::selectedDevice() { return ui->camerasComboBox->currentIndex(); }
 
 void Widget::on_cameraOnCheckBox_toggled(bool checked) {
   int key;
-  CvCapture *camera;
+  cv::VideoCapture camera;
+  int deviceID = 0;             // 0 = open default camera
+  int apiID = cv::CAP_ANY;      // 0 = autodetect default API
+  // open selected camera using selected API
+  camera.open(deviceID, apiID);
   Mat frame;
-  camera = cvCaptureFromCAM(selectedDevice());
-  cvNamedWindow("Camera", 0);
   while (ui->cameraOnCheckBox->isChecked()) {
-    frame = cv::cvarrToMat(cvQueryFrame(camera), true);
-    if (!frame.empty()) imshow("Camera", frame);
-    key = cvWaitKey(10);
+    camera.read(frame);
+    if (!frame.empty()) cv::imshow("Camera", frame);
+    key = cv::waitKey(10);
     if (key == 27 /* ESC */) break;
   }
-  cvReleaseCapture(&camera);
-  cvDestroyWindow("Camera");
 }
