@@ -1,4 +1,4 @@
-# lenna [![Build Status][travis-image]] [travis] [![Documentation][codedocs-image]] [codedocs] [![Release][release-image]] [releases] [![License][license-image]] [license]
+# lenna [![Build Status][travis-image]](travis) [![Documentation][codedocs-image]](codedocs) [![Release][release-image]](releases) [![License][license-image]](license)
 ==============
 
 *Open Source Image Processing Program*
@@ -8,13 +8,13 @@ This project is using Qt5 and OpenCV.
 [travis-image]: https://travis-ci.com/lenna-project/lenna.svg?branch=main
 [travis]: https://travis-ci.com/lenna-project/lenna
 
-[codedocs-image]: https://codedocs.xyz/lenna-project/lenna.svg
+[codedocs-image]: https://codedocs.xyz/lenna-project/lenna.svg?branch=main
 [codedocs]: https://codedocs.xyz/lenna-project/lenna/
 
-[release-image]: http://img.shields.io/badge/release-0.11.0-blue.svg?style=flat
+[release-image]: https://img.shields.io/github/v/release/lenna-project/lenna?branch=main
 [releases]: https://github.com/lenna-project/lenna/releases
 
-[license-image]: http://img.shields.io/badge/license-GPL--v3.0-red.svg?style=flat
+[license-image]: https://img.shields.io/github/license/lenna-project/lenna?branch=main
 [license]: LICENSE
 
 ### Quick start
@@ -47,3 +47,5 @@ Contributions are always welcome!
 >You can check out the full license [here](https://github.com/FalseCAM/lenna/blob/master/LICENSE.md)
 
 This project is licensed under the terms of the **GNU GPL v3.0** license.
+
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/lenna-project/lenna)
