@@ -1,101 +1,73 @@
-language:
- - cpp
-
+language: cpp
 os:
- - linux
-dist: trusty
+  - linux
+dist: focal
 sudo: required
 compiler:
-     - gcc
-     - clang
+  - gcc
+  - clang
 
 addons:
- apt:
-  packages:
-   - build-essential
-   - cmake
-   - git
-   - rpm
-   - libgtk2.0-dev
-   - pkg-config
-   - libavcodec-dev
-   - libavformat-dev
-   - libswscale-dev
-   - python-dev
-   - python-numpy
-   - libtbb2
-   - libtbb-dev
-   - libjpeg-dev
-   - libpng-dev
-   - libtiff-dev
-   - libjasper-dev
-   - libdc1394-22-dev
-   - lcov
-   - texlive-fonts-recommended
-   - texlive-latex-extra
-   - texlive-fonts-extra
-   - dvipng
-   - texlive-latex-recommended
-   - texlive-full
+  apt:
+    packages:
+      - build-essential
+      - cmake
+      - qtbase5-dev
+      - qttools5-dev
+      - libopencv-dev
+      - git
+      - rpm
+      - libgtk2.0-dev
+      - pkg-config
+      - libavcodec-dev
+      - libavformat-dev
+      - libswscale-dev
+      - python-dev
+      - python-numpy
+      - libtbb2
+      - libtbb-dev
+      - libjpeg-dev
+      - libpng-dev
+      - libtiff-dev
+      - libdc1394-22-dev
+      - lcov
+      - texlive-fonts-recommended
+      - texlive-latex-extra
+      - texlive-fonts-extra
+      - dvipng
+      - texlive-latex-recommended
+      - texlive-full
 
 install:
- - if [ "${TRAVIS_OS_NAME}" == "linux" ]; then
-         sudo apt-get update -qq
-      && sudo apt-get install -qq qt5-qmake qtbase5-dev qtdeclarative5-dev qttools5-dev libqt5webkit5-dev
-      ;
-   else
-         brew tap homebrew/science
-      && brew update
-      && brew install cmake
-      && brew install qt5
-      && brew install opencv3 --with-contrib
-      ;
-   fi
+  - if [ "${TRAVIS_OS_NAME}" == "linux" ]; then
+    sudo apt-get update -qq
+    && sudo apt-get install -qq qt5-qmake qtbase5-dev qtdeclarative5-dev qttools5-dev libqt5webkit5-dev
+    ;
+    else
+    brew tap homebrew/science
+    && brew update
+    && brew install cmake
+    && brew install qt5
+    && brew install opencv4 --with-contrib
+    ;
+    fi
 
 before_script:
- - wget http://www.cmake.org/files/v3.6/cmake-3.6.0.tar.gz
- - tar xf cmake-3.6.0.tar.gz
- - cd cmake-3.6.0
- - ./configure
- - make
- - sudo make install
- - cd ..
-
- - curl -sL https://github.com/Itseez/opencv/archive/3.1.0.zip > opencv.zip
- - unzip opencv.zip
- - cd opencv-3.1.0
-
- - mkdir build install
- - cd build
- - cmake -DCMAKE_BUILD_TYPE=RELEASE -DWITH_FFMPEG=OFF -DWITH_IPP=OFF ..
- - make -j4
- - sudo make install
- - cd ../../
-
- - mkdir build
- - cd build
- - cmake -DCMAKE_CXX_COMPILER=$CXX -DOPTION_BUILD_DOCS=1 ..
+  - mkdir build
+  - cd build
+  - cmake -DCMAKE_CXX_COMPILER=$CXX -DOPTION_BUILD_DOCS=1 ..
 script:
- - make
- - make pack
+  - make
+  - make pack
 
 deploy:
   provider: releases
   api_key: "$GH_TOKEN"
   file_glob: true
   file:
-   - $TRAVIS_BUILD_DIR/build/docs/manual/lenna.pdf
-   - $TRAVIS_BUILD_DIR/build/*.deb
-   - $TRAVIS_BUILD_DIR/build/*.rpm
+    - $TRAVIS_BUILD_DIR/build/docs/manual/lenna.pdf
+    - $TRAVIS_BUILD_DIR/build/*.deb
+    - $TRAVIS_BUILD_DIR/build/*.rpm
   skip_cleanup: true
   on:
     tags: true
-
-
-notifications:
-  webhooks:
-    urls:
-      - https://webhooks.gitter.im/e/29df591dfb81dbb446fa
-    on_success: change
-    on_failure: always
-    on_start: never
