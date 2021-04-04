@@ -31,15 +31,15 @@ Blur::~Blur() {
   if (this->widget) delete this->widget;
 }
 
-QString Blur::getName() { return QString("blur"); }
+std::string Blur::getName() { return std::string("blur"); }
 
-QString Blur::getTitle() { return QString(tr("Blur")); }
+std::string Blur::getTitle() { return tr("Blur").toStdString(); }
 
-QString Blur::getVersion() { return QString("0.1"); }
+std::string Blur::getVersion() { return std::string("0.1"); }
 
-QString Blur::getAuthor() { return QString("FalseCAM"); }
+std::string Blur::getAuthor() { return std::string("FalseCAM"); }
 
-QString Blur::getDescription() { return QString(tr("Plugin to blur images")); }
+std::string Blur::getDescription() { return tr("Plugin to blur images").toStdString(); }
 
 QIcon Blur::getIcon() { return QIcon(":/plugins/blur/blur"); }
 

@@ -33,16 +33,16 @@ HaarcascadeTrainer::HaarcascadeTrainer() { this->widget = 0; }
 
 HaarcascadeTrainer::~HaarcascadeTrainer() {}
 
-QString HaarcascadeTrainer::getName() { return QString("haarcascadetrainer"); }
+std::string HaarcascadeTrainer::getName() { return std::string("haarcascadetrainer"); }
 
-QString HaarcascadeTrainer::getTitle() { return QString(tr("Haarcascade Trainer")); }
+std::string HaarcascadeTrainer::getTitle() { return tr("Haarcascade Trainer").toStdString(); }
 
-QString HaarcascadeTrainer::getVersion() { return QString("1.0"); }
+std::string HaarcascadeTrainer::getVersion() { return std::string("1.0"); }
 
-QString HaarcascadeTrainer::getAuthor() { return QString("FalseCAM"); }
+std::string HaarcascadeTrainer::getAuthor() { return std::string("FalseCAM"); }
 
-QString HaarcascadeTrainer::getDescription() {
-  return QString(tr("Plugin to save images in a format able to train an opencv haarcascade"));
+std::string HaarcascadeTrainer::getDescription() {
+  return tr("Plugin to save images in a format able to train an opencv haarcascade").toStdString();
 }
 
 QIcon HaarcascadeTrainer::getIcon() {

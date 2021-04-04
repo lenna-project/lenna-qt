@@ -28,14 +28,14 @@ PCPluginWidget::PCPluginWidget(std::shared_ptr<Plugin> plugin)
     : ui(new Ui::PCPluginWidget) {
   this->plugin = plugin;
   ui->setupUi(this);
-  ui->nameLabel->setText(plugin->getName());
-  ui->nameLabel->setToolTip(plugin->getName() + " " + plugin->getVersion());
-  ui->titleLabel->setText(plugin->getTitle());
-  ui->titleLabel->setToolTip(plugin->getTitle());
-  ui->versionLabel->setText(plugin->getVersion());
-  ui->descriptionBrowser->setText(plugin->getDescription());
+  ui->nameLabel->setText(QString::fromStdString(plugin->getName()));
+  ui->nameLabel->setToolTip(QString::fromStdString(plugin->getName()) + " " + QString::fromStdString(plugin->getVersion()));
+  ui->titleLabel->setText(QString::fromStdString(plugin->getTitle()));
+  ui->titleLabel->setToolTip(QString::fromStdString(plugin->getTitle()));
+  ui->versionLabel->setText(QString::fromStdString(plugin->getVersion()));
+  ui->descriptionBrowser->setText(QString::fromStdString(plugin->getDescription()));
   ui->iconLabel->setPixmap(plugin->getIcon().pixmap(32, 32));
-  ui->authorLabel->setText(plugin->getAuthor());
+  ui->authorLabel->setText(QString::fromStdString(plugin->getAuthor()));
   // if (PluginLoader::getInstance().isActivatedPlugin(plugin)) {
   // ui->checkBox->setChecked(true);
   //}
@@ -58,6 +58,6 @@ std::shared_ptr<Plugin> PCPluginWidget::getPlugin() { return this->plugin; }
 
 void lenna::plugin::PCPluginWidget::on_addButton_clicked() {
   QString uid = QUuid::createUuid().toString();
-  PluginLoader::getInstance().activatePlugin(uid, plugin->getName());
+  PluginLoader::getInstance().activatePlugin(uid, QString::fromStdString(plugin->getName()));
   emit pluginActivated(uid);
 }

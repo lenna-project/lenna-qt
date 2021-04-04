@@ -104,7 +104,7 @@ void MainWindow::loadInputPluginWidgets() {
        PluginLoader::getInstance().getActiveInputPlugins()) {
     assert(plugin);
     ui->inputTabWidget->addTab(plugin->getWidget(), plugin->getIcon(),
-                               plugin->getTitle());
+                               QString::fromStdString(plugin->getTitle()));
   }
 }
 
@@ -114,7 +114,7 @@ void MainWindow::loadEditPluginWidgets() {
        PluginLoader::getInstance().getActiveEditPlugins()) {
     assert(plugin);
     ui->editTabWidget->addTab(plugin->getWidget(), plugin->getIcon(),
-                              plugin->getTitle());
+                              QString::fromStdString(plugin->getTitle()));
   }
 }
 
@@ -123,7 +123,7 @@ void MainWindow::loadOutputPluginWidgets() {
   for (std::shared_ptr<OutputPlugin> plugin :
        PluginLoader::getInstance().getActiveOutputPlugins()) {
     ui->outputTabWidget->addTab(plugin->getWidget(), plugin->getIcon(),
-                                plugin->getTitle());
+                                QString::fromStdString(plugin->getTitle()));
   }
 }
 

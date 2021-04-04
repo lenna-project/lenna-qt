@@ -31,16 +31,16 @@ FilterMatrix::~FilterMatrix() {
   if (this->widget) delete this->widget;
 }
 
-QString FilterMatrix::getName() { return QString("filtermatrix"); }
+std::string FilterMatrix::getName() { return std::string("filtermatrix"); }
 
-QString FilterMatrix::getTitle() { return QString(tr("FilterMatrix")); }
+std::string FilterMatrix::getTitle() { return tr("FilterMatrix").toStdString(); }
 
-QString FilterMatrix::getVersion() { return QString("0.1"); }
+std::string FilterMatrix::getVersion() { return std::string("0.1"); }
 
-QString FilterMatrix::getAuthor() { return QString("FalseCAM"); }
+std::string FilterMatrix::getAuthor() { return std::string("FalseCAM"); }
 
-QString FilterMatrix::getDescription() {
-  return QString(tr("Plugin to filter images with custom matrix."));
+std::string FilterMatrix::getDescription() {
+  return tr("Plugin to filter images with custom matrix.").toStdString();
 }
 
 QIcon FilterMatrix::getIcon() {

@@ -29,11 +29,11 @@ namespace plugin {
 
 class Plugin : public QObject {
  public:
-  virtual QString getName() { return QString("unknown"); }
-  virtual QString getTitle() = 0;
-  virtual QString getVersion() = 0;
-  virtual QString getAuthor() = 0;
-  virtual QString getDescription() = 0;
+  virtual std::string getName() { return std::string("unknown"); }
+  virtual std::string getTitle() = 0;
+  virtual std::string getVersion() = 0;
+  virtual std::string getAuthor() = 0;
+  virtual std::string getDescription() = 0;
   virtual QIcon getIcon() = 0;
   virtual QWidget* getWidget() = 0;
 

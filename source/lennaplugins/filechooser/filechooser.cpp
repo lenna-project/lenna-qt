@@ -34,16 +34,16 @@ FileChooser::FileChooser() {
 
 FileChooser::~FileChooser() {}
 
-QString FileChooser::getName() { return QString("filechooser"); }
+std::string FileChooser::getName() { return std::string("filechooser"); }
 
-QString FileChooser::getTitle() { return QString(tr("Filechooser")); }
+std::string FileChooser::getTitle() { return tr("Filechooser").toStdString(); }
 
-QString FileChooser::getVersion() { return QString("1.0"); }
+std::string FileChooser::getVersion() { return std::string("1.0"); }
 
-QString FileChooser::getAuthor() { return QString("FalseCAM"); }
+std::string FileChooser::getAuthor() { return std::string("FalseCAM"); }
 
-QString FileChooser::getDescription() {
-  return QString(tr("Plugin to load images from desktop."));
+std::string FileChooser::getDescription() {
+  return tr("Plugin to load images from desktop.").toStdString();
 }
 
 QIcon FileChooser::getIcon() {

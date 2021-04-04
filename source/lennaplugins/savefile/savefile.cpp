@@ -31,16 +31,16 @@ SaveFile::SaveFile() { this->widget = 0; }
 
 SaveFile::~SaveFile() {}
 
-QString SaveFile::getName() { return QString("savefile"); }
+std::string SaveFile::getName() { return std::string("savefile"); }
 
-QString SaveFile::getTitle() { return QString(tr("Save File")); }
+std::string SaveFile::getTitle() { return tr("Save File").toStdString(); }
 
-QString SaveFile::getVersion() { return QString("1.0"); }
+std::string SaveFile::getVersion() { return std::string("1.0"); }
 
-QString SaveFile::getAuthor() { return QString("FalseCAM"); }
+std::string SaveFile::getAuthor() { return std::string("FalseCAM"); }
 
-QString SaveFile::getDescription() {
-  return QString(tr("Plugin to save images to desktop."));
+std::string SaveFile::getDescription() {
+  return tr("Plugin to save images to desktop.").toStdString();
 }
 
 QIcon SaveFile::getIcon() {

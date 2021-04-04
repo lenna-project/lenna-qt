@@ -37,15 +37,15 @@ Crop::~Crop() {
   }
 }
 
-QString Crop::getName() { return QString("crop"); }
+std::string Crop::getName() { return std::string("crop"); }
 
-QString Crop::getTitle() { return QString(tr("Crop")); }
+std::string Crop::getTitle() { return tr("Crop").toStdString(); }
 
-QString Crop::getVersion() { return QString("0.1"); }
+std::string Crop::getVersion() { return std::string("0.1"); }
 
-QString Crop::getAuthor() { return QString("FalseCAM"); }
+std::string Crop::getAuthor() { return std::string("FalseCAM"); }
 
-QString Crop::getDescription() { return QString(tr("Plugin to crop images")); }
+std::string Crop::getDescription() { return tr("Plugin to crop images").toStdString(); }
 
 QIcon Crop::getIcon() { return QIcon(":/plugins/crop/crop"); }
 

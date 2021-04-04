@@ -38,11 +38,11 @@ class FileChooser : public InputPlugin {
  public:
   FileChooser();
   ~FileChooser();
-  virtual QString getName();
-  QString getTitle();
-  QString getVersion();
-  QString getAuthor();
-  QString getDescription();
+  virtual std::string getName();
+  std::string getTitle();
+  std::string getVersion();
+  std::string getAuthor();
+  std::string getDescription();
   QIcon getIcon();
   QWidget *getWidget();
 

@@ -28,16 +28,16 @@ Rename::Rename() { widget = 0; }
 
 Rename::~Rename() {}
 
-QString Rename::getName() { return QString("rename"); }
+std::string Rename::getName() { return std::string("rename"); }
 
-QString Rename::getTitle() { return QString(tr("Rename")); }
+std::string Rename::getTitle() { return tr("Rename").toStdString(); }
 
-QString Rename::getVersion() { return QString("0.1"); }
+std::string Rename::getVersion() { return std::string("0.1"); }
 
-QString Rename::getAuthor() { return QString("FalseCAM"); }
+std::string Rename::getAuthor() { return std::string("FalseCAM"); }
 
-QString Rename::getDescription() {
-  return QString(tr("Plugin to rename image files"));
+std::string Rename::getDescription() {
+  return tr("Plugin to rename image files").toStdString();
 }
 
 QIcon Rename::getIcon() { return QIcon(":/plugins/rename/rename"); }

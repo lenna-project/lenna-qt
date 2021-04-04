@@ -38,11 +38,11 @@ class Blur : public EditPlugin {
  public:
   Blur();
   ~Blur();
-  QString getName();
-  QString getTitle();
-  QString getVersion();
-  QString getAuthor();
-  QString getDescription();
+  std::string getName();
+  std::string getTitle();
+  std::string getVersion();
+  std::string getAuthor();
+  std::string getDescription();
   QIcon getIcon();
   QWidget *getWidget();
 

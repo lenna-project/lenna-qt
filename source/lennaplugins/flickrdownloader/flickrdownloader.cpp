@@ -44,18 +44,18 @@ FlickrDownloader::FlickrDownloader() {
 
 FlickrDownloader::~FlickrDownloader() {}
 
-QString FlickrDownloader::getName() { return QString("flickrdownloader"); }
+std::string FlickrDownloader::getName() { return std::string("flickrdownloader"); }
 
-QString FlickrDownloader::getTitle() {
-  return QString(tr("Flickr Downloader"));
+std::string FlickrDownloader::getTitle() {
+  return tr("Flickr Downloader").toStdString();
 }
 
-QString FlickrDownloader::getVersion() { return QString("0.9"); }
+std::string FlickrDownloader::getVersion() { return std::string("0.9"); }
 
-QString FlickrDownloader::getAuthor() { return QString("FalseCAM"); }
+std::string FlickrDownloader::getAuthor() { return std::string("FalseCAM"); }
 
-QString FlickrDownloader::getDescription() {
-  return QString(tr("Plugin to load images from desktop."));
+std::string FlickrDownloader::getDescription() {
+  return tr("Plugin to load images from desktop.").toStdString();
 }
 
 QIcon FlickrDownloader::getIcon() {

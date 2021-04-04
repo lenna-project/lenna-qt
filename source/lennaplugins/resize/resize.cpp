@@ -27,16 +27,16 @@ Resize::Resize() { widget = 0; }
 
 Resize::~Resize() {}
 
-QString Resize::getName() { return QString("resize"); }
+std::string Resize::getName() { return std::string("resize"); }
 
-QString Resize::getTitle() { return QString(tr("Resize")); }
+std::string Resize::getTitle() { return tr("Resize").toStdString(); }
 
-QString Resize::getVersion() { return QString("0.1"); }
+std::string Resize::getVersion() { return std::string("0.1"); }
 
-QString Resize::getAuthor() { return QString("FalseCAM"); }
+std::string Resize::getAuthor() { return std::string("FalseCAM"); }
 
-QString Resize::getDescription() {
-  return QString(tr("Plugin to resize images"));
+std::string Resize::getDescription() {
+  return tr("Plugin to resize images").toStdString();
 }
 
 QIcon Resize::getIcon() { return QIcon(":/plugins/resize/resize"); }

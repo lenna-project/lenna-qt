@@ -91,15 +91,15 @@ void PluginLoader::saveConfig() {
   settings.beginGroup("plugins");
   // inputplugins
   for (QString uid : this->activeInputPlugins) {
-    settings.setValue(uid, this->activatedPlugins.value(uid)->getName());
+    settings.setValue(uid, QString::fromStdString(this->activatedPlugins.value(uid)->getName()));
   }
   // editplugins
   for (QString uid : this->activeEditPlugins) {
-    settings.setValue(uid, this->activatedPlugins.value(uid)->getName());
+    settings.setValue(uid, QString::fromStdString(this->activatedPlugins.value(uid)->getName()));
   }
   // outputplugins
   for (QString uid : this->activeOutputPlugins) {
-    settings.setValue(uid, this->activatedPlugins.value(uid)->getName());
+    settings.setValue(uid, QString::fromStdString(this->activatedPlugins.value(uid)->getName()));
   }
 }
 
@@ -187,20 +187,20 @@ void PluginLoader::deactivatePlugin(int index) {
 // returns plugin from string in format "name version"
 std::shared_ptr<Plugin> PluginLoader::getPlugin(QString name) {
   for (std::shared_ptr<InputPlugin> plugin : this->inputPlugins) {
-    if (QString(plugin->getName() + " " + plugin->getVersion()) == name ||
-        QString(plugin->getName()) == name) {
+    if (QString(QString::fromStdString(plugin->getName()) + " " + QString::fromStdString(plugin->getVersion())) == name ||
+        QString(QString::fromStdString(plugin->getName())) == name) {
       return plugin;
     }
   }
   for (std::shared_ptr<EditPlugin> plugin : this->editPlugins) {
-    if (QString(plugin->getName() + " " + plugin->getVersion()) == name ||
-        QString(plugin->getName()) == name) {
+    if (QString(QString::fromStdString(plugin->getName()) + " " + QString::fromStdString(plugin->getVersion())) == name ||
+        QString(QString::fromStdString(plugin->getName())) == name) {
       return plugin;
     }
   }
   for (std::shared_ptr<OutputPlugin> plugin : this->outputPlugins) {
-    if (QString(plugin->getName() + " " + plugin->getVersion()) == name ||
-        QString(plugin->getName()) == name) {
+    if (QString(QString::fromStdString(plugin->getName()) + " " + QString::fromStdString(plugin->getVersion())) == name ||
+        QString(QString::fromStdString(plugin->getName())) == name) {
       return plugin;
     }
   }
@@ -293,7 +293,7 @@ void PluginLoader::addInputPlugin(std::shared_ptr<InputPlugin> plugin) {
       if (plugin_.get() == plugin.get()) return;
     }
     inputPlugins.push_back(plugin);
-    Translation::installPluginTranslation(plugin->getName());
+    Translation::installPluginTranslation(QString::fromStdString(plugin->getName()));
   }
 }
 
@@ -352,7 +352,7 @@ void PluginLoader::addEditPlugin(std::shared_ptr<EditPlugin> plugin) {
       if (plugin_->getName() == plugin->getName()) return;
     }
     editPlugins.push_back(plugin);
-    Translation::installPluginTranslation(plugin->getName());
+    Translation::installPluginTranslation(QString::fromStdString(plugin->getName()));
   }
 }
 
@@ -409,7 +409,7 @@ void PluginLoader::addOutputPlugin(std::shared_ptr<OutputPlugin> plugin) {
       if (plugin_->getName() == plugin->getName()) return;
     }
     outputPlugins.push_back(plugin);
-    Translation::installPluginTranslation(plugin->getName());
+    Translation::installPluginTranslation(QString::fromStdString(plugin->getName()));
   }
 }
 

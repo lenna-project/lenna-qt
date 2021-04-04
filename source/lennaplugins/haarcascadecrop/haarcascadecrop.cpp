@@ -40,18 +40,17 @@ HaarcascadeCrop::~HaarcascadeCrop() {
   }
 }
 
-QString HaarcascadeCrop::getName() { return QString("haarcascadecrop"); }
+std::string HaarcascadeCrop::getName() { return std::string("haarcascadecrop"); }
 
-QString HaarcascadeCrop::getTitle() { return QString(tr("Haarcascade Crop")); }
+std::string HaarcascadeCrop::getTitle() { return tr("Haarcascade Crop").toStdString(); }
 
-QString HaarcascadeCrop::getVersion() { return QString("0.1"); }
+std::string HaarcascadeCrop::getVersion() { return std::string("0.1"); }
 
-QString HaarcascadeCrop::getAuthor() { return QString("FalseCAM"); }
+std::string HaarcascadeCrop::getAuthor() { return std::string("FalseCAM"); }
 
-QString HaarcascadeCrop::getDescription() {
-  return QString(
-      tr("Plugin to crop images based on the boundaries the haarcascade "
-         "classifier detects."));
+std::string HaarcascadeCrop::getDescription() {
+  return tr("Plugin to crop images based on the boundaries the haarcascade "
+         "classifier detects.").toStdString();
 }
 
 QIcon HaarcascadeCrop::getIcon() {

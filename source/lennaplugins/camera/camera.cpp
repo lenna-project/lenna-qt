@@ -34,16 +34,16 @@ Camera::Camera() {
 
 Camera::~Camera() {}
 
-QString Camera::getName() { return QString("camera"); }
+std::string Camera::getName() { return std::string("camera"); }
 
-QString Camera::getTitle() { return QString(tr("Camera")); }
+std::string Camera::getTitle() { return tr("Camera").toStdString(); }
 
-QString Camera::getVersion() { return QString("1.0"); }
+std::string Camera::getVersion() { return std::string("1.0"); }
 
-QString Camera::getAuthor() { return QString("FalseCAM"); }
+std::string Camera::getAuthor() { return std::string("FalseCAM"); }
 
-QString Camera::getDescription() {
-  return QString(tr("Plugin to get images from camera."));
+std::string Camera::getDescription() {
+  return tr("Plugin to get images from camera.").toStdString();
 }
 
 QIcon Camera::getIcon() {

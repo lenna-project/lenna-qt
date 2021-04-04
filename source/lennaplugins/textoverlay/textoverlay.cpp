@@ -27,16 +27,16 @@ Textoverlay::Textoverlay() { widget = 0; }
 
 Textoverlay::~Textoverlay() {}
 
-QString Textoverlay::getName() { return QString("textoverlay"); }
+std::string Textoverlay::getName() { return std::string("textoverlay"); }
 
-QString Textoverlay::getTitle() { return QString(tr("Textoverlay")); }
+std::string Textoverlay::getTitle() { return tr("Textoverlay").toStdString(); }
 
-QString Textoverlay::getVersion() { return QString("0.1"); }
+std::string Textoverlay::getVersion() { return std::string("0.1"); }
 
-QString Textoverlay::getAuthor() { return QString("FalseCAM"); }
+std::string Textoverlay::getAuthor() { return std::string("FalseCAM"); }
 
-QString Textoverlay::getDescription() {
-  return QString(tr("Plugin to put text onto images"));
+std::string Textoverlay::getDescription() {
+  return tr("Plugin to put text onto images").toStdString();
 }
 
 QIcon Textoverlay::getIcon() {
