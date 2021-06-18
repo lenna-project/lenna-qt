@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
+#include <QDesktopServices>
 #include "mainwindow.h"
 #include <lenna/lenna.h>
 #include <lenna/logger.h>
@@ -183,4 +183,9 @@ void lenna::MainWindow::on_outputTabWidget_tabCloseRequested(int index) {
     }
   }
   loadOutputPluginWidgets();
+}
+
+void lenna::MainWindow::on_actionWebApp_triggered()
+{
+    QDesktopServices::openUrl(QUrl("https://lenna.app", QUrl::TolerantMode));
 }
