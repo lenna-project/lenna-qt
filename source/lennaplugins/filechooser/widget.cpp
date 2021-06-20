@@ -102,13 +102,14 @@ void Widget::addFiles() {
   QString supportedFormats;
   foreach (QByteArray format, QImageReader::supportedImageFormats()) {
     supportedFormats.append(QString(" *.").append(format));
+    supportedFormats.append(QString(" *.").append(format.toUpper()));
   }
   // Create File Dialog and open selected Files
   QStringList files = QFileDialog::getOpenFileNames(
       this, tr("Please select a file"), this->lastFolder,
       "All Supported Image Files (" + supportedFormats +
           ");;"
-          "Joint Photographic Experts Group File (*.jpg *.jpeg);;"
+          "Joint Photographic Experts Group File (*.jpg *.jpeg *.JPG *.JPEG);;"
           "All Files (*.*)");
   addFiles(files);
 }

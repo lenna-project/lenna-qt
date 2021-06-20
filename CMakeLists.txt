@@ -173,7 +173,8 @@ install(FILES ${META_PROJECT_NAME}-config.cmake DESTINATION ${INSTALL_ROOT} COMP
 install(FILES AUTHORS   DESTINATION ${INSTALL_ROOT} COMPONENT runtime)
 install(FILES LICENSE   DESTINATION ${INSTALL_ROOT} COMPONENT runtime)
 install(FILES README.md DESTINATION ${INSTALL_ROOT} COMPONENT runtime)
-
+install(FILES "deploy/lenna.desktop" DESTINATION "${INSTALL_ROOT}/applications" RENAME "lenna.desktop")
+install(FILES "deploy/lenna.appdata.xml" DESTINATION "${INSTALL_ROOT}/metainfo" RENAME "lenna.appdata.xml")
 # Install runtime data
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/data DESTINATION ${INSTALL_DATA} COMPONENT runtime)
 execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_SOURCE_DIR}/data

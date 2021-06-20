@@ -1,4 +1,4 @@
-# lenna [![Build Status][travis-image]][travis] [![Documentation][codedocs-image]][codedocs] [![Release][release-image]][releases] [![License][license-image]][license]
+# lenna [![Build Status][travis-image]][travis] [![Documentation][codedocs-image]][codedocs] [![Release][release-image]][releases] [![License][license-image]][license] [![lenna](https://snapcraft.io/lenna/badge.svg)](https://snapcraft.io/lenna)
 ==============
 
 *Open Source Image Processing Program*
@@ -16,6 +16,8 @@ This project is using Qt5 and OpenCV.
 
 [license-image]: https://img.shields.io/github/license/lenna-project/lenna?branch=main
 [license]: LICENSE
+
+![Preview of Lenna Desktop](docs/assets/preview.png "Preview of Lenna")
 
 ### Quick start
 

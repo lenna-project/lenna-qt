@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+    <id>app.lenna.lenna</id>
+    <name>Lenna</name>
+    <summary>This is the Lenna Graphical User Interface.</summary>
+    <description>Lenna desktop app for converting images.</description>
+    <icon type="local">deploy/images/logo512.png</icon>
+    <launchable type="desktop-id">
+    app.lenna.lenna.desktop
+  </launchable>
+    <developer_name>chriamue</developer_name>
+    <url type="homepage">https://lenna.app/</url>
+    <url type="help">https://github.com/lenna-project/lenna/issues</url>
+    <screenshots>
+        <screenshot type="default">
+            <image>https://raw.githubusercontent.com/lenna-project/lenna/main/docs/assets/preview.png</image>
+        </screenshot>
+    </screenshots>
+    <releases>
+        <release date="2021-06-19" version="0.13.0" />
+    </releases>
+</component>

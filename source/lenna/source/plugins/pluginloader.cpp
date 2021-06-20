@@ -24,6 +24,7 @@
 #include <memory>
 
 #include <QtCore/QCoreApplication>
+#include <QtCore/QProcessEnvironment>
 #include <QtCore/QDir>
 #include <QtCore/QPluginLoader>
 #include <QtCore/QSettings>
@@ -232,6 +233,12 @@ void PluginLoader::loadPlugins() {
     loadOutputPlugins(path);
     // loadOutputPlugins(path + Lenna::applicationName().toLower());
   }
+
+  QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+  loadInputPlugins(env.value("LENNA_PLUGINS", ""));
+  loadEditPlugins(env.value("LENNA_PLUGINS", ""));
+  loadOutputPlugins(env.value("LENNA_PLUGINS", ""));
+
 #if defined(Q_OS_WIN)
   if (pluginsDir.dirName().toLower() == "debug" ||
       pluginsDir.dirName().toLower() == "release") {

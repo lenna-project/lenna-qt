@@ -1,0 +1,110 @@
+name: lenna
+adopt-info: lenna
+version: git
+summary: This is the Lenna Graphical User Interface.
+description: |
+  lenna desktop app for converting images.
+confinement: strict
+base: core20
+license: MIT
+icon: deploy/images/logo512.png
+
+parts:
+  lenna:
+    plugin: cmake
+    source: https://github.com/lenna-project/lenna.git
+    source-type: git
+    parse-info: [usr/share/lenna/metainfo/lenna.appdata.xml]
+    build-snaps:
+      - kde-frameworks-5-qt-5-15-core20-sdk
+    cmake-parameters:
+      - "-DCMAKE_INSTALL_PREFIX=/usr"
+      - "-DCMAKE_BUILD_TYPE=Release"
+      - "-DCMAKE_FIND_ROOT_PATH=/usr\\;/root/stage\\;/snap/kde-frameworks-5-qt-5-15-core20-sdk/current"
+    override-pull: |
+      snapcraftctl pull
+      version="git$(git describe --tags | sed 's,^v[^-]\+,,')"
+      snapcraftctl set-version "$version"
+      sed -i 's|^Icon=.*|Icon=${SNAP}/meta/gui/icon.png|g' deploy/lenna.desktop
+    build-packages:
+      - g++
+      - libqt5webkit5-dev
+      - libssl-dev
+      - pkg-config
+      - qt5keychain-dev
+      - qttools5-dev
+      - libopencv-dev
+    stage-packages:
+      - libaec0
+      - libarmadillo9
+      - libarpack2
+      - libatk-bridge2.0-0
+      - libatk1.0-0
+      - libatspi2.0-0
+      - libcfitsio8
+      - libcharls2
+      - libcurl3-gnutls
+      - libdap25
+      - libdapclient6v5
+      - libepsilon1
+      - libfreexl1
+      - libfyba0
+      - libgdal26
+      - libgdcm3.0
+      - libgeos-3.8.0
+      - libgeos-c1v5
+      - libgeotiff5
+      - libgfortran5
+      - libgif7
+      - libgtk-3-0
+      - libhdf4-0-alt
+      - libhdf5-103
+      - libilmbase24
+      - libkmlbase1
+      - libkmldom1
+      - libkmlengine1
+      - libnetcdf15
+      - libnghttp2-14
+      - libogdi4.1
+      - libopencv-calib3d4.2
+      - libopencv-core4.2
+      - libopencv-features2d4.2
+      - libopencv-flann4.2
+      - libopencv-highgui4.2
+      - libopencv-imgcodecs4.2
+      - libopencv-imgproc4.2
+      - libopencv-objdetect4.2
+      - libopencv-videoio4.2
+      - libopenexr24
+      - libproj15
+      - libqhull7
+      - libquadmath0
+      - librtmp1
+      - libspatialite7
+      - libssh-4
+      - libsuperlu5
+      - libsz2
+      - libtbb2
+      - liburiparser1
+      - libxerces-c3.2
+      - libxinerama1
+      - odbcinst1debian2
+
+
+apps:
+  lenna:
+    common-id: app.lenna.lenna
+    desktop: usr/share/lenna/applications/lenna.desktop
+    command: usr/bin/lenna
+    plugs:
+      - kde-frameworks-5-plug
+      - home
+      - network
+      - opengl
+      - wayland
+      - x11  
+    extensions:
+      - kde-neon
+    environment:
+      LENNA_PLUGINS: $SNAP/usr/lib/
+      LD_LIBRARY_PATH: "$LD_LIBRARY_PATH:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/blas:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/lapack"
