@@ -1,40 +1,61 @@
-# See http://www.appveyor.com/docs/appveyor-yml
-
-version: '{build}'
-
+version: "{build}"
 branches:
-  except:
-  - /^travis.*$/
-
-init:
-- git config --global core.autocrlf input
-
-shallow_clone: true
-
+  only:
+    - main
+clone_folder: c:\projects\lenna
+image:
+  - Visual Studio 2017
+configuration:
+  - Release
+platform:
+  - x64
 environment:
-  MSBUILD_FLAGS: /verbosity:minimal /maxcpucount
   matrix:
-  - CMAKE_GENERATOR: "Visual Studio 12 2013"
-    QT5: C:\Qt\5.5\msvc2013
-  - CMAKE_GENERATOR: "Visual Studio 12 2013 Win64"
-    QT5: C:\Qt\5.5\msvc2013_64
-
+    - GENERATOR : "Visual Studio 15 2017"
+      ARCHITECTURE : "-A x64"
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      QTDIR: C:\Qt\5.13.2\msvc2017_64
+      PLATFORM: x64
+      OPENCV_VERSION: 4.5.0
 matrix:
   fast_finish: true
 
 install:
- - cmd: ECHO "INSTALL OPENCV:"
- - cmd: choco install OpenCV
+  - set PATH=%QTDIR%\bin;%PATH%
+  - set Qt5_DIR=%QTDIR%\lib\cmake\Qt5
+  - cmd: choco install opencv -y --version=%OPENCV_VERSION%
 
 before_build:
-- set Path=%QT5%\bin;%Path%
-- cmake -H. -Bbuild -G "%CMAKE_GENERATOR%" -DCMAKE_SYSTEM_VERSION=10.0 "-DCMAKE_PREFIX_PATH=%QT5%" -DENABLE_GUI=ON
-
-build_script:
-- if "%APPVEYOR_REPO_TAG%"=="true" (set CONFIGURATION=RelWithDebInfo) else (set CONFIGURATION=Debug)
-- cmake --build build --config "%CONFIGURATION%" -- %MSBUILD_FLAGS%
+  - IF EXIST c:\tools\opencv* CD c:\tools\opencv*
+  - SET OPENCV_DIR=%CD%\build
+  - SET OpenCV_DIR=%CD%\build
+  - set QT_DIR=%QTDIR%
+  - set Qt5_DIR=%QTDIR%\lib\cmake\Qt5
+  - cd c:\projects\lenna
+  - cmd: |-
+      mkdir build
+      cd build
+      cmake --version
+      cmake .. -DOPTION_SELF_CONTAINED=ON "-G%GENERATOR%" %ARCHITECTURE%
+build:
+  project: c:\projects\lenna\build\lenna.sln
+  verbosity: minimal
+  parallel: true
 
 after_build:
-- cmake --build build --config "%CONFIGURATION%" --target check -- %MSBUILD_FLAGS%
-- cmake --build build --config "%CONFIGURATION%" --target package -- %MSBUILD_FLAGS%
+- cmd: |-
+    cd c:\projects\lenna\build
+    cmake --build . --target pack
+    dir
 
+only_commits:
+  files:
+    - CMakeLists.txt
+    - appveyor.yml
+    - source/
+    - cmake/
+
+artifacts:
+  - path: 'build\Release\lenna.exe'
+  - path: 'build\*.exe'
+  - path: 'build\*.zip'
