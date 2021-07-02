@@ -1,7 +1,7 @@
 version: "{build}"
-branches:
-  only:
-    - main
+
+skip_non_tags: true
+
 clone_folder: c:\projects\lenna
 image:
   - Visual Studio 2017
@@ -11,8 +11,8 @@ platform:
   - x64
 environment:
   matrix:
-    - GENERATOR : "Visual Studio 15 2017"
-      ARCHITECTURE : "-A x64"
+    - GENERATOR: "Visual Studio 15 2017"
+      ARCHITECTURE: "-A x64"
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       QTDIR: C:\Qt\5.13.2\msvc2017_64
       PLATFORM: x64
@@ -43,10 +43,10 @@ build:
   parallel: true
 
 after_build:
-- cmd: |-
-    cd c:\projects\lenna\build
-    cmake --build . --target pack
-    dir
+  - cmd: |-
+      cd c:\projects\lenna\build
+      cmake --build . --target pack
+      dir
 
 only_commits:
   files:
@@ -58,4 +58,19 @@ only_commits:
 artifacts:
   - path: 'build\Release\lenna.exe'
   - path: 'build\*.exe'
+    name: installer
   - path: 'build\*.zip'
+
+deploy:
+  - provider: GitHub
+    auth_token:
+      secure: qgNDEr0uvXPJrujCdr3B45ibV7Llee5FrFthLvHOLE0h+i1x50XEZzdnAh7omZdC
+    artifact: installer
+    draft: false
+    prerelease: false
+    tag: $(APPVEYOR_REPO_TAG_NAME)
+    release: $(APPVEYOR_REPO_TAG_NAME)
+    description: $(APPVEYOR_REPO_COMMIT_MESSAGE)
+    force_update: true
+    on:
+      APPVEYOR_REPO_TAG: true
