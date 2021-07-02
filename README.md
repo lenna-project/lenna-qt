@@ -3,6 +3,8 @@
 
 *Open Source Image Processing Program*
 
+Program to batch compress, resize and rename Images.
+
 This project is using Qt5 and OpenCV.
 
 [travis-image]: https://travis-ci.com/lenna-project/lenna.svg?branch=main
@@ -19,7 +21,22 @@ This project is using Qt5 and OpenCV.
 
 ![Preview of Lenna Desktop](docs/assets/preview.png "Preview of Lenna")
 
-### Quick start
+## Features
+
+* Drag and drop images
+* convert images to formats like png, bmp, tiff or jpeg
+* batch convert folders
+
+The App is extendable by plugins.
+
+* resize
+* rotate
+* crop
+* rename
+* textoverlay
+* folders
+
+## Quick start
 
 First install CMake, Qt5, OpenCV.
 
@@ -35,12 +52,18 @@ make
 ./bin/lenna
 ```
 
+### Packages
+
+```sh
+make pack
+```
+
 #### SNAP Package
 ```sh
 make snap
 ```
 
-### Contribute
+## Contribute
 
 Contributions are always welcome!
 
