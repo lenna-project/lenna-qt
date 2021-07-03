@@ -70,6 +70,7 @@ private slots:
   void loadOutputPluginWidgets();
   void initWorker();
   bool startStopButtonIsStart;
+  void initToolbar();
 };
 }
 

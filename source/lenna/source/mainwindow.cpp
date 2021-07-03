@@ -50,6 +50,7 @@ MainWindow::MainWindow(QWidget *parent)
   loadOutputPluginWidgets();
   process = new Process(this);
   initWorker();
+  initToolbar();
   // connect infoLineEdit to Logger info signal
   connect(Logger::instance(), SIGNAL(newInfo(QString)), ui->infoLineEdit,
           SLOT(setText(QString)));
@@ -188,4 +189,9 @@ void lenna::MainWindow::on_outputTabWidget_tabCloseRequested(int index) {
 void lenna::MainWindow::on_actionWebApp_triggered()
 {
     QDesktopServices::openUrl(QUrl("https://lenna.app", QUrl::TolerantMode));
+}
+
+void lenna::MainWindow::initToolbar(){
+    QAction * webAppAction = ui->mainToolBar->addAction(QIcon(":/logo/lenna_logo"), "WebApp", this, SLOT(on_actionWebApp_triggered()));
+    QAction * pluginsAction = ui->mainToolBar->addAction(QIcon(":/lenna/plugins.png"), "Plugins", this, SLOT(on_actionPlugins_triggered()));
 }
