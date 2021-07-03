@@ -48,7 +48,6 @@ set(META_VERSION_REVISION    "${GIT_REV}")
 set(META_VERSION             "${META_VERSION_MAJOR}.${META_VERSION_MINOR}.${META_VERSION_PATCH}")
 set(META_NAME_VERSION        "${META_PROJECT_NAME} v${META_VERSION} (${META_VERSION_REVISION})")
 
-
 # 
 # Project configuration options
 # 
@@ -70,7 +69,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set(IDE_FOLDER "")  
 
 # Declare project
-project(${META_PROJECT_NAME} C CXX)
+project(${META_PROJECT_NAME} LANGUAGES C CXX VERSION ${META_VERSION})
 
 # Set output directories
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})

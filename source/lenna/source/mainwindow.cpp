@@ -192,6 +192,6 @@ void lenna::MainWindow::on_actionWebApp_triggered()
 }
 
 void lenna::MainWindow::initToolbar(){
-    QAction * webAppAction = ui->mainToolBar->addAction(QIcon(":/logo/lenna_logo"), "WebApp", this, SLOT(on_actionWebApp_triggered()));
-    QAction * pluginsAction = ui->mainToolBar->addAction(QIcon(":/lenna/plugins.png"), "Plugins", this, SLOT(on_actionPlugins_triggered()));
+    ui->mainToolBar->addAction(QIcon(":/logo/lenna_logo"), "WebApp", this, SLOT(on_actionWebApp_triggered()));
+    ui->mainToolBar->addAction(QIcon(":/lenna/plugins.png"), "Plugins", this, SLOT(on_actionPlugins_triggered()));
 }

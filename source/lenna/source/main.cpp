@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
   QApplication a(argc, argv);
   Lenna::setApplicationName(QString::fromStdString(PROJECT_NAME));
   Lenna::setApplicationVersion(QString::fromStdString(PROJECT_VERSION));
-  Lenna::setOrganizationName("FalseCAM");
+  Lenna::setOrganizationName("lenna-project");
   a.setWindowIcon(Lenna::applicationIcon());
   MainWindow w;
   w.show();

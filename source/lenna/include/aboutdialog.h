@@ -39,7 +39,9 @@ class AboutDialog : public QDialog {
   void on_pushButton_clicked();
   void on_tabWidget_currentChanged(int index);
 
- private:
+  void on_commandLinkButton_clicked();
+
+private:
   Ui::AboutDialog *ui;
   QNetworkAccessManager *manager;
   void initLicense();

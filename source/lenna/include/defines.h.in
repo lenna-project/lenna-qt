@@ -6,6 +6,7 @@
 namespace {
   std::string PROJECT_NAME = "@PROJECT_NAME@";
   std::string PROJECT_VERSION = "@PROJECT_VERSION@";
+  std::string PROJECT_REVISION = "@META_VERSION_REVISION@";
 }
 
 #endif

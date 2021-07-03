@@ -17,12 +17,14 @@
  */
 
 #include "aboutdialog.h"
+#include <QDesktopServices>
 #include <QtCore/QEventLoop>
 #include <QtCore/QFile>
 #include <QtCore/QTextStream>
 #include <QtCore/QUrl>
 #include <QtNetwork/QNetworkReply>
 #include "lenna/lenna.h"
+#include "defines.h"
 #include "ui_aboutdialog.h"
 
 using namespace lenna;
@@ -30,7 +32,7 @@ using namespace lenna;
 AboutDialog::AboutDialog(QWidget *parent)
     : QDialog(parent), ui(new Ui::AboutDialog) {
   ui->setupUi(this);
-  ui->versionLabel->setText(Lenna::applicationVersion());
+  ui->versionLabel->setText(Lenna::applicationVersion() + " - " + QString::fromStdString(PROJECT_REVISION));
   manager = 0;
   initAbout();
   initAuthors();
@@ -115,11 +117,11 @@ void AboutDialog::initUpdates() {
   ui->thisVersionLabel->setText(tr("This Version: ") +
                                 Lenna::applicationVersion());
   QNetworkAccessManager *manager = new QNetworkAccessManager(this);
-  QNetworkReply *reply = manager->get(QNetworkRequest(QUrl("")));
+  QNetworkReply *reply = manager->get(QNetworkRequest(QUrl("https://raw.githubusercontent.com/lenna-project/lenna/main/VERSION")));
   QEventLoop loop;
   QObject::connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
   loop.exec();
-  ui->htmlVersionLabel->setText(reply->readAll());
+  ui->htmlVersionLabel->setText(tr("Online Version: ") + reply->readAll());
   QObject::disconnect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
   delete reply;
   delete manager;
@@ -131,3 +133,9 @@ void AboutDialog::on_tabWidget_currentChanged(int index) {
   // When tab for updates is selected, download update information from website.
   initUpdates();
 }
+
+void AboutDialog::on_commandLinkButton_clicked()
+{
+    QDesktopServices::openUrl(QUrl("https://lenna.app", QUrl::TolerantMode));
+}
+
