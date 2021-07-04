@@ -36,9 +36,35 @@ Widget::~Widget() {
   delete ui;
 }
 
-void Widget::loadState() {}
+void Widget::loadState() {
+  QSettings settings(QCoreApplication::organizationName(),
+                     QCoreApplication::applicationName());
+  settings.beginGroup("plugins");
+  settings.beginGroup("Resize");
 
-void Widget::saveState() {}
+  ui->percentRadioButton->setChecked(
+      settings.value("PercentUse", false).toBool());
+  ui->pixelRadioButton->setChecked(settings.value("PixelUse", false).toBool());
+
+  ui->pixelWidthSpinBox->setValue(settings.value("PixelX", 1920).toInt());
+  ui->pixelHeightSpinBox->setValue(settings.value("PixelY", 1080).toInt());
+  ui->percentWidthSpinBox->setValue(settings.value("PercentX", 100).toInt());
+  ui->percentHeightSpinBox->setValue(settings.value("PercentY", 100).toInt());
+}
+
+void Widget::saveState() {
+  QSettings settings(QCoreApplication::organizationName(),
+                     QCoreApplication::applicationName());
+  settings.beginGroup("plugins");
+  settings.beginGroup("Resize");
+
+  settings.setValue("PercentUse", ui->percentRadioButton->isChecked());
+  settings.setValue("PixelUse", ui->pixelRadioButton->isChecked());
+  settings.setValue("PixelX", ui->pixelWidthSpinBox->value());
+  settings.setValue("PixelY", ui->pixelHeightSpinBox->value());
+  settings.setValue("PercentX", ui->percentWidthSpinBox->value());
+  settings.setValue("PercentY", ui->percentHeightSpinBox->value());
+}
 
 bool Widget::resizePixel() { return ui->pixelRadioButton->isChecked(); }
 

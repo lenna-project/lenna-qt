@@ -94,7 +94,10 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="4">
+   <item row="1" column="1" rowspan="5" colspan="4">
+    <widget class="QTextBrowser" name="descriptionBrowser"/>
+   </item>
+   <item row="0" column="0">
     <widget class="QCommandLinkButton" name="addButton">
      <property name="maximumSize">
       <size>
@@ -106,9 +109,6 @@
       <string>add</string>
      </property>
     </widget>
-   </item>
-   <item row="1" column="1" rowspan="5" colspan="4">
-    <widget class="QTextBrowser" name="descriptionBrowser"/>
    </item>
   </layout>
  </widget>
