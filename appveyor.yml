@@ -1,6 +1,6 @@
 version: "{build}"
 
-skip_non_tags: true
+# skip_non_tags: true
 
 clone_folder: c:\projects\lenna
 image:
@@ -23,7 +23,15 @@ matrix:
 install:
   - set PATH=%QTDIR%\bin;%PATH%
   - set Qt5_DIR=%QTDIR%\lib\cmake\Qt5
+  - ps: wget https://exiv2.org/releases/exiv2-0.27.3-2019msvc64.zip -o exiv2.zip
+  - ps: unzip exiv2.zip
+  - cmd: del exiv2-*.zip
+  - cmd: move exiv2-* c:\exiv2
+  - cmd: dir c:\exiv2
+  - set EXIV2DIR=c:\exiv2
+  - set PATH=%EXIV2DIR%\bin;%PATH%
   - cmd: choco install opencv -y --version=%OPENCV_VERSION%
+
 
 before_build:
   - IF EXIST c:\tools\opencv* CD c:\tools\opencv*
@@ -31,6 +39,7 @@ before_build:
   - SET OpenCV_DIR=%CD%\build
   - set QT_DIR=%QTDIR%
   - set Qt5_DIR=%QTDIR%\lib\cmake\Qt5
+  - set EXIV2_DIR=%EXIV2DIR%\lib
   - cd c:\projects\lenna
   - cmd: |-
       mkdir build
