@@ -1,6 +1,6 @@
 version: "{build}"
 
-# skip_non_tags: true
+skip_non_tags: true
 
 clone_folder: c:\projects\lenna
 image:
