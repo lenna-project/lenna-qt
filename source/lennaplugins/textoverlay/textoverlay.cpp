@@ -68,7 +68,10 @@ void Textoverlay::edit(std::shared_ptr<LennaImage> img) {
     painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
     int x = (int)((double)cols * ((double)widget->getX() / 100.0));
     int y = (int)((double)rows * ((double)widget->getY() / 100.0));
-    painter.setPen(*widget->getColor());
+    QColor brgColor =
+        QColor(widget->getColor()->blue(), widget->getColor()->green(),
+               widget->getColor()->red());
+    painter.setPen(brgColor);
     QFont tempFont = *widget->getFont();
     tempFont.setPointSize((int)(tempFont.pointSize() * cols / 100));
     painter.setFont(tempFont);

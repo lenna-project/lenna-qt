@@ -31,7 +31,7 @@ Image::Image(Image &image) {
 }
 
 Image::Image(QString file) {
-  this->image = cv::imread(file.toStdString().c_str(), 1);
+  this->image = cv::imread(file.toStdString().c_str(), cv::IMREAD_UNCHANGED);
 }
 
 void Image::setMat(Mat img) { this->image = img; }

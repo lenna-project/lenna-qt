@@ -21,9 +21,9 @@
 #include <QDir>
 #include <QProxyStyle>
 
+#include <exiv2/exiv2.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/opencv.hpp>
-#include <exiv2/exiv2.hpp>
 
 using namespace lenna;
 using namespace lenna::plugin;
@@ -87,11 +87,11 @@ void SaveFile::out(std::shared_ptr<LennaImage> image) {
 
   cv::imwrite(file.toStdString().c_str(), image->getImage(), params);
 
-  if(widget->getCopyMetaData()) {
+  if (widget->getCopyMetaData()) {
     // write exif data
     Exiv2::ExifData *exifData = image->getMetaData();
-    Exiv2::Image::AutoPtr destImage = Exiv2::ImageFactory::open(
-        file.toStdString().c_str());
+    Exiv2::Image::AutoPtr destImage =
+        Exiv2::ImageFactory::open(file.toStdString().c_str());
     destImage->setExifData(*exifData);
     destImage->writeMetadata();
   }
