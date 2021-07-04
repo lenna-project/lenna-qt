@@ -35,8 +35,8 @@ class EditPlugin : public Plugin {
 
   virtual void edit(std::shared_ptr<LennaImage> image) = 0;
 };
-}
-}
+}  // namespace plugin
+}  // namespace lenna
 
 Q_DECLARE_INTERFACE(lenna::plugin::EditPlugin, "Lenna.EditPlugin/1.1")
 

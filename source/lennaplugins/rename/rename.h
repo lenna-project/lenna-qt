@@ -53,8 +53,8 @@ class Rename : public EditPlugin {
  private:
   Widget *widget;
 };
-}
-}
-}
+}  // namespace rename
+}  // namespace plugin
+}  // namespace lenna
 
 #endif  // RENAME_H

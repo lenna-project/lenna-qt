@@ -38,8 +38,8 @@ class InputPlugin : public Plugin {
   virtual std::shared_ptr<LennaImage> next() = 0;
   virtual int getProgress() = 0;
 };
-}
-}
+}  // namespace plugin
+}  // namespace lenna
 
 Q_DECLARE_INTERFACE(lenna::plugin::InputPlugin, "Lenna.InputPlugin/1.1")
 

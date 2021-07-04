@@ -62,15 +62,14 @@ void Camera::init() {
   frames = widget->getFrames();
   position = 0;
   if (hasNext()) {
-
-      camera = new cv::VideoCapture();
-      int deviceID = 0;             // 0 = open default camera
-      int apiID = cv::CAP_ANY;      // 0 = autodetect default API
-      // open selected camera using selected API
-      camera->open(deviceID, apiID);
-      cv::Mat *frame = 0;
+    camera = new cv::VideoCapture();
+    int deviceID = 0;         // 0 = open default camera
+    int apiID = cv::CAP_ANY;  // 0 = autodetect default API
+    // open selected camera using selected API
+    camera->open(deviceID, apiID);
+    cv::Mat *frame = 0;
     while (frame == 0 || frame->empty()) {
-        camera->read(*frame);
+      camera->read(*frame);
     }
   }
 }

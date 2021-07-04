@@ -52,7 +52,7 @@ class SaveFile : public OutputPlugin {
  private:
   Widget *widget;
 };
-}
-}
+}  // namespace plugin
+}  // namespace lenna
 
 #endif  // SAVEFILE_H

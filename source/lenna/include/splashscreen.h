@@ -32,6 +32,6 @@ class SplashScreen : public QSplashScreen {
  public slots:
   void setMessage(QString message);
 };
-}
+}  // namespace lenna
 
 #endif  // SPLASHSCREEN_H

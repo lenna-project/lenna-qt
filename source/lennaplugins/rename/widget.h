@@ -50,8 +50,8 @@ class Widget : public QWidget {
   void loadState();
   void saveState();
 };
-}
-}
-}
+}  // namespace rename
+}  // namespace plugin
+}  // namespace lenna
 
 #endif  // WIDGET_H

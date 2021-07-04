@@ -44,7 +44,9 @@ FlickrDownloader::FlickrDownloader() {
 
 FlickrDownloader::~FlickrDownloader() {}
 
-std::string FlickrDownloader::getName() { return std::string("flickrdownloader"); }
+std::string FlickrDownloader::getName() {
+  return std::string("flickrdownloader");
+}
 
 std::string FlickrDownloader::getTitle() {
   return tr("Flickr Downloader").toStdString();

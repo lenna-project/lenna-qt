@@ -53,8 +53,8 @@ class FilterMatrix : public EditPlugin {
  private:
   Widget *widget;
 };
-}
-}
-}
+}  // namespace filtermatrix
+}  // namespace plugin
+}  // namespace lenna
 
 #endif  // FILTERMATRIX_H

@@ -20,8 +20,8 @@
 #include <QDir>
 #include <QFileDialog>
 #include <QImageWriter>
-#include <QSettings>
 #include <QListWidget>
+#include <QSettings>
 #include "ui_widget.h"
 
 using namespace lenna::plugin;
@@ -73,23 +73,20 @@ void Widget::on_selectFolderPushButton_clicked() {
 
 QString Widget::getFolder() { return ui->folderLineEdit->text(); }
 
-QStringList Widget::getPositiveAlbums()
-{
-    QStringList items;
-    for(int i = 0; i < ui->positiveList->count() ;++i){
-        QListWidgetItem *item = ui->positiveList->item(i);
-        items.append(item->text());
-    }
-    return items;
+QStringList Widget::getPositiveAlbums() {
+  QStringList items;
+  for (int i = 0; i < ui->positiveList->count(); ++i) {
+    QListWidgetItem *item = ui->positiveList->item(i);
+    items.append(item->text());
+  }
+  return items;
 }
 
-void lenna::plugin::Widget::on_addAlbumButton_clicked()
-{
-    ui->positiveList->addItem(ui->albumLineEdit->text());
-    ui->albumLineEdit->clear();
+void lenna::plugin::Widget::on_addAlbumButton_clicked() {
+  ui->positiveList->addItem(ui->albumLineEdit->text());
+  ui->albumLineEdit->clear();
 }
 
-void lenna::plugin::Widget::on_removeAlbumButton_clicked()
-{
-    qDeleteAll(ui->positiveList->selectedItems());
+void lenna::plugin::Widget::on_removeAlbumButton_clicked() {
+  qDeleteAll(ui->positiveList->selectedItems());
 }

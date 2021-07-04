@@ -35,6 +35,6 @@ class Process : public QThread {
 
  private:
 };
-}
+}  // namespace lenna
 
 #endif  // PROCESS_H

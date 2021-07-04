@@ -41,7 +41,7 @@ class AboutDialog : public QDialog {
 
   void on_commandLinkButton_clicked();
 
-private:
+ private:
   Ui::AboutDialog *ui;
   QNetworkAccessManager *manager;
   void initLicense();
@@ -50,6 +50,6 @@ private:
   void initThanksto();
   void initUpdates();
 };
-}
+}  // namespace lenna
 
 #endif  // ABOUTDIALOG_H

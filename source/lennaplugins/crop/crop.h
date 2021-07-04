@@ -53,8 +53,8 @@ class Crop : public EditPlugin {
  private:
   Widget *widget = nullptr;
 };
-}
-}
-}
+}  // namespace crop
+}  // namespace plugin
+}  // namespace lenna
 
 #endif  // CROP_H

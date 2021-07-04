@@ -45,14 +45,14 @@ class Widget : public QWidget {
 
   void on_removeAlbumButton_clicked();
 
-private:
+ private:
   Ui::Widget *ui;
   void loadState();
   void saveState();
 
   void initFolder();
 };
-}
-}
+}  // namespace plugin
+}  // namespace lenna
 
 #endif  // WIDGET_H

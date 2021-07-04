@@ -59,7 +59,7 @@ class Widget : public QWidget {
   void addFiles(QStringList files);
   void addFileItem(QString file);
 };
-}
-}
+}  // namespace plugin
+}  // namespace lenna
 
 #endif  // WIDGET_H

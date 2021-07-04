@@ -49,6 +49,6 @@ class Translation : public QObject {
   QMultiMap<QString, QString> *languages;
   QString currentLanguage;
 };
-}
+}  // namespace lenna
 
 #endif  // TRANSLATION_H

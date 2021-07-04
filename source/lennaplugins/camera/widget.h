@@ -45,8 +45,8 @@ class Widget : public QWidget {
   Ui::Widget *ui;
   void listCameras();
 };
-}
-}
-}
+}  // namespace camera
+}  // namespace plugin
+}  // namespace lenna
 
 #endif  // WIDGET_H

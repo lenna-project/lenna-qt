@@ -23,8 +23,8 @@
 #include <QtCore/QTextStream>
 #include <QtCore/QUrl>
 #include <QtNetwork/QNetworkReply>
-#include "lenna/lenna.h"
 #include "defines.h"
+#include "lenna/lenna.h"
 #include "ui_aboutdialog.h"
 
 using namespace lenna;
@@ -32,7 +32,8 @@ using namespace lenna;
 AboutDialog::AboutDialog(QWidget *parent)
     : QDialog(parent), ui(new Ui::AboutDialog) {
   ui->setupUi(this);
-  ui->versionLabel->setText(Lenna::applicationVersion() + " - " + QString::fromStdString(PROJECT_REVISION));
+  ui->versionLabel->setText(Lenna::applicationVersion() + " - " +
+                            QString::fromStdString(PROJECT_REVISION));
   manager = 0;
   initAbout();
   initAuthors();
@@ -117,7 +118,8 @@ void AboutDialog::initUpdates() {
   ui->thisVersionLabel->setText(tr("This Version: ") +
                                 Lenna::applicationVersion());
   QNetworkAccessManager *manager = new QNetworkAccessManager(this);
-  QNetworkReply *reply = manager->get(QNetworkRequest(QUrl("https://raw.githubusercontent.com/lenna-project/lenna/main/VERSION")));
+  QNetworkReply *reply = manager->get(QNetworkRequest(QUrl(
+      "https://raw.githubusercontent.com/lenna-project/lenna/main/VERSION")));
   QEventLoop loop;
   QObject::connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
   loop.exec();
@@ -134,8 +136,6 @@ void AboutDialog::on_tabWidget_currentChanged(int index) {
   initUpdates();
 }
 
-void AboutDialog::on_commandLinkButton_clicked()
-{
-    QDesktopServices::openUrl(QUrl("https://lenna.app", QUrl::TolerantMode));
+void AboutDialog::on_commandLinkButton_clicked() {
+  QDesktopServices::openUrl(QUrl("https://lenna.app", QUrl::TolerantMode));
 }
-

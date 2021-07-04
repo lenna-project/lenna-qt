@@ -33,7 +33,9 @@ FilterMatrix::~FilterMatrix() {
 
 std::string FilterMatrix::getName() { return std::string("filtermatrix"); }
 
-std::string FilterMatrix::getTitle() { return tr("FilterMatrix").toStdString(); }
+std::string FilterMatrix::getTitle() {
+  return tr("FilterMatrix").toStdString();
+}
 
 std::string FilterMatrix::getVersion() { return std::string("0.1"); }
 

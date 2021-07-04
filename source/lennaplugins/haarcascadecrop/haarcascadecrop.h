@@ -60,8 +60,8 @@ class HaarcascadeCrop : public EditPlugin {
   std::string cascadeFile = "data/haarcascadecrop/haarcascade_smile.xml";
   cv::CascadeClassifier cascade;
 };
-}
-}
-}
+}  // namespace haarcascadecrop
+}  // namespace plugin
+}  // namespace lenna
 
 #endif  // HAARCASCADECROP_H

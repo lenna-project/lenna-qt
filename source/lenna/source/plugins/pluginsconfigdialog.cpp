@@ -113,7 +113,8 @@ void PluginsConfigDialog::loadActiveInputPlugins() {
   ui->activeInputPluginsList->clear();
   for (std::shared_ptr<Plugin> plugin :
        PluginLoader::getInstance().getActiveInputPlugins()) {
-    ui->activeInputPluginsList->addItem(QString::fromStdString(plugin->getName()));
+    ui->activeInputPluginsList->addItem(
+        QString::fromStdString(plugin->getName()));
   }
 }
 
@@ -121,7 +122,8 @@ void PluginsConfigDialog::loadActiveEditPlugins() {
   ui->activeEditPluginsList->clear();
   for (std::shared_ptr<Plugin> plugin :
        PluginLoader::getInstance().getActiveEditPlugins()) {
-    ui->activeEditPluginsList->addItem(QString::fromStdString(plugin->getName()));
+    ui->activeEditPluginsList->addItem(
+        QString::fromStdString(plugin->getName()));
   }
 }
 
@@ -129,7 +131,8 @@ void PluginsConfigDialog::loadActiveOutputPlugins() {
   ui->activeOutputPluginsList->clear();
   for (std::shared_ptr<Plugin> plugin :
        PluginLoader::getInstance().getActiveOutputPlugins()) {
-    ui->activeOutputPluginsList->addItem(QString::fromStdString(plugin->getName()));
+    ui->activeOutputPluginsList->addItem(
+        QString::fromStdString(plugin->getName()));
   }
 }
 

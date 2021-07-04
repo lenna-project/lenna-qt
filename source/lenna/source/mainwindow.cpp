@@ -15,10 +15,10 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <QDesktopServices>
 #include "mainwindow.h"
 #include <lenna/lenna.h>
 #include <lenna/logger.h>
+#include <QDesktopServices>
 #include "aboutdialog.h"
 #include "loggerdialog.h"
 #include "plugins/pluginloader.h"
@@ -186,12 +186,13 @@ void lenna::MainWindow::on_outputTabWidget_tabCloseRequested(int index) {
   loadOutputPluginWidgets();
 }
 
-void lenna::MainWindow::on_actionWebApp_triggered()
-{
-    QDesktopServices::openUrl(QUrl("https://lenna.app", QUrl::TolerantMode));
+void lenna::MainWindow::on_actionWebApp_triggered() {
+  QDesktopServices::openUrl(QUrl("https://lenna.app", QUrl::TolerantMode));
 }
 
-void lenna::MainWindow::initToolbar(){
-    ui->mainToolBar->addAction(QIcon(":/logo/lenna_logo"), "WebApp", this, SLOT(on_actionWebApp_triggered()));
-    ui->mainToolBar->addAction(QIcon(":/lenna/plugins.png"), "Plugins", this, SLOT(on_actionPlugins_triggered()));
+void lenna::MainWindow::initToolbar() {
+  ui->mainToolBar->addAction(QIcon(":/logo/lenna_logo"), "WebApp", this,
+                             SLOT(on_actionWebApp_triggered()));
+  ui->mainToolBar->addAction(QIcon(":/lenna/plugins.png"), "Plugins", this,
+                             SLOT(on_actionPlugins_triggered()));
 }

@@ -37,7 +37,8 @@ void Worker::process() {
            PluginLoader::getInstance().getActiveInputPlugins()) {
     inputPlugin->init();
 
-    Logger::info(QString::fromStdString(inputPlugin->getTitle()) + " initialized");
+    Logger::info(QString::fromStdString(inputPlugin->getTitle()) +
+                 " initialized");
 
     QThreadPool threadPool(this);
     threadPool.setMaxThreadCount(QThread::idealThreadCount());

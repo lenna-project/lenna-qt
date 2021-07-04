@@ -24,9 +24,9 @@
 #include <memory>
 
 #include <QtCore/QCoreApplication>
-#include <QtCore/QProcessEnvironment>
 #include <QtCore/QDir>
 #include <QtCore/QPluginLoader>
+#include <QtCore/QProcessEnvironment>
 #include <QtCore/QSettings>
 #include <QtCore/QStringList>
 
@@ -57,11 +57,11 @@ void PluginLoader::activatePlugin(QString uid, QString name) {
   assert(uid != "{00000000-0000-0000-0000-000000000000}");
   if (this->activatedPlugins.contains(uid)) return;
   std::shared_ptr<Plugin> plugin = getPlugin(name);
-  if (plugin){
+  if (plugin) {
     std::shared_ptr<Plugin> pluginInstance = plugin->getInstance(uid);
     activatePlugin(pluginInstance);
   } else {
-      Logger::warning("Plugin could not been loaded: " + name);
+    Logger::warning("Plugin could not been loaded: " + name);
   }
 }
 
@@ -92,15 +92,18 @@ void PluginLoader::saveConfig() {
   settings.beginGroup("plugins");
   // inputplugins
   for (QString uid : this->activeInputPlugins) {
-    settings.setValue(uid, QString::fromStdString(this->activatedPlugins.value(uid)->getName()));
+    settings.setValue(uid, QString::fromStdString(
+                               this->activatedPlugins.value(uid)->getName()));
   }
   // editplugins
   for (QString uid : this->activeEditPlugins) {
-    settings.setValue(uid, QString::fromStdString(this->activatedPlugins.value(uid)->getName()));
+    settings.setValue(uid, QString::fromStdString(
+                               this->activatedPlugins.value(uid)->getName()));
   }
   // outputplugins
   for (QString uid : this->activeOutputPlugins) {
-    settings.setValue(uid, QString::fromStdString(this->activatedPlugins.value(uid)->getName()));
+    settings.setValue(uid, QString::fromStdString(
+                               this->activatedPlugins.value(uid)->getName()));
   }
 }
 
@@ -174,9 +177,9 @@ void PluginLoader::deactivatePlugin(std::shared_ptr<Plugin> plugin) {
     }
     activatedPlugins.remove(plugin->getUID());
   }
-  assert(activatedPlugins.size() ==
-         activeInputPlugins.size() + activeEditPlugins.size() +
-             activeOutputPlugins.size());
+  assert(activatedPlugins.size() == activeInputPlugins.size() +
+                                        activeEditPlugins.size() +
+                                        activeOutputPlugins.size());
 }
 
 void PluginLoader::deactivatePlugin(int index) {
@@ -188,19 +191,22 @@ void PluginLoader::deactivatePlugin(int index) {
 // returns plugin from string in format "name version"
 std::shared_ptr<Plugin> PluginLoader::getPlugin(QString name) {
   for (std::shared_ptr<InputPlugin> plugin : this->inputPlugins) {
-    if (QString(QString::fromStdString(plugin->getName()) + " " + QString::fromStdString(plugin->getVersion())) == name ||
+    if (QString(QString::fromStdString(plugin->getName()) + " " +
+                QString::fromStdString(plugin->getVersion())) == name ||
         QString(QString::fromStdString(plugin->getName())) == name) {
       return plugin;
     }
   }
   for (std::shared_ptr<EditPlugin> plugin : this->editPlugins) {
-    if (QString(QString::fromStdString(plugin->getName()) + " " + QString::fromStdString(plugin->getVersion())) == name ||
+    if (QString(QString::fromStdString(plugin->getName()) + " " +
+                QString::fromStdString(plugin->getVersion())) == name ||
         QString(QString::fromStdString(plugin->getName())) == name) {
       return plugin;
     }
   }
   for (std::shared_ptr<OutputPlugin> plugin : this->outputPlugins) {
-    if (QString(QString::fromStdString(plugin->getName()) + " " + QString::fromStdString(plugin->getVersion())) == name ||
+    if (QString(QString::fromStdString(plugin->getName()) + " " +
+                QString::fromStdString(plugin->getVersion())) == name ||
         QString(QString::fromStdString(plugin->getName())) == name) {
       return plugin;
     }
@@ -300,7 +306,8 @@ void PluginLoader::addInputPlugin(std::shared_ptr<InputPlugin> plugin) {
       if (plugin_.get() == plugin.get()) return;
     }
     inputPlugins.push_back(plugin);
-    Translation::installPluginTranslation(QString::fromStdString(plugin->getName()));
+    Translation::installPluginTranslation(
+        QString::fromStdString(plugin->getName()));
   }
 }
 
@@ -359,7 +366,8 @@ void PluginLoader::addEditPlugin(std::shared_ptr<EditPlugin> plugin) {
       if (plugin_->getName() == plugin->getName()) return;
     }
     editPlugins.push_back(plugin);
-    Translation::installPluginTranslation(QString::fromStdString(plugin->getName()));
+    Translation::installPluginTranslation(
+        QString::fromStdString(plugin->getName()));
   }
 }
 
@@ -416,7 +424,8 @@ void PluginLoader::addOutputPlugin(std::shared_ptr<OutputPlugin> plugin) {
       if (plugin_->getName() == plugin->getName()) return;
     }
     outputPlugins.push_back(plugin);
-    Translation::installPluginTranslation(QString::fromStdString(plugin->getName()));
+    Translation::installPluginTranslation(
+        QString::fromStdString(plugin->getName()));
   }
 }
 

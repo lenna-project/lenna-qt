@@ -59,7 +59,7 @@ class PluginsConfigDialog : public QDialog {
   void on_outputUpButton_clicked();
   void on_outputDownButton_clicked();
 };
-}
-}
+}  // namespace plugin
+}  // namespace lenna
 
 #endif  // PLUGINSCONFIGDIALOG_H

@@ -35,10 +35,10 @@ class MainWindow : public QMainWindow {
   explicit MainWindow(QWidget *parent = 0);
   ~MainWindow();
 
-private slots:
-    void on_actionWebApp_triggered();
+ private slots:
+  void on_actionWebApp_triggered();
 
-private slots:
+ private slots:
   void on_actionQuit_triggered();
 
   void on_actionAbout_triggered();
@@ -72,6 +72,6 @@ private slots:
   bool startStopButtonIsStart;
   void initToolbar();
 };
-}
+}  // namespace lenna
 
 #endif  // MAINWINDOW_H

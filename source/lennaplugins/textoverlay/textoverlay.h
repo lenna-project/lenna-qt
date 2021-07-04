@@ -53,8 +53,8 @@ class Textoverlay : public EditPlugin {
  private:
   Widget *widget;
 };
-}
-}
-}
+}  // namespace textoverlay
+}  // namespace plugin
+}  // namespace lenna
 
 #endif  // TEXTOVERLAY_H

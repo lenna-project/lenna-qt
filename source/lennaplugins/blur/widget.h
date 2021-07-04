@@ -63,7 +63,7 @@ class Widget : public QWidget {
   QString previewImageSrc;
   QImage *previewImage;
 };
-}
-}
+}  // namespace plugin
+}  // namespace lenna
 
 #endif  // WIDGET_H

@@ -95,7 +95,7 @@ class PluginLoader : public QObject {
   void loadOutputPlugins(QString dir);
   void addOutputPlugin(std::shared_ptr<OutputPlugin> plugin);
 };
-}
-}
+}  // namespace plugin
+}  // namespace lenna
 
 #endif  // PLUGINLOADER_H

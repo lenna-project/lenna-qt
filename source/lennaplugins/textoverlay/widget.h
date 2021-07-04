@@ -57,8 +57,8 @@ class Widget : public QWidget {
   void setColor(QColor *c);
   void setFont(QFont *f);
 };
-}
-}
-}
+}  // namespace textoverlay
+}  // namespace plugin
+}  // namespace lenna
 
 #endif  // WIDGET_H

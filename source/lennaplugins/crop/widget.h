@@ -77,8 +77,8 @@ class Widget : public QWidget {
  protected:
   void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
 };
-}
-}
-}
+}  // namespace crop
+}  // namespace plugin
+}  // namespace lenna
 
 #endif  // WIDGET_H

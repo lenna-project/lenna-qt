@@ -20,12 +20,12 @@
 #include "crop.h"
 #include "ui_widget.h"
 
-#include <opencv2/core.hpp>
-#include <opencv2/imgproc.hpp>
 #include <QGraphicsItem>
 #include <QtCore/QSettings>
 #include <QtGui/QPainter>
 #include <QtWidgets/QWidget>
+#include <opencv2/core.hpp>
+#include <opencv2/imgproc.hpp>
 
 using namespace lenna::plugin::crop;
 

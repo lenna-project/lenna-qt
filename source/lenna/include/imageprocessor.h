@@ -39,6 +39,6 @@ class ImageProcessor : public QRunnable {
   void edit(std::shared_ptr<LennaImage> image);
   void out(std::shared_ptr<LennaImage> image);
 };
-}
+}  // namespace lenna
 
 #endif  // IMAGEPROCESSOR_H

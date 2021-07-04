@@ -39,7 +39,9 @@ std::string Blur::getVersion() { return std::string("0.1"); }
 
 std::string Blur::getAuthor() { return std::string("FalseCAM"); }
 
-std::string Blur::getDescription() { return tr("Plugin to blur images").toStdString(); }
+std::string Blur::getDescription() {
+  return tr("Plugin to blur images").toStdString();
+}
 
 QIcon Blur::getIcon() { return QIcon(":/plugins/blur/blur"); }
 

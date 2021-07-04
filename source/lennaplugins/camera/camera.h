@@ -60,8 +60,8 @@ class Camera : public InputPlugin {
   int frames;
   cv::VideoCapture *camera;
 };
-}
-}
-}
+}  // namespace camera
+}  // namespace plugin
+}  // namespace lenna
 
 #endif  // CAMERA_H

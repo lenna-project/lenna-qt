@@ -33,16 +33,22 @@ HaarcascadeTrainer::HaarcascadeTrainer() { this->widget = 0; }
 
 HaarcascadeTrainer::~HaarcascadeTrainer() {}
 
-std::string HaarcascadeTrainer::getName() { return std::string("haarcascadetrainer"); }
+std::string HaarcascadeTrainer::getName() {
+  return std::string("haarcascadetrainer");
+}
 
-std::string HaarcascadeTrainer::getTitle() { return tr("Haarcascade Trainer").toStdString(); }
+std::string HaarcascadeTrainer::getTitle() {
+  return tr("Haarcascade Trainer").toStdString();
+}
 
 std::string HaarcascadeTrainer::getVersion() { return std::string("1.0"); }
 
 std::string HaarcascadeTrainer::getAuthor() { return std::string("FalseCAM"); }
 
 std::string HaarcascadeTrainer::getDescription() {
-  return tr("Plugin to save images in a format able to train an opencv haarcascade").toStdString();
+  return tr("Plugin to save images in a format able to train an opencv "
+            "haarcascade")
+      .toStdString();
 }
 
 QIcon HaarcascadeTrainer::getIcon() {
@@ -58,7 +64,8 @@ QWidget *HaarcascadeTrainer::getWidget() {
 }
 
 std::shared_ptr<Plugin> HaarcascadeTrainer::getInstance(QString uid) {
-  std::shared_ptr<Plugin> plugin = std::shared_ptr<Plugin>(new HaarcascadeTrainer());
+  std::shared_ptr<Plugin> plugin =
+      std::shared_ptr<Plugin>(new HaarcascadeTrainer());
   plugin->setUID(uid);
   return plugin;
 }
@@ -66,10 +73,10 @@ std::shared_ptr<Plugin> HaarcascadeTrainer::getInstance(QString uid) {
 void HaarcascadeTrainer::out(std::shared_ptr<LennaImage> image) {
   getWidget();
   QString folder = this->widget->getFolder();
-  if(isPositiveAlbum(image->getAlbum())){
-      folder.append("/positive_images/");
-  }else{
-      folder.append("/negative_images/");
+  if (isPositiveAlbum(image->getAlbum())) {
+    folder.append("/positive_images/");
+  } else {
+    folder.append("/negative_images/");
   }
 
   QString file = folder + image->getName() + ".jpg";
@@ -79,41 +86,35 @@ void HaarcascadeTrainer::out(std::shared_ptr<LennaImage> image) {
 
   cv::imwrite(file.toStdString().c_str(), image->getImage());
 
-  if(isPositiveAlbum(image->getAlbum())){
-      addPositiveFile(file);
-  }else{
-      addNegativeFile(file);
+  if (isPositiveAlbum(image->getAlbum())) {
+    addPositiveFile(file);
+  } else {
+    addNegativeFile(file);
   }
-
 }
 
 void HaarcascadeTrainer::finnish() {}
 
-bool HaarcascadeTrainer::isPositiveAlbum(QString album)
-{
-    return widget->getPositiveAlbums().contains(album);
+bool HaarcascadeTrainer::isPositiveAlbum(QString album) {
+  return widget->getPositiveAlbums().contains(album);
 }
 
-void HaarcascadeTrainer::addPositiveFile(QString imagefile)
-{
-    QString folder = this->widget->getFolder();
-    QFile file ( folder + "/" + "positives.txt" );
-    if ( file.open( QFile::WriteOnly | QFile::Append) )
-    {
-        QTextStream stream( &file );
-        stream << imagefile << "\n";
-        file.close();
-    }
+void HaarcascadeTrainer::addPositiveFile(QString imagefile) {
+  QString folder = this->widget->getFolder();
+  QFile file(folder + "/" + "positives.txt");
+  if (file.open(QFile::WriteOnly | QFile::Append)) {
+    QTextStream stream(&file);
+    stream << imagefile << "\n";
+    file.close();
+  }
 }
 
-void HaarcascadeTrainer::addNegativeFile(QString imagefile)
-{
-    QString folder = this->widget->getFolder();
-    QFile file ( folder + "/" + "negatives.txt" );
-    if ( file.open( QFile::WriteOnly | QFile::Append) )
-    {
-        QTextStream stream( &file );
-        stream << imagefile << "\n";
-        file.close();
-    }
+void HaarcascadeTrainer::addNegativeFile(QString imagefile) {
+  QString folder = this->widget->getFolder();
+  QFile file(folder + "/" + "negatives.txt");
+  if (file.open(QFile::WriteOnly | QFile::Append)) {
+    QTextStream stream(&file);
+    stream << imagefile << "\n";
+    file.close();
+  }
 }

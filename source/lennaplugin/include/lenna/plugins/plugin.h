@@ -45,7 +45,7 @@ class Plugin : public QObject {
  private:
   QUuid id;
 };
-}
-}
+}  // namespace plugin
+}  // namespace lenna
 
 #endif  // PLUGIN_H

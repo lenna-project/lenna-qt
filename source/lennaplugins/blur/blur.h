@@ -53,8 +53,8 @@ class Blur : public EditPlugin {
  private:
   Widget *widget;
 };
-}
-}
-}
+}  // namespace blur
+}  // namespace plugin
+}  // namespace lenna
 
 #endif  // BLUR_H

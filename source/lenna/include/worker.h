@@ -39,6 +39,6 @@ class Worker : public QObject {
 
   void finish();
 };
-}
+}  // namespace lenna
 
 #endif  // WORKER_H

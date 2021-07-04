@@ -36,8 +36,8 @@ class OutputPlugin : public Plugin {
   virtual void out(std::shared_ptr<LennaImage> image) = 0;
   virtual void finnish() = 0;
 };
-}
-}
+}  // namespace plugin
+}  // namespace lenna
 
 Q_DECLARE_INTERFACE(lenna::plugin::OutputPlugin, "Lenna.OutputPlugin/1.1")
 

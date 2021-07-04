@@ -26,12 +26,12 @@
 #include <QtCore/QUrl>
 #include <QtGui/QDragEnterEvent>
 #include <QtGui/QImageReader>
-#include <QtWidgets/QWidget>
 #include <QtWidgets/QFileDialog>
+#include <QtWidgets/QWidget>
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
-#include <opencv2/videoio.hpp>
 #include <opencv2/imgproc.hpp>
+#include <opencv2/videoio.hpp>
 
 using namespace lenna::plugin::camera;
 using namespace cv;
@@ -61,8 +61,8 @@ int Widget::selectedDevice() { return ui->camerasComboBox->currentIndex(); }
 void Widget::on_cameraOnCheckBox_toggled(bool checked) {
   int key;
   cv::VideoCapture camera;
-  int deviceID = 0;             // 0 = open default camera
-  int apiID = cv::CAP_ANY;      // 0 = autodetect default API
+  int deviceID = 0;         // 0 = open default camera
+  int apiID = cv::CAP_ANY;  // 0 = autodetect default API
   // open selected camera using selected API
   camera.open(deviceID, apiID);
   Mat frame;

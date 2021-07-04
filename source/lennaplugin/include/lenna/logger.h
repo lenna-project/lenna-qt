@@ -64,6 +64,6 @@ class LENNAPLUGIN_API Logger : public QObject {
   QStringList fatalMsgs;
   QStringList infoMsgs;
 };
-}
+}  // namespace lenna
 
 #endif  // LOGGER_H

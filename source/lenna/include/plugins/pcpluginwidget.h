@@ -49,7 +49,7 @@ class PCPluginWidget : public QWidget {
   void checkBoxChanged();
   void on_addButton_clicked();
 };
-}
-}
+}  // namespace plugin
+}  // namespace lenna
 
 #endif  // PCPLUGINWIDGET_H

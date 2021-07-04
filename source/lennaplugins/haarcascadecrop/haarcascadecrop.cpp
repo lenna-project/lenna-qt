@@ -25,8 +25,8 @@
 
 #include <QtGui/QIcon>
 #include <QtGui/QPainter>
-#include <opencv2/imgproc.hpp>
 #include <opencv2/calib3d/calib3d.hpp>
+#include <opencv2/imgproc.hpp>
 
 using namespace lenna;
 using namespace lenna::plugin::haarcascadecrop;
@@ -40,9 +40,13 @@ HaarcascadeCrop::~HaarcascadeCrop() {
   }
 }
 
-std::string HaarcascadeCrop::getName() { return std::string("haarcascadecrop"); }
+std::string HaarcascadeCrop::getName() {
+  return std::string("haarcascadecrop");
+}
 
-std::string HaarcascadeCrop::getTitle() { return tr("Haarcascade Crop").toStdString(); }
+std::string HaarcascadeCrop::getTitle() {
+  return tr("Haarcascade Crop").toStdString();
+}
 
 std::string HaarcascadeCrop::getVersion() { return std::string("0.1"); }
 
@@ -50,7 +54,8 @@ std::string HaarcascadeCrop::getAuthor() { return std::string("FalseCAM"); }
 
 std::string HaarcascadeCrop::getDescription() {
   return tr("Plugin to crop images based on the boundaries the haarcascade "
-         "classifier detects.").toStdString();
+            "classifier detects.")
+      .toStdString();
 }
 
 QIcon HaarcascadeCrop::getIcon() {

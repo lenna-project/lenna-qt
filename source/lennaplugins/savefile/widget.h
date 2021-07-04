@@ -51,7 +51,7 @@ class Widget : public QWidget {
   void initFolder();
   void initImageFormats();
 };
-}
-}
+}  // namespace plugin
+}  // namespace lenna
 
 #endif  // WIDGET_H

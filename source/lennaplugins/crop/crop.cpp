@@ -45,7 +45,9 @@ std::string Crop::getVersion() { return std::string("0.1"); }
 
 std::string Crop::getAuthor() { return std::string("FalseCAM"); }
 
-std::string Crop::getDescription() { return tr("Plugin to crop images").toStdString(); }
+std::string Crop::getDescription() {
+  return tr("Plugin to crop images").toStdString();
+}
 
 QIcon Crop::getIcon() { return QIcon(":/plugins/crop/crop"); }
 

@@ -50,7 +50,7 @@ class LENNAPLUGIN_API Image {
   QString name;
   QString album;
 };
-}
+}  // namespace lenna
 
 typedef lenna::Image LennaImage;
 

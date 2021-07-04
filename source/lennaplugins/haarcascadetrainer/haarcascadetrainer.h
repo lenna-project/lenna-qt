@@ -31,7 +31,8 @@ namespace haarcascadetrainer {
 
 class HaarcascadeTrainer : public OutputPlugin {
   Q_OBJECT
-  Q_PLUGIN_METADATA(IID "lenna.haarcascadetrainer" FILE "haarcascadetrainer.json")
+  Q_PLUGIN_METADATA(IID "lenna.haarcascadetrainer" FILE
+                        "haarcascadetrainer.json")
   Q_INTERFACES(lenna::plugin::OutputPlugin)
 
  public:
@@ -56,10 +57,9 @@ class HaarcascadeTrainer : public OutputPlugin {
   void addNegativeFile(QString imagefile);
 
   Widget *widget;
-
 };
-} // namespace haarcascadetrainer
-} // namespace plugin
-} // namespace lenna
+}  // namespace haarcascadetrainer
+}  // namespace plugin
+}  // namespace lenna
 
 #endif  // SAVEFILE_H

@@ -42,6 +42,6 @@ class LENNAPLUGIN_API Lenna : public QObject {
 
   static void installTranslator(QTranslator *file);
 };
-}
+}  // namespace lenna
 
 #endif  // LENNA_H

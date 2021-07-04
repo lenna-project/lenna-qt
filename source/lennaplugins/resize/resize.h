@@ -53,8 +53,8 @@ class Resize : public EditPlugin {
  private:
   Widget *widget;
 };
-}
-}
-}
+}  // namespace resize
+}  // namespace plugin
+}  // namespace lenna
 
 #endif  // RESIZE_H
