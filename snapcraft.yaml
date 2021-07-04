@@ -28,6 +28,7 @@ parts:
       sed -i 's|^Icon=.*|Icon=${SNAP}/meta/gui/icon.png|g' deploy/lenna.desktop
     build-packages:
       - g++
+      - libexiv2-dev
       - libqt5webkit5-dev
       - libssl-dev
       - pkg-config
@@ -47,6 +48,7 @@ parts:
       - libdap25
       - libdapclient6v5
       - libepsilon1
+      - libexiv2-27
       - libfreexl1
       - libfyba0
       - libgdal26

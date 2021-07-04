@@ -60,7 +60,10 @@ make pack
 
 #### SNAP Package
 ```sh
-make snap
+snapcraft --enable-experimental-extensions
+# publish
+snapcraft login
+snapcraft upload --release=edge lenna_*_amd64.snap
 ```
 
 ## Contribute
