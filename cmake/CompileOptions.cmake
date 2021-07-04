@@ -30,18 +30,19 @@ set(DEFAULT_PROJECT_OPTIONS
  find_package(Qt5Network REQUIRED)
  find_package(Qt5LinguistTools REQUIRED)
  find_package( OpenCV 4 REQUIRED )
+ find_package(exiv2 REQUIRED)
 
 # 
 # Include directories
 # 
 
-set(DEFAULT_INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR} ${Poco_INCLUDE_DIR} ${OpenCV_INCLUDE_DIRS})
+set(DEFAULT_INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR} ${Poco_INCLUDE_DIR} ${OpenCV_INCLUDE_DIRS} ${Exiv2_INCLUDE_DIRS})
 
 # 
 # Libraries
 # 
 
-set(DEFAULT_LIBRARIES Qt5::Core Qt5::Widgets Qt5::Network ${OpenCV_LIBS}
+set(DEFAULT_LIBRARIES Qt5::Core Qt5::Widgets Qt5::Network ${OpenCV_LIBS} exiv2lib
 )
 
 

@@ -23,6 +23,7 @@
 
 #include <QtCore/QObject>
 #include <QtGui/QImage>
+#include <exiv2/exiv2.hpp>
 #include <iostream>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -45,8 +46,12 @@ class LENNAPLUGIN_API Image {
   void convolve(cv::Mat filter);
   QImage toQImage();
 
+  Exiv2::ExifData readMetaData(std::string file);
+  Exiv2::ExifData *getMetaData();
+
  private:
   cv::Mat image;
+  Exiv2::ExifData exifData;
   QString name;
   QString album;
 };

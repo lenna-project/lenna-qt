@@ -27,6 +27,7 @@ Image::Image(Image &image) {
   this->name = image.name;
   this->album = image.album;
   image.getImage().copyTo(this->image);
+  this->exifData = image.exifData;
 }
 
 Image::Image(QString file) {
@@ -55,3 +56,12 @@ QImage Image::toQImage() {
   return QImage((uchar *)image.data, image.cols, image.rows, image.step1(),
                 QImage::Format_RGB32);
 }
+
+Exiv2::ExifData Image::readMetaData(std::string file) {
+  Exiv2::Image::AutoPtr image = Exiv2::ImageFactory::open(file.c_str());
+  image->readMetadata();
+  this->exifData = image->exifData();
+  return image->exifData();
+}
+
+Exiv2::ExifData *Image::getMetaData() { return &this->exifData; }

@@ -85,6 +85,7 @@ std::shared_ptr<LennaImage> FileChooser::next() {
     std::shared_ptr<LennaImage> img(new LennaImage(file));
     img->setName(name);
     img->setAlbum(album);
+    img->readMetaData(file.toStdString());
     return img;
   }
 
