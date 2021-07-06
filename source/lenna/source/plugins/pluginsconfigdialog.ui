@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>1024</width>
     <height>720</height>
    </rect>
   </property>
@@ -127,7 +127,17 @@
           </widget>
          </item>
          <item row="0" column="0" colspan="2">
-          <widget class="QListWidget" name="activeInputPluginsList"/>
+          <widget class="QListWidget" name="activeInputPluginsList">
+           <property name="dragDropMode">
+            <enum>QAbstractItemView::InternalMove</enum>
+           </property>
+           <property name="defaultDropAction">
+            <enum>Qt::IgnoreAction</enum>
+           </property>
+           <property name="movement">
+            <enum>QListView::Snap</enum>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
@@ -153,7 +163,23 @@
           </widget>
          </item>
          <item row="0" column="0" colspan="2">
-          <widget class="QListWidget" name="activeEditPluginsList"/>
+          <widget class="QListWidget" name="activeEditPluginsList">
+           <property name="dragEnabled">
+            <bool>false</bool>
+           </property>
+           <property name="dragDropMode">
+            <enum>QAbstractItemView::InternalMove</enum>
+           </property>
+           <property name="defaultDropAction">
+            <enum>Qt::IgnoreAction</enum>
+           </property>
+           <property name="movement">
+            <enum>QListView::Static</enum>
+           </property>
+           <property name="viewMode">
+            <enum>QListView::ListMode</enum>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
@@ -179,7 +205,17 @@
           </widget>
          </item>
          <item row="0" column="0" colspan="2">
-          <widget class="QListWidget" name="activeOutputPluginsList"/>
+          <widget class="QListWidget" name="activeOutputPluginsList">
+           <property name="dragDropMode">
+            <enum>QAbstractItemView::InternalMove</enum>
+           </property>
+           <property name="defaultDropAction">
+            <enum>Qt::IgnoreAction</enum>
+           </property>
+           <property name="movement">
+            <enum>QListView::Snap</enum>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>

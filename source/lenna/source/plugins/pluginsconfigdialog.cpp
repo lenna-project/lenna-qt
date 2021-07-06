@@ -18,10 +18,12 @@
 
 #include "plugins/pluginsconfigdialog.h"
 
+#include "plugins/activepcpluginwidget.h"
 #include "plugins/pcpluginwidget.h"
 #include "plugins/pluginloader.h"
 #include "ui_pluginsconfigdialog.h"
 
+#include <QDebug>
 #include <QtWidgets/QListWidgetItem>
 #include <QtWidgets/QWidget>
 
@@ -111,28 +113,43 @@ void PluginsConfigDialog::loadOutputPlugins() {
 
 void PluginsConfigDialog::loadActiveInputPlugins() {
   ui->activeInputPluginsList->clear();
-  for (std::shared_ptr<Plugin> plugin :
+  for (std::shared_ptr<InputPlugin> plugin :
        PluginLoader::getInstance().getActiveInputPlugins()) {
-    ui->activeInputPluginsList->addItem(
-        QString::fromStdString(plugin->getName()));
+    ActivePCPluginWidget *widget = new ActivePCPluginWidget(plugin);
+    connect(widget, SIGNAL(pluginDeactivated(QString)), this,
+            SLOT(on_plugin_activated(QString)));
+    QListWidgetItem *item = new QListWidgetItem();
+    item->setSizeHint(QSize(0, 48));
+    ui->activeInputPluginsList->addItem(item);
+    ui->activeInputPluginsList->setItemWidget(item, widget);
   }
 }
 
 void PluginsConfigDialog::loadActiveEditPlugins() {
   ui->activeEditPluginsList->clear();
-  for (std::shared_ptr<Plugin> plugin :
+  for (std::shared_ptr<EditPlugin> plugin :
        PluginLoader::getInstance().getActiveEditPlugins()) {
-    ui->activeEditPluginsList->addItem(
-        QString::fromStdString(plugin->getName()));
+    ActivePCPluginWidget *widget = new ActivePCPluginWidget(plugin);
+    connect(widget, SIGNAL(pluginDeactivated(QString)), this,
+            SLOT(on_plugin_activated(QString)));
+    QListWidgetItem *item = new QListWidgetItem();
+    item->setSizeHint(QSize(0, 48));
+    ui->activeEditPluginsList->addItem(item);
+    ui->activeEditPluginsList->setItemWidget(item, widget);
   }
 }
 
 void PluginsConfigDialog::loadActiveOutputPlugins() {
   ui->activeOutputPluginsList->clear();
-  for (std::shared_ptr<Plugin> plugin :
+  for (std::shared_ptr<OutputPlugin> plugin :
        PluginLoader::getInstance().getActiveOutputPlugins()) {
-    ui->activeOutputPluginsList->addItem(
-        QString::fromStdString(plugin->getName()));
+    ActivePCPluginWidget *widget = new ActivePCPluginWidget(plugin);
+    connect(widget, SIGNAL(pluginDeactivated(QString)), this,
+            SLOT(on_plugin_activated(QString)));
+    QListWidgetItem *item = new QListWidgetItem();
+    item->setSizeHint(QSize(0, 48));
+    ui->activeOutputPluginsList->addItem(item);
+    ui->activeOutputPluginsList->setItemWidget(item, widget);
   }
 }
 
