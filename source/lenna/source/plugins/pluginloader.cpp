@@ -73,9 +73,9 @@ void PluginLoader::activatePlugin(QString uid, QString name) {
 void PluginLoader::loadConfig() {
   // load from settings.
   QSettings settings(Lenna::organizationName(), Lenna::applicationName());
-  settings.beginGroup("plugins");
+  settings.beginGroup("active-plugins");
   QStringList keys = settings.childKeys();
-  for (QString key : keys) {
+  for (QString &key : keys) {
     activatePlugin(key, settings.value(key).toString());
   }
 
@@ -89,19 +89,20 @@ void PluginLoader::loadConfig() {
 
 void PluginLoader::saveConfig() {
   QSettings settings(Lenna::organizationName(), Lenna::applicationName());
-  settings.beginGroup("plugins");
+  settings.remove("active-plugins");
+  settings.beginGroup("active-plugins");
   // inputplugins
-  for (QString uid : this->activeInputPlugins) {
+  for (QString &uid : this->activeInputPlugins) {
     settings.setValue(uid, QString::fromStdString(
                                this->activatedPlugins.value(uid)->getName()));
   }
   // editplugins
-  for (QString uid : this->activeEditPlugins) {
+  for (QString &uid : this->activeEditPlugins) {
     settings.setValue(uid, QString::fromStdString(
                                this->activatedPlugins.value(uid)->getName()));
   }
   // outputplugins
-  for (QString uid : this->activeOutputPlugins) {
+  for (QString &uid : this->activeOutputPlugins) {
     settings.setValue(uid, QString::fromStdString(
                                this->activatedPlugins.value(uid)->getName()));
   }
@@ -231,7 +232,7 @@ void PluginLoader::loadPlugins() {
   // loadEditPlugins(pluginsDir.currentPath());
   // loadOutputPlugins(pluginsDir.currentPath());
 
-  for (QString path : QCoreApplication::libraryPaths()) {
+  for (QString &path : QCoreApplication::libraryPaths()) {
     loadInputPlugins(path);
     // loadInputPlugins(path + Lenna::applicationName().toLower());
     loadEditPlugins(path);
@@ -284,7 +285,7 @@ void PluginLoader::loadInputPlugins(QString dir) {
     if (!pluginsDir.cd("plugins")) return;
   }
 
-  for (QString fileName : pluginsDir.entryList(QDir::Files)) {
+  for (QString &fileName : pluginsDir.entryList(QDir::Files)) {
     QPluginLoader pluginLoader(pluginsDir.absoluteFilePath(fileName));
     QObject *plugin = pluginLoader.instance();
 
@@ -317,7 +318,7 @@ std::vector<std::shared_ptr<InputPlugin>> PluginLoader::getInputPlugins() {
 
 QList<std::shared_ptr<InputPlugin>> PluginLoader::getActiveInputPlugins() {
   QList<std::shared_ptr<InputPlugin>> plugins;
-  for (QString uid : activeInputPlugins) {
+  for (QString &uid : activeInputPlugins) {
     std::shared_ptr<InputPlugin> plugin =
         std::dynamic_pointer_cast<InputPlugin>(
             this->activatedPlugins.value(uid));
@@ -377,7 +378,7 @@ std::vector<std::shared_ptr<EditPlugin>> PluginLoader::getEditPlugins() {
 
 QList<std::shared_ptr<EditPlugin>> PluginLoader::getActiveEditPlugins() {
   QList<std::shared_ptr<EditPlugin>> plugins;
-  for (QString uid : activeEditPlugins) {
+  for (QString &uid : activeEditPlugins) {
     std::shared_ptr<EditPlugin> plugin = std::dynamic_pointer_cast<EditPlugin>(
         this->activatedPlugins.value(uid));
     if (plugin) plugins.append(plugin);
@@ -435,7 +436,7 @@ std::vector<std::shared_ptr<OutputPlugin>> PluginLoader::getOutputPlugins() {
 
 QList<std::shared_ptr<OutputPlugin>> PluginLoader::getActiveOutputPlugins() {
   QList<std::shared_ptr<OutputPlugin>> plugins;
-  for (QString uid : activeOutputPlugins) {
+  for (QString &uid : activeOutputPlugins) {
     std::shared_ptr<OutputPlugin> plugin =
         std::dynamic_pointer_cast<OutputPlugin>(
             this->activatedPlugins.value(uid));
