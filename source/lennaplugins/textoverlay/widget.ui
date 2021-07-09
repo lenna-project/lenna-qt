@@ -28,7 +28,11 @@
     </spacer>
    </item>
    <item row="1" column="1">
-    <widget class="QLineEdit" name="textLineEdit"/>
+    <widget class="QLineEdit" name="textLineEdit">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+    </widget>
    </item>
    <item row="4" column="1">
     <spacer name="verticalSpacer_2">
@@ -108,5 +112,22 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>textCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>textLineEdit</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>41</x>
+     <y>114</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>137</x>
+     <y>112</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

@@ -28,12 +28,15 @@
 using namespace lenna::plugin::textoverlay;
 
 Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget) {
-  color = 0;
-  font = 0;
+  color = nullptr;
+  font = nullptr;
   ui->setupUi(this);
+
   setColor(new QColor(Qt::black));
   setFont(new QFont("Times", 10));
   loadState();
+  setColor(color);
+  setFont(font);
 }
 
 Widget::~Widget() {
@@ -41,9 +44,45 @@ Widget::~Widget() {
   delete ui;
 }
 
-void Widget::loadState() {}
+void Widget::loadState() {
+  QSettings settings(QCoreApplication::organizationName(),
+                     QCoreApplication::applicationName());
+  settings.beginGroup("plugins");
+  settings.beginGroup("Textoverlay");
 
-void Widget::saveState() {}
+  ui->textCheckBox->setChecked(settings.value("TextUse", false).toBool());
+  ui->textLineEdit->setText(settings.value("Text", "").toString());
+
+  QFont *font = new QFont();
+  font->fromString(
+      settings.value("Font", QFont("Times", 10).toString()).toString());
+  int red = settings.value("Red", 0).toInt();
+  int green = settings.value("Green", 0).toInt();
+  int blue = settings.value("Blue", 0).toInt();
+
+  setFont(font);
+  setColor(new QColor(red, green, blue));
+
+  ui->xSpinBox->setValue(settings.value("PosX", 0).toInt());
+  ui->ySpinBox->setValue(settings.value("PosY", 0).toInt());
+}
+
+void Widget::saveState() {
+  QSettings settings(QCoreApplication::organizationName(),
+                     QCoreApplication::applicationName());
+  settings.beginGroup("plugins");
+  settings.beginGroup("Textoverlay");
+
+  settings.setValue("TextUse", ui->textCheckBox->isChecked());
+  settings.setValue("Text", ui->textLineEdit->text());
+  settings.setValue("Font", this->font->toString());
+  settings.setValue("Red", this->color->red());
+  settings.setValue("Green", this->color->green());
+  settings.setValue("Blue", this->color->blue());
+
+  settings.setValue("PosX", ui->xSpinBox->value());
+  settings.setValue("PosY", ui->ySpinBox->value());
+}
 
 bool Widget::isActivated() { return ui->textCheckBox->isChecked(); }
 
@@ -55,7 +94,7 @@ int Widget::getY() { return ui->ySpinBox->value(); }
 
 void Widget::setFont(QFont *f) {
   if (font == f) return;
-  delete font;
+  if (font != nullptr) delete font;
   font = new QFont(*f);
   ui->fontButton->setText(
       QString("%1 %2").arg(font->family()).arg(font->pointSize()));
@@ -63,7 +102,7 @@ void Widget::setFont(QFont *f) {
 
 void Widget::setColor(QColor *c) {
   if (color == c) return;
-  delete color;
+  if (color != nullptr) delete color;
   color = new QColor(*c);
   QPixmap pixmap(16, 16);
   pixmap.fill(*color);
