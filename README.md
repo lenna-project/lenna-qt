@@ -66,6 +66,15 @@ snapcraft login
 snapcraft upload --release=edge lenna_*_amd64.snap
 ```
 
+## create new version
+
+Change version in files VERSION and CMakeLists.txt.
+
+```bash
+ git tag -a vx.y.z -m "Version x.y.z"
+ git push origin --tags
+```
+
 ## Contribute
 
 Contributions are always welcome!
