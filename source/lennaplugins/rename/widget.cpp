@@ -36,9 +36,32 @@ Widget::~Widget() {
   delete ui;
 }
 
-void Widget::loadState() {}
+void Widget::loadState() {
+  QSettings settings(QCoreApplication::organizationName(),
+                     QCoreApplication::applicationName());
+  settings.beginGroup("plugins");
+  settings.beginGroup("Rename");
 
-void Widget::saveState() {}
+  ui->renameRadioButton->setChecked(
+      settings.value("RenameUse", false).toBool());
+  ui->newNameCheckBox->setChecked(settings.value("NewName", false).toBool());
+  ui->nameLineEdit->setText(settings.value("Name", "").toString());
+  ui->prefixLineEdit->setText(settings.value("Prefix", "").toString());
+  ui->suffixLineEdit->setText(settings.value("Suffix", "").toString());
+}
+
+void Widget::saveState() {
+  QSettings settings(QCoreApplication::organizationName(),
+                     QCoreApplication::applicationName());
+  settings.beginGroup("plugins");
+  settings.beginGroup("Rename");
+
+  settings.setValue("RenameUse", ui->renameRadioButton->isChecked());
+  settings.setValue("NewName", ui->newNameCheckBox->isChecked());
+  settings.setValue("Name", ui->nameLineEdit->text());
+  settings.setValue("Prefix", ui->prefixLineEdit->text());
+  settings.setValue("Suffix", ui->suffixLineEdit->text());
+}
 
 bool Widget::isRename() { return ui->renameRadioButton->isChecked(); }
 

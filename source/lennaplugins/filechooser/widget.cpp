@@ -45,8 +45,7 @@ void Widget::loadState() {
                      QCoreApplication::applicationName());
   settings.beginGroup("plugins");
   settings.beginGroup("Filechooser");
-
-  this->lastFolder = QDir::homePath();
+  this->lastFolder = settings.value("path", QDir::homePath()).toString();
 }
 
 void Widget::saveState() {
@@ -54,6 +53,7 @@ void Widget::saveState() {
                      QCoreApplication::applicationName());
   settings.beginGroup("plugins");
   settings.beginGroup("Filechooser");
+  settings.setValue("path", lastFolder);
 }
 
 QStringList Widget::getFiles() { return this->filesList; }
@@ -127,6 +127,7 @@ void Widget::addFiles(QStringList files) {
 }
 
 void Widget::addFileItem(QString file) {
+  this->lastFolder = QDir(file).absolutePath();
   QListWidgetItem* item = new QListWidgetItem(file);
   item->setToolTip("<img width=\"96\" src=\"" + file + "\">");
   if (ui->showPreviewCheckBox->isChecked()) {
