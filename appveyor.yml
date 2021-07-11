@@ -1,10 +1,12 @@
 version: "{build}"
 
-skip_non_tags: true
+#skip_non_tags: true
 
 clone_folder: c:\projects\lenna
 image:
   - Visual Studio 2017
+  - macOS-Mojave
+
 configuration:
   - Release
 platform:
@@ -12,74 +14,113 @@ platform:
 environment:
   matrix:
     - GENERATOR: "Visual Studio 15 2017"
+      COMPILER: VS2017
       ARCHITECTURE: "-A x64"
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       QTDIR: C:\Qt\5.13.2\msvc2017_64
       PLATFORM: x64
       OPENCV_VERSION: 4.5.0
+    - ARCH: x64
+      COMPILER: Clang
 matrix:
-  fast_finish: true
+  exclude:
+    - ARCH: x86
+    - ARCH: arm
+    - image: Visual Studio 2017
+      COMPILER: Clang
+    - image: macOS-Mojave
+      COMPILER: VS2017
 
-install:
-  - set PATH=%QTDIR%\bin;%PATH%
-  - set Qt5_DIR=%QTDIR%\lib\cmake\Qt5
-  - ps: wget https://exiv2.org/releases/exiv2-0.27.3-2019msvc64.zip -o exiv2.zip
-  - ps: unzip exiv2.zip
-  - cmd: del exiv2-*.zip
-  - cmd: move exiv2-* c:\exiv2
-  - cmd: dir c:\exiv2
-  - set EXIV2DIR=c:\exiv2
-  - set PATH=%EXIV2DIR%\bin;%PATH%
-  - cmd: choco install opencv -y --version=%OPENCV_VERSION%
+for:
+  # Windows
+  - matrix:
+      only:
+        - image: Visual Studio 2019
 
+    install:
+      - set PATH=%QTDIR%\bin;%PATH%
+      - set Qt5_DIR=%QTDIR%\lib\cmake\Qt5
+      - ps: wget https://exiv2.org/releases/exiv2-0.27.3-2019msvc64.zip -o exiv2.zip
+      - ps: unzip exiv2.zip
+      - cmd: del exiv2-*.zip
+      - cmd: move exiv2-* c:\exiv2
+      - cmd: dir c:\exiv2
+      - set EXIV2DIR=c:\exiv2
+      - set PATH=%EXIV2DIR%\bin;%PATH%
+      - cmd: choco install opencv -y --version=%OPENCV_VERSION%
 
-before_build:
-  - IF EXIST c:\tools\opencv* CD c:\tools\opencv*
-  - SET OPENCV_DIR=%CD%\build
-  - SET OpenCV_DIR=%CD%\build
-  - set QT_DIR=%QTDIR%
-  - set Qt5_DIR=%QTDIR%\lib\cmake\Qt5
-  - set EXIV2_DIR=%EXIV2DIR%\lib
-  - cd c:\projects\lenna
-  - cmd: |-
-      mkdir build
-      cd build
-      cmake --version
-      cmake .. -DOPTION_SELF_CONTAINED=ON "-G%GENERATOR%" %ARCHITECTURE%
-build:
-  project: c:\projects\lenna\build\lenna.sln
-  verbosity: minimal
-  parallel: true
+    before_build:
+      - IF EXIST c:\tools\opencv* CD c:\tools\opencv*
+      - SET OPENCV_DIR=%CD%\build
+      - SET OpenCV_DIR=%CD%\build
+      - set QT_DIR=%QTDIR%
+      - set Qt5_DIR=%QTDIR%\lib\cmake\Qt5
+      - set EXIV2_DIR=%EXIV2DIR%\lib
+      - cd c:\projects\lenna
+      - cmd: |-
+          mkdir build
+          cd build
+          cmake --version
+          cmake .. -DOPTION_SELF_CONTAINED=ON "-G%GENERATOR%" %ARCHITECTURE%
+    build:
+      project: c:\projects\lenna\build\lenna.sln
+      verbosity: minimal
+      parallel: true
 
-after_build:
-  - cmd: |-
-      cd c:\projects\lenna\build
-      cmake --build . --target pack
-      dir
+    after_build:
+      - cmd: |-
+          cd c:\projects\lenna\build
+          cmake --build . --target pack
+          dir
 
-only_commits:
-  files:
-    - CMakeLists.txt
-    - appveyor.yml
-    - source/
-    - cmake/
+    only_commits:
+      files:
+        - CMakeLists.txt
+        - appveyor.yml
+        - source/
+        - cmake/
 
-artifacts:
-  - path: 'build\Release\lenna.exe'
-  - path: 'build\*.exe'
-    name: installer
-  - path: 'build\*.zip'
+    artifacts:
+      - path: 'build\Release\lenna.exe'
+      - path: 'build\*.exe'
+        name: installer
+      - path: 'build\*.zip'
 
-deploy:
-  - provider: GitHub
-    auth_token:
-      secure: qgNDEr0uvXPJrujCdr3B45ibV7Llee5FrFthLvHOLE0h+i1x50XEZzdnAh7omZdC
-    artifact: installer
-    draft: false
-    prerelease: false
-    tag: $(APPVEYOR_REPO_TAG_NAME)
-    release: $(APPVEYOR_REPO_TAG_NAME)
-    description: $(APPVEYOR_REPO_COMMIT_MESSAGE)
-    force_update: true
-    on:
-      APPVEYOR_REPO_TAG: true
+    deploy:
+      - provider: GitHub
+        auth_token:
+          secure: qgNDEr0uvXPJrujCdr3B45ibV7Llee5FrFthLvHOLE0h+i1x50XEZzdnAh7omZdC
+        artifact: installer
+        draft: false
+        prerelease: false
+        tag: $(APPVEYOR_REPO_TAG_NAME)
+        release: $(APPVEYOR_REPO_TAG_NAME)
+        description: $(APPVEYOR_REPO_COMMIT_MESSAGE)
+        force_update: true
+        on:
+          APPVEYOR_REPO_TAG: true
+
+  # Mac
+  - matrix:
+      only:
+        - image: macOS-Mojave
+
+    clone_folder: ~/lenna
+
+    init:
+      - sh: echo _NPROCESSORS_ONLN=$(getconf _NPROCESSORS_ONLN)
+
+    install:
+      - ps: $env:package_version = ("$(git describe --tags --always --long)").trim()
+      - ps: Update-AppveyorBuild -Version "$env:package_version-$env:APPVEYOR_BUILD_NUMBER"
+      - brew install qt5 openssl@1.1 exiv2 opencv
+      - brew link qt5 --force
+      - export PATH=/usr/local/opt/qt5/bin:$PATH
+
+    build_script:
+      - mkdir build
+      - cd build
+      - cmake .. -DCMAKE_PREFIX_PATH=/usr/local/opt/qt5/bin/ -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl\@1.1
+      - make -j$(getconf _NPROCESSORS_ONLN)
+      - cmake --build . --target pack
+      - ls
