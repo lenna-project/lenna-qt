@@ -75,6 +75,10 @@ Change version in files VERSION and CMakeLists.txt.
  git push origin --tags
 ```
 
+## Plugins
+
+Lenna is extended by plugins. For more details see [Plugins Docs](PLUGINS.md).
+
 ## Contribute
 
 Contributions are always welcome!
