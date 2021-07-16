@@ -3,9 +3,13 @@
 
 *Open Source Image Processing Program*
 
-Program to batch compress, resize and rename Images.
+Lenna is an app to process images.
+Core functionality is to compress images in a batch,
+resize or rename images.
 
-This project is using Qt5 and OpenCV.
+As the successor of [easyimagesizer](https://sourceforge.net/projects/easyimagesizer/), Lenna contains most of the functionality of easyimagesizer.
+
+Due to its modular structure, lenna can also be used as a webapp on [lenna.app](https://lenna.app).
 
 [travis-image]: https://travis-ci.com/lenna-project/lenna.svg?branch=main
 [travis]: https://travis-ci.com/lenna-project/lenna
