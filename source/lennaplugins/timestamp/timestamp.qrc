@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/plugins/timestamp">
+        <file alias="timestamp">timestamp.png</file>
+    </qresource>
+</RCC>

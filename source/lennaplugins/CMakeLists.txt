@@ -21,5 +21,6 @@ add_subdirectory(rename)
 add_subdirectory(resize)
 add_subdirectory(savefile)
 add_subdirectory(textoverlay)
+add_subdirectory(timestamp)
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_LIBRARY_OUTPUT_DIRECTORY_MAIN})
