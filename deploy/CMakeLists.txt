@@ -15,7 +15,7 @@ include(${PROJECT_SOURCE_DIR}/cmake/RuntimeDependencies.cmake)
 # Packages
 # 
 
-include(packages/pack-lenna.cmake)
+include(packages/pack-lenna-qt.cmake)
 
 
 #

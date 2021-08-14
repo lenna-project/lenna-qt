@@ -36,13 +36,13 @@ get_git_head_revision(GIT_REFSPEC GIT_SHA1)
 string(SUBSTRING "${GIT_SHA1}" 0 12 GIT_REV)
 
 # Meta information about the project
-set(META_PROJECT_NAME        "lenna")
+set(META_PROJECT_NAME        "lenna-qt")
 set(META_PROJECT_DESCRIPTION "Lenna image processing")
 set(META_AUTHOR_ORGANIZATION "lenna-project")
 set(META_AUTHOR_DOMAIN       "https://github.com/lenna-project/")
 set(META_AUTHOR_MAINTAINER   "chriamue@gmail.com")
 set(META_VERSION_MAJOR       "0")
-set(META_VERSION_MINOR       "17")
+set(META_VERSION_MINOR       "18")
 set(META_VERSION_PATCH       "0")
 set(META_VERSION_REVISION    "${GIT_REV}")
 set(META_VERSION             "${META_VERSION_MAJOR}.${META_VERSION_MINOR}.${META_VERSION_PATCH}")
@@ -172,8 +172,8 @@ install(FILES ${META_PROJECT_NAME}-config.cmake DESTINATION ${INSTALL_ROOT} COMP
 install(FILES AUTHORS   DESTINATION ${INSTALL_ROOT} COMPONENT runtime)
 install(FILES LICENSE   DESTINATION ${INSTALL_ROOT} COMPONENT runtime)
 install(FILES README.md DESTINATION ${INSTALL_ROOT} COMPONENT runtime)
-install(FILES "deploy/lenna.desktop" DESTINATION "${INSTALL_ROOT}/applications" RENAME "lenna.desktop")
-install(FILES "deploy/lenna.appdata.xml" DESTINATION "${INSTALL_ROOT}/metainfo" RENAME "lenna.appdata.xml")
+install(FILES "deploy/lenna-qt.desktop" DESTINATION "${INSTALL_ROOT}/applications" RENAME "lenna-qt.desktop")
+install(FILES "deploy/lenna-qt.appdata.xml" DESTINATION "${INSTALL_ROOT}/metainfo" RENAME "lenna-qt.appdata.xml")
 # Install runtime data
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/data DESTINATION ${INSTALL_DATA} COMPONENT runtime)
 execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_SOURCE_DIR}/data

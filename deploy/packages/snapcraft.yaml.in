@@ -9,7 +9,7 @@ build-packages: [gcc, g++, libc6-dev, libopencv-dev, qt5-default]
 
 apps:
   @META_PROJECT_NAME@:
-    command: qt5-launch bin/lenna
+    command: qt5-launch bin/lenna-qt
     plugs: [x11, unity7, home, opengl, network, network-bind]
 
 parts:
@@ -49,7 +49,7 @@ parts:
      - qtubuntu-desktop
      - libopencv-dev
     files:
-      lenna: bin/lenna
+      lenna-qt: bin/lenna-qt
       liblennaplugin.so: bin/liblennaplugin.so
       plugins: bin/plugins
     after: [qt, environment, integration]

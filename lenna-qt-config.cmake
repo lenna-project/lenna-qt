@@ -7,7 +7,7 @@
 
 # List of modules
 set(MODULE_NAMES
-    lenna
+    lenna-qt
     lennaplugin
     lennaplugins
 )

@@ -1,10 +1,10 @@
 [Desktop Entry]
 Version=1.0
 Name=Lenna
-Comment=Lenna desktop app for converting images.
-TryExec=lenna
-Exec=lenna -- %u
-Icon=lenna
+Comment=Lenna qt desktop app for converting images.
+TryExec=lenna-qt
+Exec=lenna-qt -- %u
+Icon=lenna-qt
 Terminal=false
 Type=Application
 Categories=Graphics;Utility;Qt;

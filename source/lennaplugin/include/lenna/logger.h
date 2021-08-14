@@ -19,7 +19,7 @@
 #ifndef LOGGER_H
 #define LOGGER_H
 
-#include <lenna/lennaplugin/lennaplugin_api.h>
+#include <lenna-qt/lennaplugin/lennaplugin_api.h>
 
 #include <QObject>
 #include <QtCore/QStringList>

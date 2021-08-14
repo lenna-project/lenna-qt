@@ -19,7 +19,7 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
-#include <lenna/lennaplugin/lennaplugin_api.h>
+#include <lenna-qt/lennaplugin/lennaplugin_api.h>
 
 #include <QtCore/QObject>
 #include <QtGui/QImage>

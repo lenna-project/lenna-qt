@@ -21,7 +21,7 @@ cmake_policy(SET CMP0020 NEW)
 #
 
 # Target name
-set(target lenna)
+set(target lenna-qt)
 
 # Exit here if required dependencies are not met
 message(STATUS "Exe ${target}")

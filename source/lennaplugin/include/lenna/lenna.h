@@ -19,7 +19,7 @@
 #ifndef LENNA_H
 #define LENNA_H
 
-#include <lenna/lennaplugin/lennaplugin_api.h>
+#include <lenna-qt/lennaplugin/lennaplugin_api.h>
 
 #include <QObject>
 #include <QtCore/QTranslator>

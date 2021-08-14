@@ -1,20 +1,20 @@
-name: lenna
-adopt-info: lenna
+name: lenna-qt
+adopt-info: lenna-qt
 version: git
 summary: This is the Lenna Graphical User Interface.
 description: |
-  lenna desktop app for converting images.
+  qt based lenna desktop app for converting images.
 confinement: strict
 base: core20
 license: MIT
 icon: deploy/images/logo512.png
 
 parts:
-  lenna:
+  lenna-qt:
     plugin: cmake
-    source: https://github.com/lenna-project/lenna.git
+    source: https://github.com/lenna-project/lenna-qt.git
     source-type: git
-    parse-info: [usr/share/lenna/metainfo/lenna.appdata.xml]
+    parse-info: [usr/share/lenna-qt/metainfo/lenna-qt.appdata.xml]
     build-snaps:
       - kde-frameworks-5-qt-5-15-core20-sdk
     cmake-parameters:
@@ -25,7 +25,7 @@ parts:
       snapcraftctl pull
       version="git$(git describe --tags | sed 's,^v[^-]\+,,')"
       snapcraftctl set-version "$version"
-      sed -i 's|^Icon=.*|Icon=${SNAP}/meta/gui/icon.png|g' deploy/lenna.desktop
+      sed -i 's|^Icon=.*|Icon=${SNAP}/meta/gui/icon.png|g' deploy/lenna-qt.desktop
     build-packages:
       - g++
       - libexiv2-dev
@@ -94,10 +94,10 @@ parts:
 
 
 apps:
-  lenna:
-    common-id: app.lenna.lenna
-    desktop: usr/share/lenna/applications/lenna.desktop
-    command: usr/bin/lenna
+  lenna-qt:
+    common-id: app.lenna.lenna-qt
+    desktop: usr/share/lenna-qt/applications/lenna-qt.desktop
+    command: usr/bin/lenna-qt
     plugs:
       - kde-frameworks-5-plug
       - home
