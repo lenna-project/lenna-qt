@@ -2,7 +2,7 @@ version: "{build}"
 
 skip_non_tags: true
 
-clone_folder: c:\projects\lenna
+clone_folder: c:\projects\lenna-qt
 image:
   - Visual Studio 2017
 configuration:
@@ -40,20 +40,20 @@ before_build:
   - set QT_DIR=%QTDIR%
   - set Qt5_DIR=%QTDIR%\lib\cmake\Qt5
   - set EXIV2_DIR=%EXIV2DIR%\lib
-  - cd c:\projects\lenna
+  - cd c:\projects\lenna-qt
   - cmd: |-
       mkdir build
       cd build
       cmake --version
       cmake .. -DOPTION_SELF_CONTAINED=ON "-G%GENERATOR%" %ARCHITECTURE%
 build:
-  project: c:\projects\lenna\build\lenna.sln
+  project: c:\projects\lenna-qt\build\lenna-qt.sln
   verbosity: minimal
   parallel: true
 
 after_build:
   - cmd: |-
-      cd c:\projects\lenna\build
+      cd c:\projects\lenna-qt\build
       cmake --build . --target pack
       dir
 
@@ -65,7 +65,7 @@ only_commits:
     - cmake/
 
 artifacts:
-  - path: 'build\Release\lenna.exe'
+  - path: 'build\Release\lenna-qt.exe'
   - path: 'build\*.exe'
     name: installer
   - path: 'build\*.zip'
